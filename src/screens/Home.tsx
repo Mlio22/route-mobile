@@ -5,11 +5,15 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import MapboxGL, {Logger} from '@rnmapbox/maps';
 
 import LinearGradient from 'react-native-linear-gradient'; // import LinearGradient
 import {Map} from '../Components/organisms/Map';
+
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import type {RootStackParamList} from '../../App';
 
 MapboxGL.locationManager.start(1);
 
@@ -91,22 +95,35 @@ const styles = StyleSheet.create({
   },
 });
 
-class HomeScreen extends React.Component {
+type HomeStackProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+class Home extends React.Component<HomeStackProps> {
+  constructor(props: HomeStackProps) {
+    super(props);
+  }
+
   render(): React.ReactNode {
+    const navigation = this.props.navigation;
+
     return (
       <LinearGradient style={styles.container} colors={['#1B920E', '#53DED9']}>
         <View style={styles.mapContainer}>
-          <View style={styles.searchBarContainer}>
-            <TextInput
-              style={styles.searchBar}
-              placeholder="Universitas Telkom"
-            />
-
-            <Image
-              style={styles.searchIcon}
-              source={require('../images/search.png')}
-            />
-          </View>
+          <TouchableWithoutFeedback
+            onPressIn={() => {
+              navigation.navigate('SearchBar');
+            }}>
+            <View style={styles.searchBarContainer}>
+              <TextInput
+                style={styles.searchBar}
+                editable={false}
+                placeholder="Universitas Telkom"
+              />
+              <Image
+                style={styles.searchIcon}
+                source={require('../images/search.png')}
+              />
+            </View>
+          </TouchableWithoutFeedback>
           <Map />
         </View>
         <View style={styles.menuButtonContainer}>
@@ -140,4 +157,4 @@ class HomeScreen extends React.Component {
   }
 }
 
-export default HomeScreen;
+export default Home;
