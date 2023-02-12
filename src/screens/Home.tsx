@@ -1,8 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, TextInput, Image} from 'react-native';
+import {StyleSheet, View, TextInput, Image, TouchableOpacity ,Button} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import MapboxGL from '@rnmapbox/maps';
 
 import LinearGradient from 'react-native-linear-gradient'; // import LinearGradient
+//import { TouchableOpacity } from 'react-native/Libraries/Components/Touchable/TouchableOpacity';
 
 const styles = StyleSheet.create({
   container: {
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeScreen = () => {
+const HomeScreen = ({}) => {
   return (
     <LinearGradient style={styles.container} colors={['#1B920E', '#53DED9']}>
       <View style={styles.mapContainer}>
@@ -127,45 +129,45 @@ const HomeScreen = () => {
             centerCoordinate={[107.604954, -6.934469]}
           />
         </MapboxGL.MapView>
-        <View style={styles.userPositionContainer}>
+        <TouchableOpacity style={styles.userPositionContainer}>
           <Image
             style={styles.trackUserImage}
             source={require('../images/userTrack.png')}
           />
-        </View>
+        </TouchableOpacity>
 
-        <View style={styles.mapSettingsContainer}>
+        <TouchableOpacity style={styles.mapSettingsContainer}>
           <Image
             style={styles.mapSettings}
             source={require('../images/options1.png')}
           />
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.menuButtonContainer}>
-        <View style={styles.menuButton}>
+        <TouchableOpacity style={styles.menuButton}>
           <Image
             style={styles.menuIcon}
             source={require('../images/user.png')}
           />
-        </View>
-        <View style={styles.menuButton}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuButton}>
           <Image
             style={styles.menuIcon}
             source={require('../images/vehicleType.png')}
           />
-        </View>
-        <View style={styles.menuButton}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuButton}>
           <Image
             style={styles.menuIcon}
             source={require('../images/timeline.png')}
           />
-        </View>
-        <View style={styles.menuButton}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuButton}>
           <Image
             style={styles.menuIcon}
             source={require('../images/generalSettings.png')}
           />
-        </View>
+        </TouchableOpacity>
       </View>
     </LinearGradient>
   );
