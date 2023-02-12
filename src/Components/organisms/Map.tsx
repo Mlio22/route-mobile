@@ -6,12 +6,15 @@ import {
   StyleSheet,
   ToastAndroid,
 } from 'react-native';
-import MapboxGL, {MapViewProps} from '@rnmapbox/maps';
 import {PermissionsAndroid} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
+import RNAndroidLocationEnabler from 'react-native-android-location-enabler';
+
+import MapboxGL, {MapViewProps} from '@rnmapbox/maps';
+import {CameraProps} from '@rnmapbox/maps/javascript/components/Camera';
+
 import {UserMarker} from '../molecules/UserMarker';
 
-import {CameraProps} from '@rnmapbox/maps/javascript/components/Camera';
 const styles = StyleSheet.create({
   map: {
     flex: 1,
@@ -87,6 +90,8 @@ export class Map extends React.Component {
   }
 
   async centerMapToUser(): Promise<void> {
+    console.log('again');
+
     const userLocationGranted = await this.grantUserLocation();
 
     if (userLocationGranted) {
@@ -95,9 +100,15 @@ export class Map extends React.Component {
           this.userMarker.current?.moveTo([longitude, latitude]);
           this.camera.current?.flyTo([longitude, latitude], 1000);
         },
-        error => {
+        async error => {
           if (error.message === 'No location provider available.') {
             ToastAndroid.show('GPS unavailable, please turn on GPS', 1000);
+            await RNAndroidLocationEnabler.promptForEnableLocationIfNeeded({
+              interval: 10000,
+              fastInterval: 5000,
+            });
+
+            this.centerMapToUser();
           }
         },
       );
