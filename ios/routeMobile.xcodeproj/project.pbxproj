@@ -14,6 +14,18 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-routeMobile-routeMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-routeMobile-routeMobileTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		18B82678FFE041DB91A483CC /* Marker.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 8E99CFB028A14C67821E043C /* Marker.tsx */; };
+		16FEE4ED2C2C4393A5D46A70 /* UserMarker.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 82C06AC6F2FB4EE194DB521C /* UserMarker.tsx */; };
+		92CAE1913B3848699F44661C /* Map.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 0BF04FBCF24D4648B50F4572 /* Map.tsx */; };
+		2DAC74938C6B4F3FA995720D /* generalSettings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6E442ABE1048CFB2C9DDE0 /* generalSettings.png */; };
+		711823A91E174C4DBD5A13D8 /* options1.png in Resources */ = {isa = PBXBuildFile; fileRef = C560C7FFA67E43038139C166 /* options1.png */; };
+		3470C58F841C4C1B8DD8DAEB /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 22ADB9015E0D47D08FE8D828 /* search.png */; };
+		A86CCF4E26554A538BE5A561 /* timeline.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C4421133B448E0B49E19A7 /* timeline.png */; };
+		497029D4FFB746489BF531DD /* TrackUser.svg in Resources */ = {isa = PBXBuildFile; fileRef = EBF97A036D9D4FF7A0562ADC /* TrackUser.svg */; };
+		8E3DE8E063AE4E5C93BF93E5 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 59CC8DCCD0684ABB821A5983 /* user.png */; };
+		4A8D98B17E5C4D00A477ED7D /* userTrack.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C5303A2AC1485BBD513E7C /* userTrack.png */; };
+		3C57CC142833423A853D9660 /* vehicleType.png in Resources */ = {isa = PBXBuildFile; fileRef = 64C0CDD22AA94751B7D99E68 /* vehicleType.png */; };
+		8DE275AC11DD47D79F76F1EE /* Home.tsx in Resources */ = {isa = PBXBuildFile; fileRef = A6A9C81DFE124922A2A737C1 /* Home.tsx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +56,18 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = routeMobile/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-routeMobile-routeMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-routeMobile-routeMobileTests.release.xcconfig"; path = "Target Support Files/Pods-routeMobile-routeMobileTests/Pods-routeMobile-routeMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		8E99CFB028A14C67821E043C /* Marker.tsx */ = {isa = PBXFileReference; name = "Marker.tsx"; path = "../src/Components/atoms/Marker.tsx"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		82C06AC6F2FB4EE194DB521C /* UserMarker.tsx */ = {isa = PBXFileReference; name = "UserMarker.tsx"; path = "../src/Components/molecules/UserMarker.tsx"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0BF04FBCF24D4648B50F4572 /* Map.tsx */ = {isa = PBXFileReference; name = "Map.tsx"; path = "../src/Components/organisms/Map.tsx"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3D6E442ABE1048CFB2C9DDE0 /* generalSettings.png */ = {isa = PBXFileReference; name = "generalSettings.png"; path = "../src/images/generalSettings.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C560C7FFA67E43038139C166 /* options1.png */ = {isa = PBXFileReference; name = "options1.png"; path = "../src/images/options1.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		22ADB9015E0D47D08FE8D828 /* search.png */ = {isa = PBXFileReference; name = "search.png"; path = "../src/images/search.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		95C4421133B448E0B49E19A7 /* timeline.png */ = {isa = PBXFileReference; name = "timeline.png"; path = "../src/images/timeline.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EBF97A036D9D4FF7A0562ADC /* TrackUser.svg */ = {isa = PBXFileReference; name = "TrackUser.svg"; path = "../src/images/TrackUser.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		59CC8DCCD0684ABB821A5983 /* user.png */ = {isa = PBXFileReference; name = "user.png"; path = "../src/images/user.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D5C5303A2AC1485BBD513E7C /* userTrack.png */ = {isa = PBXFileReference; name = "userTrack.png"; path = "../src/images/userTrack.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		64C0CDD22AA94751B7D99E68 /* vehicleType.png */ = {isa = PBXFileReference; name = "vehicleType.png"; path = "../src/images/vehicleType.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A6A9C81DFE124922A2A737C1 /* Home.tsx */ = {isa = PBXFileReference; name = "Home.tsx"; path = "../src/screens/Home.tsx"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +146,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				AE440B2CD3FA42DBB3B4D0E9 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +172,26 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		AE440B2CD3FA42DBB3B4D0E9 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				8E99CFB028A14C67821E043C /* Marker.tsx */,
+				82C06AC6F2FB4EE194DB521C /* UserMarker.tsx */,
+				0BF04FBCF24D4648B50F4572 /* Map.tsx */,
+				3D6E442ABE1048CFB2C9DDE0 /* generalSettings.png */,
+				C560C7FFA67E43038139C166 /* options1.png */,
+				22ADB9015E0D47D08FE8D828 /* search.png */,
+				95C4421133B448E0B49E19A7 /* timeline.png */,
+				EBF97A036D9D4FF7A0562ADC /* TrackUser.svg */,
+				59CC8DCCD0684ABB821A5983 /* user.png */,
+				D5C5303A2AC1485BBD513E7C /* userTrack.png */,
+				64C0CDD22AA94751B7D99E68 /* vehicleType.png */,
+				A6A9C81DFE124922A2A737C1 /* Home.tsx */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -244,6 +289,18 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				18B82678FFE041DB91A483CC /* Marker.tsx in Resources */,
+				16FEE4ED2C2C4393A5D46A70 /* UserMarker.tsx in Resources */,
+				92CAE1913B3848699F44661C /* Map.tsx in Resources */,
+				2DAC74938C6B4F3FA995720D /* generalSettings.png in Resources */,
+				711823A91E174C4DBD5A13D8 /* options1.png in Resources */,
+				3470C58F841C4C1B8DD8DAEB /* search.png in Resources */,
+				A86CCF4E26554A538BE5A561 /* timeline.png in Resources */,
+				497029D4FFB746489BF531DD /* TrackUser.svg in Resources */,
+				8E3DE8E063AE4E5C93BF93E5 /* user.png in Resources */,
+				4A8D98B17E5C4D00A477ED7D /* userTrack.png in Resources */,
+				3C57CC142833423A853D9660 /* vehicleType.png in Resources */,
+				8DE275AC11DD47D79F76F1EE /* Home.tsx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

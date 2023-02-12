@@ -1,0 +1,53 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/Components/atoms/Marker.tsx",
+      "sha1": "22f99d52a06981320d171591b16997aa6755db54"
+    },
+    {
+      "path": "src/Components/molecules/UserMarker.tsx",
+      "sha1": "c329f83edc74dd87a78aae584e7daf51533ad4ef"
+    },
+    {
+      "path": "src/Components/organisms/Map.tsx",
+      "sha1": "44ef88735e776f18f3ad25101d77dda337f76eef"
+    },
+    {
+      "path": "src/images/generalSettings.png",
+      "sha1": "68db7f38789d5381fbcbf32f6d00efddbb068622"
+    },
+    {
+      "path": "src/images/options1.png",
+      "sha1": "f689124878455ef2309ee90550e0fa75c1a8cb86"
+    },
+    {
+      "path": "src/images/search.png",
+      "sha1": "7ea50c8f42a37540ee8253d57123890f966edcc2"
+    },
+    {
+      "path": "src/images/timeline.png",
+      "sha1": "2af23f10149ba6bc4762969fb17a709fbceef99e"
+    },
+    {
+      "path": "src/images/TrackUser.svg",
+      "sha1": "a2949c72968b6cc949dc329bbbf3c142d5f4c2cd"
+    },
+    {
+      "path": "src/images/user.png",
+      "sha1": "79add90749b7f7846269328051bdc9a1bdaab822"
+    },
+    {
+      "path": "src/images/userTrack.png",
+      "sha1": "09fcfa681560a4c109d447463fbb39a4548e0092"
+    },
+    {
+      "path": "src/images/vehicleType.png",
+      "sha1": "a3fa99a08f45aff429722b53bd2f7e06f55d1c92"
+    },
+    {
+      "path": "src/screens/Home.tsx",
+      "sha1": "9d6d2d2b568f4c4a6b67becaec312440ed77906d"
+    }
+  ]
+}

@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  TextInput,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, View, TextInput, Image} from 'react-native';
 import MapboxGL, {Logger} from '@rnmapbox/maps';
 
 import LinearGradient from 'react-native-linear-gradient'; // import LinearGradient
@@ -110,30 +104,30 @@ class HomeScreen extends React.Component {
           <Map />
         </View>
         <View style={styles.menuButtonContainer}>
-          <TouchableOpacity style={styles.menuButton}>
+          <View style={styles.menuButton}>
             <Image
               style={styles.menuIcon}
               source={require('../images/user.png')}
             />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuButton}>
+          </View>
+          <View style={styles.menuButton}>
             <Image
               style={styles.menuIcon}
               source={require('../images/vehicleType.png')}
             />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuButton}>
+          </View>
+          <View style={styles.menuButton}>
             <Image
               style={styles.menuIcon}
               source={require('../images/timeline.png')}
             />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuButton}>
+          </View>
+          <View style={styles.menuButton}>
             <Image
               style={styles.menuIcon}
               source={require('../images/generalSettings.png')}
             />
-          </TouchableOpacity>
+          </View>
         </View>
       </LinearGradient>
     );
