@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MapboxGL from '@rnmapbox/maps';
-import {Marker} from '../atoms/Marker';
+import {UserMarkerIcon} from '../atoms/UserMarkerIcon';
 
 export interface UserMarkerProps {
   readonly coordinates: number[];
@@ -11,7 +11,6 @@ export class UserMarker extends React.Component<UserMarkerProps> {
   state: {
     coordinates?: number[];
     markerShown: boolean;
-    compassHeading: number;
   };
 
   constructor(props: UserMarkerProps) {
@@ -19,7 +18,6 @@ export class UserMarker extends React.Component<UserMarkerProps> {
     this.state = {
       coordinates: undefined,
       markerShown: false,
-      compassHeading: 0,
     };
   }
 
@@ -32,7 +30,7 @@ export class UserMarker extends React.Component<UserMarkerProps> {
       <>
         {this.state.markerShown && (
           <MapboxGL.MarkerView coordinate={this.state.coordinates}>
-            <Marker />
+            <UserMarkerIcon />
           </MapboxGL.MarkerView>
         )}
       </>

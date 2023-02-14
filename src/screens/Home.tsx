@@ -12,8 +12,7 @@ import MapboxGL, {Logger} from '@rnmapbox/maps';
 import LinearGradient from 'react-native-linear-gradient'; // import LinearGradient
 import {Map} from '../Components/organisms/Map';
 
-import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import type {RootStackParamList} from '../../App';
+import type {HomeStackProps} from '../../App';
 
 MapboxGL.locationManager.start(1);
 
@@ -62,6 +61,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     flexDirection: 'row',
     height: 50,
+    borderColor: '#a1a1a1',
+    borderWidth: 2,
   },
 
   searchBar: {
@@ -95,8 +96,6 @@ const styles = StyleSheet.create({
   },
 });
 
-type HomeStackProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
-
 class Home extends React.Component<HomeStackProps> {
   constructor(props: HomeStackProps) {
     super(props);
@@ -110,12 +109,13 @@ class Home extends React.Component<HomeStackProps> {
         <View style={styles.mapContainer}>
           <TouchableWithoutFeedback
             onPressIn={() => {
-              navigation.navigate('SearchBar');
+              navigation.navigate('SearchLocation');
             }}>
             <View style={styles.searchBarContainer}>
               <TextInput
                 style={styles.searchBar}
                 editable={false}
+                placeholderTextColor={'#959595'}
                 placeholder="Universitas Telkom"
               />
               <Image
