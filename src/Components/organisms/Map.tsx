@@ -90,8 +90,6 @@ export class Map extends React.Component {
   }
 
   async centerMapToUser(): Promise<void> {
-    console.log('again');
-
     const userLocationGranted = await this.grantUserLocation();
 
     if (userLocationGranted) {
