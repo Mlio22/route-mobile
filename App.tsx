@@ -1,10 +1,13 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  NativeStackScreenProps,
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
 import MapboxGL from '@rnmapbox/maps';
 
 import Home from './src/screens/Home';
-import Pencarian1 from './src/screens/Searchbarreccomend1';
+import SearchLocation from './src/screens/SearchLocation';
 
 MapboxGL.setConnected(true);
 MapboxGL.setWellKnownTileServer('Mapbox');
@@ -14,7 +17,7 @@ MapboxGL.setAccessToken(
 
 export type RootStackParamList = {
   Home: undefined;
-  SearchBar: undefined;
+  SearchLocation: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -26,10 +29,16 @@ const MyStack = () => {
         initialRouteName="Home"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="SearchBar" component={Pencarian1} />
+        <Stack.Screen name="SearchLocation" component={SearchLocation} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
+
+export type SearchLocationProps = NativeStackScreenProps<
+  RootStackParamList,
+  'SearchLocation'
+>;
+export type HomeStackProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export default MyStack;
