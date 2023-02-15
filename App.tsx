@@ -1,25 +1,25 @@
-import * as React from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import MapboxGL from '@rnmapbox/maps';
+
+import {mapboxSetup} from './src/utils/mapbox';
 
 import Home from './src/screens/Home';
 import SearchLocation from './src/screens/SearchLocation';
+
 import {
   UserLocationContext,
   UserLocationContextType,
+  locationInfo,
 } from './src/Components/context/UserLocationContext';
 
-MapboxGL.setConnected(true);
-MapboxGL.setWellKnownTileServer('Mapbox');
-MapboxGL.setAccessToken(
-  'pk.eyJ1IjoiYW5ha2JhaWstZXhlIiwiYSI6ImNsYnl4YnZkaTAzaDYzd3A3MWhrb2lqeWIifQ.JLrFLc_GxkTdET36LKjJvw',
-);
+// setup for mapbox
+mapboxSetup();
 
-export type RootStackParamList = {
+type RootStackParamList = {
   Home: undefined;
   SearchLocation: undefined;
 };
@@ -38,20 +38,6 @@ const MyStack = React.memo(() => {
     </NavigationContainer>
   );
 });
-
-export type SearchLocationProps = NativeStackScreenProps<
-  RootStackParamList,
-  'SearchLocation'
->;
-export type HomeStackProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
-
-type locationInfo = {
-  isShown: boolean;
-  coordinates: {
-    latitude?: number;
-    longitude?: number;
-  };
-};
 
 export default function App() {
   const [locationInfo, updateLocationInfo] = React.useState<locationInfo>({
@@ -77,3 +63,9 @@ export default function App() {
     </UserLocationContext.Provider>
   );
 }
+
+export type SearchLocationProps = NativeStackScreenProps<
+  RootStackParamList,
+  'SearchLocation'
+>;
+export type HomeStackProps = NativeStackScreenProps<RootStackParamList, 'Home'>;

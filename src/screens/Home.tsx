@@ -7,28 +7,11 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native';
-import MapboxGL, {Logger} from '@rnmapbox/maps';
 
 import LinearGradient from 'react-native-linear-gradient'; // import LinearGradient
 import {Map} from '../Components/organisms/Map';
 
 import type {HomeStackProps} from '../../App';
-
-MapboxGL.locationManager.start(1);
-
-// edit logging messages
-Logger.setLogCallback(log => {
-  const {message} = log;
-
-  // expected warnings - see https://github.com/mapbox/mapbox-gl-native/issues/15341#issuecomment-522889062
-  if (
-    message.match('Request failed due to a permanent error: Canceled') ||
-    message.match('Request failed due to a permanent error: Socket Closed')
-  ) {
-    return true;
-  }
-  return false;
-});
 
 const styles = StyleSheet.create({
   container: {
