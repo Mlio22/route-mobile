@@ -14,6 +14,7 @@ import MapboxGL, {MapViewProps} from '@rnmapbox/maps';
 import {CameraProps} from '@rnmapbox/maps/javascript/components/Camera';
 
 import {UserMarker} from '../molecules/UserMarker';
+import {UserLocationContext} from '../context/UserLocationContext';
 
 const styles = StyleSheet.create({
   map: {
@@ -50,7 +51,30 @@ const styles = StyleSheet.create({
   mapSettings: {},
 });
 
+async function grantUserLocation(): Promise<boolean> {
+  try {
+    const granted = await PermissionsAndroid.requestMultiple([
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+    ]);
+
+    if (granted['android.permission.ACCESS_FINE_LOCATION'] === 'granted') {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+
+  return false;
+}
+
 export class Map extends React.Component {
+  static contextType = UserLocationContext;
+
+  //@ts-ignore
+  context!: React.ContextType<typeof UserLocationContext>;
+
   camera: React.RefObject<MapboxGL.Camera>;
   userMarker: React.RefObject<UserMarker>;
   userLocationEnabled: boolean;
@@ -71,32 +95,19 @@ export class Map extends React.Component {
     this.userLocationEnabled = false;
   }
 
-  async grantUserLocation(): Promise<boolean> {
-    try {
-      const granted = await PermissionsAndroid.requestMultiple([
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      ]);
-
-      if (granted['android.permission.ACCESS_FINE_LOCATION'] === 'granted') {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-
-    return false;
-  }
-
   async centerMapToUser(): Promise<void> {
-    const userLocationGranted = await this.grantUserLocation();
+    const userLocationGranted = await grantUserLocation();
 
     if (userLocationGranted) {
       Geolocation.getCurrentPosition(
         ({coords: {latitude, longitude}}) => {
           this.userMarker.current?.moveTo([longitude, latitude]);
           this.camera.current?.flyTo([longitude, latitude], 1000);
+
+          this.context.updateInfo({
+            isShown: true,
+            coordinates: {latitude, longitude},
+          });
         },
         async error => {
           if (error.message === 'No location provider available.') {
@@ -112,8 +123,6 @@ export class Map extends React.Component {
       );
     }
   }
-
-  componentDidMount(): void {}
 
   render(): React.ReactNode {
     const mapviewProps: MapViewProps = {

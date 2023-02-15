@@ -8,6 +8,10 @@ import MapboxGL from '@rnmapbox/maps';
 
 import Home from './src/screens/Home';
 import SearchLocation from './src/screens/SearchLocation';
+import {
+  UserLocationContext,
+  UserLocationContextType,
+} from './src/Components/context/UserLocationContext';
 
 MapboxGL.setConnected(true);
 MapboxGL.setWellKnownTileServer('Mapbox');
@@ -22,7 +26,7 @@ export type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const MyStack = () => {
+const MyStack = React.memo(() => {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -33,7 +37,7 @@ const MyStack = () => {
       </Stack.Navigator>
     </NavigationContainer>
   );
-};
+});
 
 export type SearchLocationProps = NativeStackScreenProps<
   RootStackParamList,
@@ -41,4 +45,35 @@ export type SearchLocationProps = NativeStackScreenProps<
 >;
 export type HomeStackProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
-export default MyStack;
+type locationInfo = {
+  isShown: boolean;
+  coordinates: {
+    latitude?: number;
+    longitude?: number;
+  };
+};
+
+export default function App() {
+  const [locationInfo, updateLocationInfo] = React.useState<locationInfo>({
+    isShown: false,
+    coordinates: {
+      longitude: 0,
+      latitude: 0,
+    },
+  });
+
+  const updateInfo = (newInfo: locationInfo) => {
+    updateLocationInfo(newInfo);
+  };
+
+  const locationInfoObj: UserLocationContextType = {
+    locationInfo,
+    updateInfo,
+  };
+
+  return (
+    <UserLocationContext.Provider value={locationInfoObj}>
+      <MyStack />
+    </UserLocationContext.Provider>
+  );
+}

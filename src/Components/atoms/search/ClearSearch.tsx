@@ -22,6 +22,7 @@ export const ClearSearchButton = (props: ClearSearchButtonProps) => {
     <TouchableWithoutFeedback
       onPress={() => {
         autoRef.current?.setAddressText('');
+        autoRef.current?.focus();
       }}>
       <View style={styles.clearIconContainer}>
         <FontAwesomeIcon size={20} icon={faXmark} />
