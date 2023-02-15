@@ -1,20 +1,54 @@
 import React from 'react';
 
-export type locationInfo = {
+type LocationInfoType = {
   isShown: any | boolean;
   coordinates: {latitude?: number; longitude?: number};
 };
 
-export type UserLocationContextType = {
-  locationInfo: locationInfo;
-  updateInfo: (newInfo: locationInfo) => void;
+type UserLocationContextType = {
+  locationInfo: LocationInfoType;
+  updateInfo: (newInfo: LocationInfoType) => void;
 };
 
-export const UserLocationContext: React.Context<UserLocationContextType> =
-  React.createContext({
-    locationInfo: {
-      isShown: false,
-      coordinates: {},
-    },
-    updateInfo: _ => {},
-  });
+const userLocationDefaultValue: LocationInfoType = {
+  isShown: false,
+  coordinates: {},
+};
+
+const contextDefaultValue: UserLocationContextType = {
+  locationInfo: userLocationDefaultValue,
+  updateInfo: (_: any) => {},
+};
+
+type props = {
+  children: React.ReactNode;
+};
+
+const UserLocationContext: React.Context<UserLocationContextType> =
+  React.createContext(contextDefaultValue);
+
+const UserLocationContextProvider = (props: props) => {
+  const [locationInfo, updateLocationInfo] = React.useState<LocationInfoType>(
+    userLocationDefaultValue,
+  );
+
+  const updateInfo = (newInfo: LocationInfoType) => {
+    updateLocationInfo(newInfo);
+  };
+
+  const locationInfoObj: UserLocationContextType = {
+    locationInfo,
+    updateInfo,
+  };
+
+  const {children} = props;
+
+  return (
+    <UserLocationContext.Provider value={locationInfoObj}>
+      {children}
+    </UserLocationContext.Provider>
+  );
+};
+
+export type {LocationInfoType, UserLocationContextType};
+export {UserLocationContext, UserLocationContextProvider};

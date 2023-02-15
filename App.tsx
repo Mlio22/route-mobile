@@ -10,11 +10,7 @@ import {mapboxSetup} from './src/utils/mapbox';
 import Home from './src/screens/Home';
 import SearchLocation from './src/screens/SearchLocation';
 
-import {
-  UserLocationContext,
-  UserLocationContextType,
-  locationInfo,
-} from './src/Components/context/UserLocationContext';
+import {UserLocationContextProvider} from './src/Components/context/UserLocationContext';
 
 // setup for mapbox
 mapboxSetup();
@@ -39,28 +35,11 @@ const MyStack = React.memo(() => {
   );
 });
 
-export default function App() {
-  const [locationInfo, updateLocationInfo] = React.useState<locationInfo>({
-    isShown: false,
-    coordinates: {
-      longitude: 0,
-      latitude: 0,
-    },
-  });
-
-  const updateInfo = (newInfo: locationInfo) => {
-    updateLocationInfo(newInfo);
-  };
-
-  const locationInfoObj: UserLocationContextType = {
-    locationInfo,
-    updateInfo,
-  };
-
+export default function App(): React.ReactNode {
   return (
-    <UserLocationContext.Provider value={locationInfoObj}>
+    <UserLocationContextProvider>
       <MyStack />
-    </UserLocationContext.Provider>
+    </UserLocationContextProvider>
   );
 }
 
