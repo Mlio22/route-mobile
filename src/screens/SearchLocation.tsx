@@ -65,8 +65,8 @@ let query: Query<AutocompleteRequestType> = {
 export const SearchLocation = (props: SearchLocationProps) => {
   const {locationInfo} = useContext(UserLocationContext);
 
-  if (locationInfo.isShown) {
-    const {latitude, longitude} = locationInfo.coordinates;
+  if (locationInfo.isEnabled) {
+    const {latitude, longitude} = locationInfo.coordinates!;
 
     query = {
       ...query,

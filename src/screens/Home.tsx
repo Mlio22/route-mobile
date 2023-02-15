@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient'; // import LinearGradient
-import {Map} from '../Components/organisms/Map';
+import {HomeMap} from '../Components/organisms/HomeMap';
 
 import type {HomeStackProps} from '../../App';
 
@@ -79,65 +79,59 @@ const styles = StyleSheet.create({
   },
 });
 
-class Home extends React.Component<HomeStackProps> {
-  constructor(props: HomeStackProps) {
-    super(props);
-  }
+const Home = (props: HomeStackProps) => {
+  const navigation = props.navigation;
 
-  render(): React.ReactNode {
-    const navigation = this.props.navigation;
-
-    return (
-      <LinearGradient style={styles.container} colors={['#1B920E', '#53DED9']}>
-        <View style={styles.mapContainer}>
-          <TouchableWithoutFeedback
-            onPressIn={() => {
-              navigation.navigate('SearchLocation');
-            }}>
-            <View style={styles.searchBarContainer}>
-              <TextInput
-                style={styles.searchBar}
-                editable={false}
-                placeholderTextColor={'#959595'}
-                placeholder="Universitas Telkom"
-              />
-              <Image
-                style={styles.searchIcon}
-                source={require('../images/search.png')}
-              />
-            </View>
-          </TouchableWithoutFeedback>
-          <Map />
-        </View>
-        <View style={styles.menuButtonContainer}>
-          <TouchableOpacity style={styles.menuButton}>
-            <Image
-              style={styles.menuIcon}
-              source={require('../images/user.png')}
+  return (
+    <LinearGradient style={styles.container} colors={['#1B920E', '#53DED9']}>
+      <View style={styles.mapContainer}>
+        <TouchableWithoutFeedback
+          onPressIn={() => {
+            navigation.navigate('SearchLocation');
+          }}>
+          <View style={styles.searchBarContainer}>
+            <TextInput
+              style={styles.searchBar}
+              editable={false}
+              placeholderTextColor={'#959595'}
+              placeholder="Universitas Telkom"
             />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuButton}>
             <Image
-              style={styles.menuIcon}
-              source={require('../images/vehicleType.png')}
+              style={styles.searchIcon}
+              source={require('../images/search.png')}
             />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuButton}>
-            <Image
-              style={styles.menuIcon}
-              source={require('../images/timeline.png')}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuButton}>
-            <Image
-              style={styles.menuIcon}
-              source={require('../images/generalSettings.png')}
-            />
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>
-    );
-  }
-}
+          </View>
+        </TouchableWithoutFeedback>
+        <HomeMap />
+      </View>
+      <View style={styles.menuButtonContainer}>
+        <TouchableOpacity style={styles.menuButton}>
+          <Image
+            style={styles.menuIcon}
+            source={require('../images/user.png')}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuButton}>
+          <Image
+            style={styles.menuIcon}
+            source={require('../images/vehicleType.png')}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuButton}>
+          <Image
+            style={styles.menuIcon}
+            source={require('../images/timeline.png')}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuButton}>
+          <Image
+            style={styles.menuIcon}
+            source={require('../images/generalSettings.png')}
+          />
+        </TouchableOpacity>
+      </View>
+    </LinearGradient>
+  );
+};
 
 export default Home;

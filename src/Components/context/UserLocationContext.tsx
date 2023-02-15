@@ -1,8 +1,8 @@
 import React from 'react';
 
 type LocationInfoType = {
-  isShown: any | boolean;
-  coordinates: {latitude?: number; longitude?: number};
+  isEnabled?: any | boolean;
+  coordinates?: {latitude?: number; longitude?: number};
 };
 
 type UserLocationContextType = {
@@ -11,7 +11,7 @@ type UserLocationContextType = {
 };
 
 const userLocationDefaultValue: LocationInfoType = {
-  isShown: false,
+  isEnabled: false,
   coordinates: {},
 };
 
@@ -33,6 +33,11 @@ const UserLocationContextProvider = (props: props) => {
   );
 
   const updateInfo = (newInfo: LocationInfoType) => {
+    newInfo = {
+      ...locationInfo,
+      ...newInfo,
+    };
+
     updateLocationInfo(newInfo);
   };
 
@@ -51,4 +56,8 @@ const UserLocationContextProvider = (props: props) => {
 };
 
 export type {LocationInfoType, UserLocationContextType};
-export {UserLocationContext, UserLocationContextProvider};
+export {
+  UserLocationContext,
+  UserLocationContextProvider,
+  userLocationDefaultValue,
+};
