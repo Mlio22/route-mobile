@@ -41,30 +41,17 @@ const styles = StyleSheet.create({
   mapSettings: {},
 });
 
-const mapviewProps: MapViewProps = {
-    projection: 'globe',
-    style: styles.map,
-    attributionEnabled: false,
-    logoEnabled: false,
-  },
-  cameraProps: CameraProps = {
-    zoomLevel: 15,
-    animationMode: 'none',
-    centerCoordinate: [107.604954, -6.934469],
-  };
-
 type basicMapProps = {
+  centerCoordinates: number[];
   children: React.ReactNode;
 };
 
-export class BasicMap extends React.Component {
+export class BasicMap extends React.Component<basicMapProps> {
   camera: React.RefObject<MapboxGL.Camera>;
   userMarker: React.RefObject<UserMarker>;
 
   constructor(props: basicMapProps) {
     super(props);
-
-    console.log(this.props);
 
     this.camera = React.createRef<MapboxGL.Camera>();
     this.userMarker = React.createRef<UserMarker>();
@@ -79,7 +66,19 @@ export class BasicMap extends React.Component {
   }
 
   render(): React.ReactNode {
-    const {children} = this.props as basicMapProps;
+    const {children, centerCoordinates} = this.props as basicMapProps;
+
+    const mapviewProps: MapViewProps = {
+        projection: 'globe',
+        style: styles.map,
+        attributionEnabled: false,
+        logoEnabled: false,
+      },
+      cameraProps: CameraProps = {
+        zoomLevel: 15,
+        animationMode: 'none',
+        centerCoordinate: centerCoordinates || [107.604954, -6.934469],
+      };
 
     return (
       <>

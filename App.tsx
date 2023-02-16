@@ -11,6 +11,7 @@ import Home from './src/screens/Home';
 import SearchLocation from './src/screens/SearchLocation';
 
 import {UserLocationContextProvider} from './src/Components/context/UserLocationContext';
+import LocationDetails from './src/screens/LocationDetail';
 
 // setup for mapbox
 mapboxSetup();
@@ -18,6 +19,7 @@ mapboxSetup();
 type RootStackParamList = {
   Home: undefined;
   SearchLocation: undefined;
+  LocationDetails: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -26,10 +28,11 @@ const MyStack = React.memo(() => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="LocationDetails"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="SearchLocation" component={SearchLocation} />
+        <Stack.Screen name="LocationDetails" component={LocationDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -48,3 +51,7 @@ export type SearchLocationProps = NativeStackScreenProps<
   'SearchLocation'
 >;
 export type HomeStackProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+export type LocationDetailsProps = NativeStackScreenProps<
+  RootStackParamList,
+  'LocationDetails'
+>;
