@@ -12,6 +12,7 @@ import LinearGradient from 'react-native-linear-gradient'; // import LinearGradi
 import {HomeMap} from '../Components/organisms/HomeMap';
 
 import type {HomeStackProps} from '../../App';
+import {SearchContext} from '../Components/context/SearchContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -80,6 +81,8 @@ const styles = StyleSheet.create({
 });
 
 const Home = (props: HomeStackProps) => {
+  const {searchInfo} = React.useContext(SearchContext);
+
   const navigation = props.navigation;
 
   return (
@@ -95,6 +98,7 @@ const Home = (props: HomeStackProps) => {
               editable={false}
               placeholderTextColor={'#959595'}
               placeholder="Universitas Telkom"
+              value={searchInfo.searchQuery}
             />
             <Image
               style={styles.searchIcon}

@@ -12,6 +12,7 @@ import SearchLocation from './src/screens/SearchLocation';
 
 import {UserLocationContextProvider} from './src/Components/context/UserLocationContext';
 import LocationDetails from './src/screens/LocationDetail';
+import {SearchContextProvider} from './src/Components/context/SearchContext';
 
 // setup for mapbox
 mapboxSetup();
@@ -28,7 +29,7 @@ const MyStack = React.memo(() => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="LocationDetails"
+        initialRouteName="Home"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="SearchLocation" component={SearchLocation} />
@@ -41,7 +42,9 @@ const MyStack = React.memo(() => {
 export default function App(): React.ReactNode {
   return (
     <UserLocationContextProvider>
-      <MyStack />
+      <SearchContextProvider>
+        <MyStack />
+      </SearchContextProvider>
     </UserLocationContextProvider>
   );
 }

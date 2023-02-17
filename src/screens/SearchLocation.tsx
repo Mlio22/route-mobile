@@ -14,6 +14,7 @@ import {BackButton} from '../Components/atoms/search/BackButton';
 import {ClearSearchButton} from '../Components/atoms/search/ClearSearch';
 import {SearchResultItem} from '../Components/atoms/search/SearchResultItem';
 import {UserLocationContext} from '../Components/context/UserLocationContext';
+import {SearchContext} from '../Components/context/SearchContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -64,6 +65,9 @@ let query: Query<AutocompleteRequestType> = {
 
 export const SearchLocation = (props: SearchLocationProps) => {
   const {locationInfo} = useContext(UserLocationContext);
+  const {searchInfo, updateInfo: updateSearchInfo} = useContext(SearchContext);
+
+  let isSearchAutoFilled = false;
 
   if (locationInfo.isEnabled) {
     const {latitude, longitude} = locationInfo.coordinates!;
@@ -82,15 +86,37 @@ export const SearchLocation = (props: SearchLocationProps) => {
     styles,
     placeholder: 'Search Place',
     query: query,
-    onPress: (data, details) => console.log(data, details),
+    onPress: data => {
+      const {
+        structured_formatting: {main_text},
+        place_id,
+      } = data;
+
+      autoRef.current?.setAddressText(main_text);
+      updateSearchInfo({
+        searchQuery: main_text,
+        selectedPlaceId: place_id,
+      });
+
+      props.navigation.navigate('LocationDetails', {
+        place_id,
+      });
+    },
     onFail: error => console.log(error),
     onNotFound: () => console.log('no results'),
     renderLeftButton: () => <BackButton navigation={props.navigation} />,
     renderRightButton: () => <ClearSearchButton autoRef={autoRef} />,
     renderRow: data => <SearchResultItem data={data} />,
+    keepResultsAfterBlur: true,
 
     textInputProps: {
       autoFocus: true,
+      onFocus: () => {
+        if (!isSearchAutoFilled) {
+          autoRef.current?.setAddressText(searchInfo.searchQuery!);
+          isSearchAutoFilled = true;
+        }
+      },
     },
   };
 
