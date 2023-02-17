@@ -41,7 +41,7 @@ const UserLocationContextProvider = (props: props) => {
     updateLocationInfo(newInfo);
   };
 
-  const locationInfoObj: UserLocationContextType = {
+  const locationInfoContextObj: UserLocationContextType = {
     locationInfo,
     updateInfo,
   };
@@ -49,7 +49,7 @@ const UserLocationContextProvider = (props: props) => {
   const {children} = props;
 
   return (
-    <UserLocationContext.Provider value={locationInfoObj}>
+    <UserLocationContext.Provider value={locationInfoContextObj}>
       {children}
     </UserLocationContext.Provider>
   );

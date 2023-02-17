@@ -1,27 +1,41 @@
 import React from 'react';
-import {PermissionsAndroid, ToastAndroid} from 'react-native';
 import MapboxGL from '@rnmapbox/maps';
-import Geolocation from '@react-native-community/geolocation';
-import RNAndroidLocationEnabler from 'react-native-android-location-enabler';
 
-import {UserMarkerIcon} from '../atoms/UserMarkerIcon';
-import {
-  LocationInfoType,
-  UserLocationContext,
-  userLocationDefaultValue,
-} from '../context/UserLocationContext';
 import {TargetMarkerIcon} from '../atoms/TargetMarkerIcon';
 
 type targetMarkerProps = {
-  coordinates: number[];
+  coordinates?: number[];
 };
 
-export const TargetMarker = (props: targetMarkerProps) => {
-  const {coordinates} = props;
+export class TargetMarker extends React.Component<targetMarkerProps> {
+  state: {
+    currentCoordinates?: number[];
+  };
 
-  return (
-    <MapboxGL.MarkerView coordinate={coordinates}>
-      <TargetMarkerIcon />
-    </MapboxGL.MarkerView>
-  );
-};
+  constructor(props: targetMarkerProps) {
+    super(props);
+
+    this.state = {
+      currentCoordinates: undefined,
+    };
+  }
+
+  moveTo(newCoordinates: number[]) {
+    this.setState({
+      currentCoordinates: newCoordinates,
+    });
+  }
+
+  render() {
+    const {currentCoordinates} = this.state;
+    return (
+      <>
+        {currentCoordinates && (
+          <MapboxGL.MarkerView coordinate={this.state.currentCoordinates}>
+            <TargetMarkerIcon />
+          </MapboxGL.MarkerView>
+        )}
+      </>
+    );
+  }
+}

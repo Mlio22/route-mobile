@@ -42,8 +42,17 @@ const styles = StyleSheet.create({
 });
 
 type basicMapProps = {
-  centerCoordinates: number[];
-  children: React.ReactNode;
+  centerCoordinates?: number[];
+  children?: React.ReactNode;
+};
+
+type centerMapToCoordinatesProps = {
+  coordinates: number[];
+  bounds?: {
+    ne: number[];
+    sw: number[];
+  };
+  addPadding?: boolean;
 };
 
 export class BasicMap extends React.Component<basicMapProps> {
@@ -65,8 +74,27 @@ export class BasicMap extends React.Component<basicMapProps> {
     }
   }
 
+  async centerMapToCoordinates(params: centerMapToCoordinatesProps) {
+    const {coordinates, bounds, addPadding} = params;
+
+    let [lng, lat] = coordinates;
+    if (addPadding) {
+      lat -= 0.002;
+    }
+
+    this.camera.current?.flyTo([lng, lat]);
+    if (bounds) {
+      // const {ne, sw} = bounds;
+      // this.camera.current?.fitBounds(sw, ne);
+    }
+  }
+
   render(): React.ReactNode {
-    const {children, centerCoordinates} = this.props as basicMapProps;
+    let {children, centerCoordinates} = this.props as basicMapProps;
+
+    if (!centerCoordinates) {
+      centerCoordinates = [107.604791, -6.934023];
+    }
 
     const mapviewProps: MapViewProps = {
         projection: 'globe',

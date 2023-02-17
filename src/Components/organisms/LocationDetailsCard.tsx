@@ -1,13 +1,10 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Image,
-  TouchableWithoutFeedback,
-  Text,
-} from 'react-native';
+import {StyleSheet, View, TouchableWithoutFeedback, Text} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faLocationDot, faRoute} from '@fortawesome/free-solid-svg-icons';
+import {PreviewImage} from '../atoms/details/PreviewImage';
+
+const GOOGLE_PLACES_API_KEY = 'AIzaSyCjpcDm8TzqStHV2YMsPzIlnHUy8W5zDFo';
 
 const styles = StyleSheet.create({
   mapContainer: {
@@ -19,8 +16,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    backgroundColor: '#2EC08CCC',
-    height: '48%',
+    backgroundColor: '#2EC08CEF',
+    height: '50%',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     overflow: 'hidden',
@@ -57,7 +54,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     backgroundColor: '#2EC08C',
     paddingHorizontal: 15,
-    paddingVertical: 5,
+    paddingVertical: 15,
   },
   routeIcon: {
     marginRight: 30,
@@ -85,41 +82,97 @@ const styles = StyleSheet.create({
   locationAddressCoordinates: {},
 });
 
-export const LocationDetailsCard = () => {
+type locationDetailsCardProps = {
+  place_id: string;
+};
+
+type placeDataType = {
+  previewImageReference: string;
+  placeTitle: {
+    placeName: string;
+    placeType: string;
+  };
+  locationDetails: {
+    address: string;
+  };
+};
+
+function extractData(jsonResponse: any): placeDataType {
+  const {photos, formatted_address, name, types} = jsonResponse;
+
+  const result: placeDataType = {
+    previewImageReference: photos[0].photo_reference,
+    placeTitle: {
+      placeName: name,
+      placeType: types[0],
+    },
+    locationDetails: {
+      address: formatted_address,
+    },
+  };
+
+  return result;
+}
+
+export const LocationDetailsCard = (props: locationDetailsCardProps) => {
+  const [placeData, updatePlaceData] = React.useState<placeDataType>();
+
+  React.useEffect(() => {
+    const {place_id} = props;
+
+    async function getPlaceData() {
+      const API_URL = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${place_id}&key=${GOOGLE_PLACES_API_KEY}`;
+      console.log(API_URL);
+
+      const response = await fetch(API_URL, {
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }),
+        responseJSON = await response.json();
+
+      updatePlaceData(extractData(responseJSON.result));
+    }
+
+    getPlaceData();
+  }, [props]);
+
   return (
-    <View style={styles.locationDetailContainer}>
-      <View style={styles.locationPreviewImage}>
-        <Image
-          style={styles.locationImage}
-          source={require('../../images/preview.png')}
-        />
-      </View>
-      <View style={styles.locationDetail}>
-        <View style={styles.locationTitle}>
-          <Text style={styles.locationName}>Indomaret Sukabirus</Text>
-          <Text style={styles.locationType}>Convenience Store</Text>
-        </View>
-        <TouchableWithoutFeedback>
-          <View style={styles.routeButton}>
-            <View style={styles.routeIcon}>
-              <FontAwesomeIcon size={20} icon={faRoute} />
+    <>
+      {placeData && (
+        <View style={styles.locationDetailContainer}>
+          <PreviewImage reference={placeData.previewImageReference} />
+          <View style={styles.locationDetail}>
+            <View style={styles.locationTitle}>
+              <Text style={styles.locationName}>
+                {placeData.placeTitle.placeName}
+              </Text>
+              <Text style={styles.locationType}>
+                {placeData.placeTitle.placeType}
+              </Text>
             </View>
-            <Text style={styles.routeText}>Routing Now</Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <View style={styles.locationAddress}>
-          <View style={styles.addressIcon}>
-            <FontAwesomeIcon size={30} icon={faLocationDot} />
-          </View>
-          <View style={styles.locationAddressDetail}>
-            <Text style={styles.locationAddressComplete}>
-              2JFM+95X, Jl. Sukabirus, Sukapura, Kec. Dayeuhkolot, Kabupaten
-              Bandung, Jawa Barat 40257
-            </Text>
-            <Text style={styles.locationAddressCoordinates}>ABC</Text>
+            <TouchableWithoutFeedback>
+              <View style={styles.routeButton}>
+                <View style={styles.routeIcon}>
+                  <FontAwesomeIcon size={20} icon={faRoute} />
+                </View>
+                <Text style={styles.routeText}>Routing Now</Text>
+              </View>
+            </TouchableWithoutFeedback>
+            <View style={styles.locationAddress}>
+              <View style={styles.addressIcon}>
+                <FontAwesomeIcon size={30} icon={faLocationDot} />
+              </View>
+              <View style={styles.locationAddressDetail}>
+                <Text style={styles.locationAddressComplete}>
+                  {placeData.locationDetails.address}
+                </Text>
+              </View>
+            </View>
           </View>
         </View>
-      </View>
-    </View>
+      )}
+    </>
   );
 };

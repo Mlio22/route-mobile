@@ -20,7 +20,9 @@ mapboxSetup();
 type RootStackParamList = {
   Home: undefined;
   SearchLocation: undefined;
-  LocationDetails: undefined;
+  LocationDetails: {
+    place_id: string;
+  };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

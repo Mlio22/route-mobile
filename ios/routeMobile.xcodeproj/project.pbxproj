@@ -25,6 +25,7 @@
 		370FCD9BDE88427E8F17E93C /* galleryfavorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D2720E0D7F4D6AB722A597 /* galleryfavorite.png */; };
 		80A68497E32D46D3AC8B98FC /* home3.png in Resources */ = {isa = PBXBuildFile; fileRef = 950CA857C6A744438A04D8A8 /* home3.png */; };
 		A52A4289453F4B74BAA704FA /* homehashtag.png in Resources */ = {isa = PBXBuildFile; fileRef = 8686102B618741E9B730D38B /* homehashtag.png */; };
+		B5790465EA324F1C89D0684E /* preview.png in Resources */ = {isa = PBXBuildFile; fileRef = E79511627AE74805AFE5F0A3 /* preview.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		65D2720E0D7F4D6AB722A597 /* galleryfavorite.png */ = {isa = PBXFileReference; name = "galleryfavorite.png"; path = "../src/images/galleryfavorite.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		950CA857C6A744438A04D8A8 /* home3.png */ = {isa = PBXFileReference; name = "home3.png"; path = "../src/images/home3.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		8686102B618741E9B730D38B /* homehashtag.png */ = {isa = PBXFileReference; name = "homehashtag.png"; path = "../src/images/homehashtag.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E79511627AE74805AFE5F0A3 /* preview.png */ = {isa = PBXFileReference; name = "preview.png"; path = "../src/images/preview.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 				65D2720E0D7F4D6AB722A597 /* galleryfavorite.png */,
 				950CA857C6A744438A04D8A8 /* home3.png */,
 				8686102B618741E9B730D38B /* homehashtag.png */,
+				E79511627AE74805AFE5F0A3 /* preview.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				370FCD9BDE88427E8F17E93C /* galleryfavorite.png in Resources */,
 				80A68497E32D46D3AC8B98FC /* home3.png in Resources */,
 				A52A4289453F4B74BAA704FA /* homehashtag.png in Resources */,
+				B5790465EA324F1C89D0684E /* preview.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
