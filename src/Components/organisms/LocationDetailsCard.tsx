@@ -3,14 +3,11 @@ import {StyleSheet, View, TouchableWithoutFeedback, Text} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faLocationDot, faRoute} from '@fortawesome/free-solid-svg-icons';
 import {PreviewImage} from '../atoms/details/PreviewImage';
+import {SearchContext} from '../context/SearchContext';
 
 const GOOGLE_PLACES_API_KEY = 'AIzaSyCjpcDm8TzqStHV2YMsPzIlnHUy8W5zDFo';
 
 const styles = StyleSheet.create({
-  mapContainer: {
-    width: '100%',
-    height: '80%',
-  },
   locationDetailContainer: {
     width: '100%',
     position: 'absolute',
@@ -83,7 +80,7 @@ const styles = StyleSheet.create({
 });
 
 type locationDetailsCardProps = {
-  place_id: string;
+  
 };
 
 type placeDataType = {
@@ -115,14 +112,14 @@ function extractData(jsonResponse: any): placeDataType {
 }
 
 export const LocationDetailsCard = (props: locationDetailsCardProps) => {
+  const {searchInfo} = React.useContext(SearchContext);
+
   const [placeData, updatePlaceData] = React.useState<placeDataType>();
+  const placeId = searchInfo.selectedPlaceId;
 
   React.useEffect(() => {
-    const {place_id} = props;
-
     async function getPlaceData() {
-      const API_URL = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${place_id}&key=${GOOGLE_PLACES_API_KEY}`;
-      console.log(API_URL);
+      const API_URL = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${GOOGLE_PLACES_API_KEY}`;
 
       const response = await fetch(API_URL, {
           method: 'get',
@@ -136,7 +133,7 @@ export const LocationDetailsCard = (props: locationDetailsCardProps) => {
     }
 
     getPlaceData();
-  }, [props]);
+  }, [placeId]);
 
   return (
     <>

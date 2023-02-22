@@ -86,21 +86,19 @@ export const SearchLocation = (props: SearchLocationProps) => {
     styles,
     placeholder: 'Search Place',
     query: query,
-    onPress: data => {
+    onPress: async data => {
       const {
         structured_formatting: {main_text},
         place_id,
       } = data;
 
       autoRef.current?.setAddressText(main_text);
-      updateSearchInfo({
+      await updateSearchInfo({
         searchQuery: main_text,
         selectedPlaceId: place_id,
       });
 
-      props.navigation.navigate('LocationDetails', {
-        place_id,
-      });
+      props.navigation.navigate('LocationDetails');
     },
     onFail: error => console.log(error),
     onNotFound: () => console.log('no results'),

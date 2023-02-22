@@ -46,24 +46,21 @@ type basicMapProps = {
   children?: React.ReactNode;
 };
 
-type centerMapToCoordinatesProps = {
-  coordinates: number[];
-  bounds?: {
-    ne: number[];
-    sw: number[];
-  };
-  addPadding?: boolean;
-};
-
 export class BasicMap extends React.Component<basicMapProps> {
   camera: React.RefObject<MapboxGL.Camera>;
   userMarker: React.RefObject<UserMarker>;
+
+  currentTargetCoordinates: number[];
 
   constructor(props: basicMapProps) {
     super(props);
 
     this.camera = React.createRef<MapboxGL.Camera>();
     this.userMarker = React.createRef<UserMarker>();
+
+    this.currentTargetCoordinates = props.centerCoordinates || [
+      107.604954, -6.934469,
+    ];
   }
 
   async centerMapToUser(): Promise<void> {
@@ -74,28 +71,7 @@ export class BasicMap extends React.Component<basicMapProps> {
     }
   }
 
-  async centerMapToCoordinates(params: centerMapToCoordinatesProps) {
-    const {coordinates, bounds, addPadding} = params;
-
-    let [lng, lat] = coordinates;
-    if (addPadding) {
-      lat -= 0.002;
-    }
-
-    this.camera.current?.flyTo([lng, lat]);
-    if (bounds) {
-      // const {ne, sw} = bounds;
-      // this.camera.current?.fitBounds(sw, ne);
-    }
-  }
-
-  render(): React.ReactNode {
-    let {children, centerCoordinates} = this.props as basicMapProps;
-
-    if (!centerCoordinates) {
-      centerCoordinates = [107.604791, -6.934023];
-    }
-
+  renderMap(anotherChildren?: any) {
     const mapviewProps: MapViewProps = {
         projection: 'globe',
         style: styles.map,
@@ -105,7 +81,7 @@ export class BasicMap extends React.Component<basicMapProps> {
       cameraProps: CameraProps = {
         zoomLevel: 15,
         animationMode: 'none',
-        centerCoordinate: centerCoordinates || [107.604954, -6.934469],
+        centerCoordinate: this.currentTargetCoordinates,
       };
 
     return (
@@ -113,9 +89,14 @@ export class BasicMap extends React.Component<basicMapProps> {
         <MapboxGL.MapView {...mapviewProps}>
           <MapboxGL.Camera ref={this.camera} {...cameraProps} />
           <UserMarker ref={this.userMarker} />
-          {children}
+          {this.props.children}
+          {anotherChildren}
         </MapboxGL.MapView>
       </>
     );
+  }
+
+  render(): React.ReactNode {
+    return this.renderMap();
   }
 }

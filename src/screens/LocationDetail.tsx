@@ -1,9 +1,10 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {LocationDetailsProps} from '../../App';
-import {BasicMap} from '../Components/molecules/BasicMap';
 import {TargetMarker} from '../Components/molecules/TargetMarker';
 import {LocationDetailsCard} from '../Components/organisms/LocationDetailsCard';
+import {RouteUI} from '../Components/organisms/RouteUI';
+import {SearchContext} from '../Components/context/SearchContext';
+import {RouteMap} from '../Components/organisms/RouteMap';
 
 const styles = StyleSheet.create({
   mapContainer: {
@@ -12,66 +13,46 @@ const styles = StyleSheet.create({
   },
 });
 
-const GOOGLE_PLACES_API_KEY = 'AIzaSyCjpcDm8TzqStHV2YMsPzIlnHUy8W5zDFo';
-
-async function getLocationCoordinates(placeId: string) {
-  const API_URL = `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${GOOGLE_PLACES_API_KEY}`;
-
-  const response = await fetch(API_URL, {
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }),
-    responseJson = await response.json();
-
-  const {
-    geometry: {
-      location: {lat, lng},
-      viewport: {
-        northeast: {lat: boundY1, lng: boundX1},
-        southwest: {lat: boundY2, lng: boundX2},
-      },
-    },
-  } = responseJson.results[0];
-
-  const coordinates = [lng, lat],
-    bounds = {
-      ne: [boundX1, boundY1],
-      sw: [boundX2, boundY2],
-    };
-
-  return {coordinates, bounds};
-}
-
-const LocationDetails = (props: LocationDetailsProps) => {
-  const basicMapRef = React.useRef() as React.RefObject<BasicMap>;
+const LocationDetails = () => {
+  const routeMapRef = React.useRef() as React.RefObject<RouteMap>;
   const targetMarkerRef = React.useRef() as React.RefObject<TargetMarker>;
 
-  const {place_id} = props.route.params;
+  const [isRouteMode, updateRouteMode] = React.useState(false);
+
+  const {searchInfo} = React.useContext(SearchContext);
+  const {coordinates, bounds} = searchInfo.selectedPlaceDetail!;
 
   React.useEffect(() => {
-    setTimeout(async () => {
-      const {coordinates, bounds} = await getLocationCoordinates(place_id);
+    if (isRouteMode) {
+      routeMapRef.current?.boundUserAndTarget();
+    } else {
+      setTimeout(async () => {
+        routeMapRef.current?.centerMapToTarget({
+          coordinates,
+          bounds,
+          addPadding: true,
+        });
 
-      basicMapRef.current?.centerMapToCoordinates({
-        coordinates,
-        bounds,
-        addPadding: true,
-      });
+        targetMarkerRef.current?.moveTo(coordinates);
+      }, 500);
+    }
+  }, [bounds, coordinates, isRouteMode]);
 
-      targetMarkerRef.current?.moveTo(coordinates);
-    }, 50);
-  }, [basicMapRef, place_id, targetMarkerRef]);
+  const routeUI = <RouteUI mapRef={routeMapRef} />;
+  const detailsCard = (
+    <LocationDetailsCard changeModeHandler={() => updateRouteMode(true)} />
+  );
+
+  const UIView = isRouteMode ? routeUI : detailsCard;
 
   return (
     <>
       <View style={styles.mapContainer}>
-        <BasicMap ref={basicMapRef}>
+        <RouteMap ref={routeMapRef}>
           <TargetMarker ref={targetMarkerRef} />
-        </BasicMap>
+        </RouteMap>
       </View>
-      <LocationDetailsCard place_id={place_id} />
+      {UIView}
     </>
   );
 };

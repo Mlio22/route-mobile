@@ -2,6 +2,70 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/images/directions/rounded=belok kiri bawah.svg",
+      "sha1": "cf168962f87bd6bee3fee26c78d440f1d8a1124b"
+    },
+    {
+      "path": "src/images/directions/rounded=muter belok kanan bawah.svg",
+      "sha1": "192ecf168a2ba9e81f87f7bb712dfeeef8f1f897"
+    },
+    {
+      "path": "src/images/directions/rounded=muter belok kanan.svg",
+      "sha1": "822e064c45621a1108f825786a7341b8da491057"
+    },
+    {
+      "path": "src/images/directions/rounded=muter belok kiri.svg",
+      "sha1": "21531ab1226b7f85c2ad3550dadeff645a8ed90f"
+    },
+    {
+      "path": "src/images/directions/rounded=muter dulu baru kanan.svg",
+      "sha1": "da190cd1785d1806d6b1d2500c9b56451ce673b0"
+    },
+    {
+      "path": "src/images/directions/rounded=muter kanan.svg",
+      "sha1": "b087098d75193c699f9afb7369a56370966bc9a7"
+    },
+    {
+      "path": "src/images/directions/rounded=muter kiri.svg",
+      "sha1": "6a4dfb4c9b2f686ad6de145d0c661c7f6ddaf0fe"
+    },
+    {
+      "path": "src/images/directions/rounded=muter lurus.svg",
+      "sha1": "942ab2203b3a50c8631cc6344e5b306d28c3e5a5"
+    },
+    {
+      "path": "src/images/directions/straight.svg",
+      "sha1": "441cc1b5eb24ef1f40e566c0faaa92ef973e2788"
+    },
+    {
+      "path": "src/images/directions/turn.svg",
+      "sha1": "908704fee61a485d29847ca3cb3e5afd67399700"
+    },
+    {
+      "path": "src/images/directions/way 3=left.svg",
+      "sha1": "076674c938cf4a8b07ab7a8f123c35df9268f9cc"
+    },
+    {
+      "path": "src/images/directions/way 3=right.svg",
+      "sha1": "b596d6bd69d132e9b530fdc8569e0c4053531bf9"
+    },
+    {
+      "path": "src/images/directions/way2=slide left.svg",
+      "sha1": "b769c7cc3f4cbeb060955a7cf543fd65d3deb2cf"
+    },
+    {
+      "path": "src/images/directions/way2=slide right.svg",
+      "sha1": "e0c06e73cc2a1d6c95bf5ee65601683adcd4d844"
+    },
+    {
+      "path": "src/images/directions/way2=u turn left.svg",
+      "sha1": "9513efd4723094bcaf2ddba6c5a097abf833f98c"
+    },
+    {
+      "path": "src/images/directions/way2=u turn right.svg",
+      "sha1": "7bab13869aa79fd3c752788838faa1b8c28fa1fc"
+    },
+    {
       "path": "src/images/galleryfavorite-1.png",
       "sha1": "62a0e9affb8c9f8d0360803d6da61e522556c5dc"
     },
@@ -32,6 +96,10 @@
     {
       "path": "src/images/search.png",
       "sha1": "7ea50c8f42a37540ee8253d57123890f966edcc2"
+    },
+    {
+      "path": "src/images/straight.png",
+      "sha1": "02df0d85a03c4adbd3754eb42ac41a61605d1921"
     },
     {
       "path": "src/images/timeline.png",
