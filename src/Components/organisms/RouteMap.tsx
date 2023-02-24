@@ -3,8 +3,9 @@ import {BasicMap} from '../molecules/BasicMap';
 import MapboxGL from '@rnmapbox/maps';
 
 // @ts-ignore
-import mapboxPolyline from '@mapbox/polyline';
-import {polylineData} from '../atoms/route/RouteSteps';
+import {PlaceRouteContext} from '../context/locationDetails/PlaceRouteContext';
+import {PreviewModeContext} from '../context/locationDetails/PreviewModeContext';
+import {PlaceDetailContext} from '../context/locationDetails/PlaceDetailsContext';
 
 type centerTargetProps = {
   coordinates: number[];
@@ -33,31 +34,6 @@ type PolylineRouteType = {
   coordinates: number[][];
 };
 
-function fixCoordinates(polylineString: string): number[][] {
-  const coordinatesList = mapboxPolyline.decode(polylineString);
-
-  return coordinatesList.map((coordinate: number[]) => {
-    const [lat, lng] = coordinate;
-    return [lng, lat];
-  });
-}
-
-const processPolylineStrings = (polylineDataList: polylineData[]) => {
-  let polylineRoute: PolylineRouteType[] = [];
-
-  polylineDataList.forEach(polylineData => {
-    const {polylineString, congestionIndex} = polylineData;
-    const coordinates = fixCoordinates(polylineString);
-
-    polylineRoute.push({
-      coordinates,
-      congestionIndex,
-    });
-  });
-
-  return polylineRoute;
-};
-
 const polylineColor = ['#cc3300', '#ffcc00', '#14530d'];
 
 // const convertMultipolylineString = (polylineStrings: PolylineRouteType[]) => {
@@ -72,16 +48,8 @@ const polylineColor = ['#cc3300', '#ffcc00', '#14530d'];
 // };
 
 export class RouteMap extends BasicMap {
-  state: {
-    polylineDataList: polylineData[];
-  };
-
   constructor(props: any) {
     super(props);
-
-    this.state = {
-      polylineDataList: [],
-    };
   }
 
   centerMapToTarget(params: centerTargetProps) {
@@ -112,54 +80,88 @@ export class RouteMap extends BasicMap {
     this.camera.current?.fitBounds(ne, sw, [300, 200, 200, 100]);
   }
 
-  appendPolylines(polylineDataList: polylineData[]) {
-    this.setState({
-      polylineDataList,
-    });
-  }
-
-  render(): React.ReactNode {
-    const {polylineDataList} = this.state;
-
-    let children;
-
-    if (polylineDataList.length > 0) {
-      const polylineRoute = processPolylineStrings(polylineDataList);
-
-      children = polylineRoute.map((polyline, index) => {
-        const {congestionIndex, coordinates} = polyline;
-
-        // ide: ambil satu titik koordinat setelah akhir dari garis
-        let appendCoordinate = coordinates;
-
-        if (index !== polylineRoute.length - 1) {
-          const {coordinates: otherCoordinates} = polylineRoute[index + 1];
-
-          appendCoordinate.push(otherCoordinates[1]);
-        }
-
-        const shape = {
-          type: 'LineString',
-          coordinates: appendCoordinate,
-        };
-
-        return (
-          // @ts-ignore
-          <MapboxGL.ShapeSource id={`line${index}`} shape={shape}>
-            <MapboxGL.LineLayer
-              id={`linelayer${index}`}
-              // todo: perbaiki styling
-              style={{
-                lineColor: polylineColor[congestionIndex],
-                lineWidth: 5,
-                lineJoin: 'round',
-              }}
-            />
-          </MapboxGL.ShapeSource>
-        );
-      });
-    }
+  render() {
+    const children = <RouteMapChildren routeMapRef={this} />;
 
     return this.renderMap(children);
   }
 }
+
+const RouteLineLayers = (polylineRoute: PolylineRouteType[]) => {
+  const children = polylineRoute.map((polyline, index) => {
+    const {congestionIndex, coordinates} = polyline;
+
+    // ide: ambil satu titik koordinat setelah akhir dari garis
+    let appendCoordinate = coordinates;
+
+    if (index !== polylineRoute.length - 1) {
+      const {coordinates: otherCoordinates} = polylineRoute[index + 1];
+
+      appendCoordinate.push(otherCoordinates[1]);
+    }
+
+    // @ts-ignore
+    const shape: Geometry = {
+      type: 'LineString',
+      coordinates: appendCoordinate,
+    };
+
+    return (
+      <MapboxGL.ShapeSource id={`line${index}`} shape={shape}>
+        <MapboxGL.LineLayer
+          id={`linelayer${index}`}
+          // todo: perbaiki styling
+          style={{
+            lineColor: polylineColor[congestionIndex],
+            lineWidth: 5,
+            lineJoin: 'round',
+          }}
+        />
+      </MapboxGL.ShapeSource>
+    );
+  });
+
+  return children;
+};
+
+type RouteMapChildrenProps = {
+  routeMapRef: RouteMap;
+};
+
+const PlaceChildren = (props: RouteMapChildrenProps) => {
+  const {isDataReady, placeGeolocation} = React.useContext(PlaceDetailContext);
+  const {routeMapRef} = props;
+
+  if (isDataReady) {
+    const {coordinates, bounds} = placeGeolocation?.current!;
+    routeMapRef.centerMapToTarget({
+      coordinates,
+      bounds,
+      addPadding: true,
+    });
+  }
+
+  return <></>;
+};
+
+const RouteChildren = (props: RouteMapChildrenProps) => {
+  let {isDataReady, routeLineList} = React.useContext(PlaceRouteContext)!;
+  let children;
+
+  if (isDataReady && routeLineList?.current) {
+    children = RouteLineLayers(routeLineList.current);
+    props.routeMapRef.boundUserAndTarget();
+  }
+
+  return <>{children}</>;
+};
+
+const RouteMapChildren = (props: RouteMapChildrenProps) => {
+  const {previewMode} = React.useContext(PreviewModeContext);
+
+  if (previewMode === 'place') {
+    return <PlaceChildren {...props} />;
+  } else {
+    return <RouteChildren {...props} />;
+  }
+};

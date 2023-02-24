@@ -1,12 +1,12 @@
 import React from 'react';
 
 type LocationInfoType = {
-  isEnabled?: any | boolean;
+  isEnabled?: boolean;
   coordinates?: {latitude?: number; longitude?: number};
 };
 
 type UserLocationContextType = {
-  locationInfo: LocationInfoType;
+  locationInfo: React.RefObject<LocationInfoType>;
   updateInfo: (newInfo: LocationInfoType) => void;
 };
 
@@ -16,7 +16,7 @@ const userLocationDefaultValue: LocationInfoType = {
 };
 
 const contextDefaultValue: UserLocationContextType = {
-  locationInfo: userLocationDefaultValue,
+  locationInfo: undefined as unknown as React.RefObject<LocationInfoType>,
   updateInfo: (_: any) => {},
 };
 
@@ -28,9 +28,7 @@ const UserLocationContext: React.Context<UserLocationContextType> =
   React.createContext(contextDefaultValue);
 
 const UserLocationContextProvider = (props: props) => {
-  const [locationInfo, updateLocationInfo] = React.useState<LocationInfoType>(
-    userLocationDefaultValue,
-  );
+  const locationInfo = React.useRef<LocationInfoType>(userLocationDefaultValue);
 
   const updateInfo = (newInfo: LocationInfoType) => {
     newInfo = {
@@ -38,7 +36,7 @@ const UserLocationContextProvider = (props: props) => {
       ...newInfo,
     };
 
-    updateLocationInfo(newInfo);
+    locationInfo.current = newInfo;
   };
 
   const locationInfoContextObj: UserLocationContextType = {

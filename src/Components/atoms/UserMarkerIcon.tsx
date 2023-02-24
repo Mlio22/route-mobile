@@ -23,7 +23,7 @@ export const UserMarkerIcon: React.FunctionComponent = () => {
 
   return (
     <View style={{transform: [{rotate: `${compassHeading}deg`}]}}>
-      <FontAwesomeIcon icon={faLocationArrow} />
+      <FontAwesomeIcon size={28} icon={faLocationArrow} />
     </View>
   );
 };

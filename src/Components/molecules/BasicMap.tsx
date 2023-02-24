@@ -41,18 +41,18 @@ const styles = StyleSheet.create({
   mapSettings: {},
 });
 
-type basicMapProps = {
+type BasicMapProps = {
   centerCoordinates?: number[];
   children?: React.ReactNode;
 };
 
-export class BasicMap extends React.Component<basicMapProps> {
+export class BasicMap extends React.Component<BasicMapProps> {
   camera: React.RefObject<MapboxGL.Camera>;
   userMarker: React.RefObject<UserMarker>;
 
   currentTargetCoordinates: number[];
 
-  constructor(props: basicMapProps) {
+  constructor(props: BasicMapProps) {
     super(props);
 
     this.camera = React.createRef<MapboxGL.Camera>();

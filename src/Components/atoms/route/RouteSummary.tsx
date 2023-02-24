@@ -6,11 +6,7 @@ import {
   faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
 import {SearchContext} from '../../context/SearchContext';
-import {RouteInfo} from '../../organisms/RouteUI';
-
-type RouteSummaryProps = {
-  summary?: RouteInfo;
-};
+import {PlaceRouteContext} from '../../context/locationDetails/PlaceRouteContext';
 
 const styles = StyleSheet.create({
   routeSummaryContainer: {
@@ -62,9 +58,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export const RouteSummary = (props: RouteSummaryProps) => {
+export const RouteSummary = () => {
   const {searchInfo} = React.useContext(SearchContext);
-  const {distance, duration} = props.summary!;
+  const {isDataReady, routeSummary} = React.useContext(PlaceRouteContext);
+
+  if (!isDataReady) {
+    return <></>;
+  }
+
+  const {distance, duration} = routeSummary?.current!;
 
   return (
     <View style={styles.routeSummaryContainer}>

@@ -7,28 +7,9 @@ import ActionSheet, {
   useScrollHandlers,
 } from 'react-native-actions-sheet';
 
-import {RawStepsType} from '../../organisms/RouteUI';
-import {RouteMap} from '../../organisms/RouteMap';
 import {RouteDirectionIcon} from '../RouteDirectionIcon';
 import {parse} from 'node-html-parser';
-
-type RouteStepsProps = {
-  stepsRaw: RawStepsType;
-  mapRef: React.RefObject<RouteMap>;
-};
-
-type ProcessedStepType = {
-  distance: any;
-  duration: any;
-  maneuver: string;
-  congestionIndex: number;
-  html_instructions: string;
-};
-
-export type polylineData = {
-  polylineString: string;
-  congestionIndex: number;
-};
+import {PlaceRouteContext} from '../../context/locationDetails/PlaceRouteContext';
 
 const styles = StyleSheet.create({
   actionSheetContainer: {
@@ -120,54 +101,13 @@ const actionSheetProps: ActionSheetProps = {
   drawUnderStatusBar: false,
 };
 
-const processRouteSteps = (stepsRawData: RawStepsType) => {
-  let stepsList: ProcessedStepType[] = [],
-    polylineList: polylineData[] = [];
-
-  stepsRawData.forEach(step => {
-    const {
-      distance,
-      duration,
-      polyline: {points: polylineString},
-      maneuver,
-      html_instructions,
-    } = step;
-
-    const congestionIndex = Math.floor(Math.random() * 3);
-
-    stepsList.push({
-      distance,
-      duration,
-      maneuver,
-      congestionIndex,
-      html_instructions,
-    });
-
-    polylineList.push({
-      polylineString,
-      congestionIndex,
-    });
-  });
-
-  return {stepsList, polylineList};
-};
-
-export const RouteSteps = (props: RouteStepsProps) => {
+export const RouteSteps = () => {
   const actionSheetRef = React.useRef<ActionSheetRef>(null);
-  const [steps, setSteps] = React.useState<ProcessedStepType[]>();
   const scrollhandlers = useScrollHandlers<ScrollView>('sv-1', actionSheetRef);
 
-  React.useEffect(() => {
-    const {stepsRaw, mapRef} = props;
+  const {isDataReady, routeSteps} = React.useContext(PlaceRouteContext);
 
-    const {stepsList, polylineList} = processRouteSteps(stepsRaw);
-
-    setSteps(stepsList);
-
-    mapRef.current?.appendPolylines(polylineList);
-  }, [props]);
-
-  if (!steps) {
+  if (!isDataReady) {
     return <></>;
   }
 
@@ -175,8 +115,9 @@ export const RouteSteps = (props: RouteStepsProps) => {
     actionSheetRef.current?.show();
   }, 100);
 
+  const steps = routeSteps?.current!;
+
   return (
-    // @ts-ignore
     <ActionSheet {...actionSheetProps} ref={actionSheetRef}>
       <View style={styles.routeDetailsContainer}>
         <View style={styles.routeDetailsHeader}>
@@ -200,7 +141,7 @@ export const RouteSteps = (props: RouteStepsProps) => {
   );
 };
 
-const RouteStepsItem = (props: ProcessedStepType) => {
+const RouteStepsItem = (props: any) => {
   const {maneuver, congestionIndex, html_instructions, distance} = props;
   const instructions = parse(html_instructions).text;
 

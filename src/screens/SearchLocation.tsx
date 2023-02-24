@@ -65,12 +65,14 @@ let query: Query<AutocompleteRequestType> = {
 
 export const SearchLocation = (props: SearchLocationProps) => {
   const {locationInfo} = useContext(UserLocationContext);
-  const {searchInfo, updateInfo: updateSearchInfo} = useContext(SearchContext);
+  const {searchInfo, updateInfo} = useContext(SearchContext);
+
+  const {isEnabled, coordinates} = locationInfo?.current!;
 
   let isSearchAutoFilled = false;
 
-  if (locationInfo.isEnabled) {
-    const {latitude, longitude} = locationInfo.coordinates!;
+  if (isEnabled) {
+    const {latitude, longitude} = coordinates!;
 
     query = {
       ...query,
@@ -93,12 +95,12 @@ export const SearchLocation = (props: SearchLocationProps) => {
       } = data;
 
       autoRef.current?.setAddressText(main_text);
-      await updateSearchInfo({
+      updateInfo({
         searchQuery: main_text,
         selectedPlaceId: place_id,
       });
 
-      props.navigation.navigate('LocationDetails');
+      props.navigation.navigate('LocationDetails', {selectedPlaceId: place_id});
     },
     onFail: error => console.log(error),
     onNotFound: () => console.log('no results'),

@@ -2,40 +2,20 @@ import React from 'react';
 import MapboxGL from '@rnmapbox/maps';
 
 import {TargetMarkerIcon} from '../atoms/TargetMarkerIcon';
+import {PlaceDetailContext} from '../context/locationDetails/PlaceDetailsContext';
 
-type targetMarkerProps = {
-  coordinates?: number[];
-};
+export const TargetMarker = () => {
+  const {isDataReady, placeGeolocation} = React.useContext(PlaceDetailContext);
 
-export class TargetMarker extends React.Component<targetMarkerProps> {
-  state: {
-    currentCoordinates?: number[];
-  };
+  if (isDataReady) {
+    const {coordinates} = placeGeolocation?.current!;
 
-  constructor(props: targetMarkerProps) {
-    super(props);
-
-    this.state = {
-      currentCoordinates: undefined,
-    };
-  }
-
-  moveTo(newCoordinates: number[]) {
-    this.setState({
-      currentCoordinates: newCoordinates,
-    });
-  }
-
-  render() {
-    const {currentCoordinates} = this.state;
     return (
-      <>
-        {currentCoordinates && (
-          <MapboxGL.MarkerView coordinate={this.state.currentCoordinates}>
-            <TargetMarkerIcon />
-          </MapboxGL.MarkerView>
-        )}
-      </>
+      <MapboxGL.MarkerView coordinate={coordinates}>
+        <TargetMarkerIcon />
+      </MapboxGL.MarkerView>
     );
   }
-}
+
+  return <></>;
+};

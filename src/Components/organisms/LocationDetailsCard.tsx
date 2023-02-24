@@ -3,9 +3,8 @@ import {StyleSheet, View, TouchableWithoutFeedback, Text} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faLocationDot, faRoute} from '@fortawesome/free-solid-svg-icons';
 import {PreviewImage} from '../atoms/details/PreviewImage';
-import {SearchContext} from '../context/SearchContext';
-
-const GOOGLE_PLACES_API_KEY = 'AIzaSyCjpcDm8TzqStHV2YMsPzIlnHUy8W5zDFo';
+import {PlaceDetailContext} from '../context/locationDetails/PlaceDetailsContext';
+import {PreviewModeContext} from '../context/locationDetails/PreviewModeContext';
 
 const styles = StyleSheet.create({
   locationDetailContainer: {
@@ -79,97 +78,47 @@ const styles = StyleSheet.create({
   locationAddressCoordinates: {},
 });
 
-type locationDetailsCardProps = {
-  
-};
+export const LocationDetailsCard = () => {
+  const {updatePreviewMode} = React.useContext(PreviewModeContext);
+  const {isDataReady, placeData} = React.useContext(PlaceDetailContext);
 
-type placeDataType = {
-  previewImageReference: string;
-  placeTitle: {
-    placeName: string;
-    placeType: string;
-  };
-  locationDetails: {
-    address: string;
-  };
-};
+  if (!isDataReady) {
+    return <></>;
+  }
 
-function extractData(jsonResponse: any): placeDataType {
-  const {photos, formatted_address, name, types} = jsonResponse;
-
-  const result: placeDataType = {
-    previewImageReference: photos[0].photo_reference,
-    placeTitle: {
-      placeName: name,
-      placeType: types[0],
-    },
-    locationDetails: {
-      address: formatted_address,
-    },
-  };
-
-  return result;
-}
-
-export const LocationDetailsCard = (props: locationDetailsCardProps) => {
-  const {searchInfo} = React.useContext(SearchContext);
-
-  const [placeData, updatePlaceData] = React.useState<placeDataType>();
-  const placeId = searchInfo.selectedPlaceId;
-
-  React.useEffect(() => {
-    async function getPlaceData() {
-      const API_URL = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${GOOGLE_PLACES_API_KEY}`;
-
-      const response = await fetch(API_URL, {
-          method: 'get',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }),
-        responseJSON = await response.json();
-
-      updatePlaceData(extractData(responseJSON.result));
-    }
-
-    getPlaceData();
-  }, [placeId]);
+  const {
+    previewImageReference,
+    placeTitle: {placeName, placeType},
+    locationDetails: {address},
+  } = placeData?.current!;
 
   return (
     <>
-      {placeData && (
-        <View style={styles.locationDetailContainer}>
-          <PreviewImage reference={placeData.previewImageReference} />
-          <View style={styles.locationDetail}>
-            <View style={styles.locationTitle}>
-              <Text style={styles.locationName}>
-                {placeData.placeTitle.placeName}
-              </Text>
-              <Text style={styles.locationType}>
-                {placeData.placeTitle.placeType}
-              </Text>
+      <View style={styles.locationDetailContainer}>
+        <PreviewImage reference={previewImageReference} />
+        <View style={styles.locationDetail}>
+          <View style={styles.locationTitle}>
+            <Text style={styles.locationName}>{placeName}</Text>
+            <Text style={styles.locationType}>{placeType}</Text>
+          </View>
+          <TouchableWithoutFeedback onPress={() => updatePreviewMode('route')}>
+            <View style={styles.routeButton}>
+              <View style={styles.routeIcon}>
+                <FontAwesomeIcon size={20} icon={faRoute} />
+              </View>
+              <Text style={styles.routeText}>Routing Now</Text>
             </View>
-            <TouchableWithoutFeedback>
-              <View style={styles.routeButton}>
-                <View style={styles.routeIcon}>
-                  <FontAwesomeIcon size={20} icon={faRoute} />
-                </View>
-                <Text style={styles.routeText}>Routing Now</Text>
-              </View>
-            </TouchableWithoutFeedback>
-            <View style={styles.locationAddress}>
-              <View style={styles.addressIcon}>
-                <FontAwesomeIcon size={30} icon={faLocationDot} />
-              </View>
-              <View style={styles.locationAddressDetail}>
-                <Text style={styles.locationAddressComplete}>
-                  {placeData.locationDetails.address}
-                </Text>
-              </View>
+          </TouchableWithoutFeedback>
+          <View style={styles.locationAddress}>
+            <View style={styles.addressIcon}>
+              <FontAwesomeIcon size={30} icon={faLocationDot} />
+            </View>
+            <View style={styles.locationAddressDetail}>
+              <Text style={styles.locationAddressComplete}>{address}</Text>
             </View>
           </View>
         </View>
-      )}
+      </View>
     </>
   );
 };
