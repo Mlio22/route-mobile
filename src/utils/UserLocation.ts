@@ -34,19 +34,24 @@ async function requestUserLocation(): Promise<boolean> {
 }
 
 let userCoordinates: CoordinatesObjectType = {
-  latitude: null,
-  longitude: null,
+  latitude: 0,
+  longitude: 0,
 };
 
 export const getUserCoordinates = () => {
+  console.log(userCoordinates);
+
   return userCoordinates;
 };
 
 const updateUserCoordinates = (newCoords: CoordinatesObjectType) => {
   let {latitude, longitude} = newCoords;
 
-  longitude = 107.632827;
-  latitude = -6.980611;
+  // indonesia only
+  if (latitude > 6 || latitude < -11 || longitude < 95 || longitude > 141) {
+    longitude = 107.632827;
+    latitude = -6.980611;
+  }
 
   userCoordinates = {latitude, longitude};
 };
@@ -85,7 +90,7 @@ export const checkUserLocationFirst = async (): Promise<boolean> => {
   const userLocationGranted = await grantUserLocation();
 
   return new Promise(resolve => {
-    const success = (coords: any) => {
+    const success = ({coords}: any) => {
       updateUserCoordinates(coords);
       resolve(true);
     };

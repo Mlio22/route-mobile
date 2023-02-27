@@ -27,17 +27,19 @@ export const UserLocationContextProvider = (props: ChildrenProp) => {
   // add manual settings for user location
   const isEnabled = React.useRef(false);
   const userCoordinates = React.useRef<CoordinatesObjectType>({
-    longitude: null,
-    latitude: null,
+    longitude: 0,
+    latitude: 0,
   });
 
   const onLocationActivated = () => {
     interval = setInterval(async () => {
+      // console.log('interval location');
+
       if (!isEnabled.current) clearInterval(interval);
 
       // check user location still enabled every 1s
       isEnabled.current = await checkUserLocationFirst();
-    }, 1000);
+    }, 10000);
   };
 
   const activateUserLocation = async () => {
@@ -50,6 +52,8 @@ export const UserLocationContextProvider = (props: ChildrenProp) => {
   const userLocationStartup = async () => {
     isEnabled.current = await checkUserLocationFirst();
     userCoordinates.current = getUserCoordinates();
+
+    console.log(userCoordinates);
 
     if (isEnabled.current) onLocationActivated();
   };

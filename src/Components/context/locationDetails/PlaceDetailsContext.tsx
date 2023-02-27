@@ -108,8 +108,6 @@ export const PlaceDetailContextProvider = (props: any) => {
     updateIsDataReady(newStatus);
   };
 
-  console.log('a');
-
   (async () => {
     if (placeId !== props.placeId) {
       const newPlaceData = await getPlaceData(props.placeId);

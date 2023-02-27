@@ -5,6 +5,7 @@ import {BasicMap} from '../molecules/BasicMap';
 import {PreviewModeContext} from '../context/locationDetails/PreviewModeContext';
 import {PlaceChildren} from '../atoms/locationMap/PlaceChildren';
 import {RouteChildren} from '../atoms/locationMap/RouteChildren';
+import {coordinatesObjToArr} from '../../utils/Coordinates';
 
 type centerTargetProps = {
   coordinates: number[];
@@ -50,15 +51,18 @@ export class LocationMap extends BasicMap {
   }
 
   async boundUserAndTarget() {
-    const userCoordinates =
-      (await this.userMarker.current?.getUserCoordinates()) as number[];
+    const {isEnabled, userCoordinates, activateUserLocation} = this.context;
 
-    const [ne, sw] = searchBounds(
-      userCoordinates,
-      this.currentTargetCoordinates,
-    );
+    if (isEnabled.current) {
+      const coordinates = coordinatesObjToArr(userCoordinates.current!);
 
-    this.camera.current?.fitBounds(ne, sw, [300, 200, 200, 100]);
+      const [ne, sw] = searchBounds(coordinates, this.currentTargetCoordinates);
+
+      this.camera.current?.fitBounds(ne, sw, [300, 200, 200, 100]);
+    } else {
+      await activateUserLocation();
+      this.boundUserAndTarget();
+    }
   }
 
   render() {

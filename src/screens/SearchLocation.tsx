@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import {StyleSheet} from 'react-native';
-import {SearchLocationProps} from '../../App';
 import {HideKeyboard} from '../Components/atoms/HideKeyboard';
 import {
   AutocompleteRequestType,
@@ -15,6 +14,7 @@ import {ClearSearchButton} from '../Components/atoms/search/ClearSearch';
 import {SearchResultItem} from '../Components/atoms/search/SearchResultItem';
 import {UserLocationContext} from '../Components/context/UserLocationContext';
 import {SearchContext} from '../Components/context/SearchContext';
+import {SearchLocationProps} from '../types/App';
 
 const styles = StyleSheet.create({
   container: {
@@ -64,15 +64,13 @@ let query: Query<AutocompleteRequestType> = {
 };
 
 export const SearchLocation = (props: SearchLocationProps) => {
-  const {locationInfo} = useContext(UserLocationContext);
+  const {isEnabled, userCoordinates} = useContext(UserLocationContext);
   const {searchInfo, updateInfo} = useContext(SearchContext);
-
-  const {isEnabled, coordinates} = locationInfo?.current!;
 
   let isSearchAutoFilled = false;
 
-  if (isEnabled) {
-    const {latitude, longitude} = coordinates!;
+  if (isEnabled.current) {
+    const {latitude, longitude} = userCoordinates.current!;
 
     query = {
       ...query,
