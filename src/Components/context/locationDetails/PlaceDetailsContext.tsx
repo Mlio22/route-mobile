@@ -23,8 +23,8 @@ type placeGeolocationType = {
 
 type placeDetailContextDefault = {
   isDataReady: boolean;
-  placeData?: React.RefObject<placeDataType | undefined>;
-  placeGeolocation?: React.MutableRefObject<placeGeolocationType | undefined>;
+  placeData?: React.RefObject<placeDataType>;
+  placeGeolocation?: React.MutableRefObject<placeGeolocationType>;
 };
 
 const contextDefaultValue: placeDetailContextDefault = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {TargetMarker} from '../Components/molecules/TargetMarker';
-import {RouteMap} from '../Components/organisms/RouteMap';
+import {LocationMap} from '../Components/organisms/LocationMap';
 import {LocationDetailsContextProvider} from '../Components/context/LocationDetailContext';
 import {LocationDetailsUI} from '../Components/organisms/LocationDetailsUI';
 import {LocationDetailsProps} from '../../App';
@@ -10,9 +10,9 @@ const LocationDetails = (props: LocationDetailsProps) => {
 
   return (
     <LocationDetailsContextProvider placeId={selectedPlaceId}>
-      <RouteMap>
+      <LocationMap>
         <TargetMarker />
-      </RouteMap>
+      </LocationMap>
 
       <LocationDetailsUI />
     </LocationDetailsContextProvider>

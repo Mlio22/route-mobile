@@ -11,8 +11,8 @@ import {
 import LinearGradient from 'react-native-linear-gradient'; // import LinearGradient
 import {HomeMap} from '../Components/organisms/HomeMap';
 
-import type {HomeStackProps} from '../../App';
 import {SearchContext} from '../Components/context/SearchContext';
+import {HomeStackProps} from '../types/App';
 
 const styles = StyleSheet.create({
   container: {

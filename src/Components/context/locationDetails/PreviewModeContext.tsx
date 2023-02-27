@@ -18,8 +18,6 @@ export const PreviewModeContextProvider = (props: any) => {
   const [previewMode, updateMode] = React.useState<PreviewModeType>('place');
 
   const updatePreviewMode = (newMode: PreviewModeType) => {
-    console.log(newMode, previewMode);
-
     if (newMode === previewMode) return;
     updateMode(newMode);
   };

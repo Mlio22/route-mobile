@@ -1,47 +1,65 @@
 import React from 'react';
-
-type LocationInfoType = {
-  isEnabled?: boolean;
-  coordinates?: {latitude?: number; longitude?: number};
-};
-
-type UserLocationContextType = {
-  locationInfo: React.RefObject<LocationInfoType>;
-  updateInfo: (newInfo: LocationInfoType) => void;
-};
-
-const userLocationDefaultValue: LocationInfoType = {
-  isEnabled: false,
-  coordinates: {},
-};
+import {
+  ChildrenProp,
+  CoordinatesObjectType,
+  UserLocationContextType,
+} from '../../types/Home';
+import {
+  checkUserLocationFirst,
+  enableUserLocation,
+  getUserCoordinates,
+} from '../../utils/UserLocation';
 
 const contextDefaultValue: UserLocationContextType = {
-  locationInfo: undefined as unknown as React.RefObject<LocationInfoType>,
-  updateInfo: (_: any) => {},
+  isEnabled: null as unknown as React.RefObject<boolean>,
+  userCoordinates: null as unknown as React.RefObject<CoordinatesObjectType>,
+  activateUserLocation: async () => {},
 };
 
-type props = {
-  children: React.ReactNode;
-};
+export const UserLocationContext = React.createContext(contextDefaultValue);
 
-const UserLocationContext: React.Context<UserLocationContextType> =
-  React.createContext(contextDefaultValue);
+export const UserLocationContextProvider = (props: ChildrenProp) => {
+  let interval: ReturnType<typeof setInterval>;
 
-const UserLocationContextProvider = (props: props) => {
-  const locationInfo = React.useRef<LocationInfoType>(userLocationDefaultValue);
+  // todo:
+  // on startup, get user location if GPS is enabled.
+  // if user enabled location, listen every 10 secs until it detects that location has disabled
+  // add manual settings for user location
+  const isEnabled = React.useRef(false);
+  const userCoordinates = React.useRef<CoordinatesObjectType>({
+    longitude: null,
+    latitude: null,
+  });
 
-  const updateInfo = (newInfo: LocationInfoType) => {
-    newInfo = {
-      ...locationInfo,
-      ...newInfo,
-    };
+  const onLocationActivated = () => {
+    interval = setInterval(async () => {
+      if (!isEnabled.current) clearInterval(interval);
 
-    locationInfo.current = newInfo;
+      // check user location still enabled every 1s
+      isEnabled.current = await checkUserLocationFirst();
+    }, 1000);
   };
 
+  const activateUserLocation = async () => {
+    isEnabled.current = await enableUserLocation();
+    userCoordinates.current = getUserCoordinates();
+
+    if (isEnabled.current) onLocationActivated();
+  };
+
+  const userLocationStartup = async () => {
+    isEnabled.current = await checkUserLocationFirst();
+    userCoordinates.current = getUserCoordinates();
+
+    if (isEnabled.current) onLocationActivated();
+  };
+
+  userLocationStartup();
+
   const locationInfoContextObj: UserLocationContextType = {
-    locationInfo,
-    updateInfo,
+    isEnabled,
+    userCoordinates,
+    activateUserLocation,
   };
 
   const {children} = props;
@@ -51,11 +69,4 @@ const UserLocationContextProvider = (props: props) => {
       {children}
     </UserLocationContext.Provider>
   );
-};
-
-export type {LocationInfoType, UserLocationContextType};
-export {
-  UserLocationContext,
-  UserLocationContextProvider,
-  userLocationDefaultValue,
 };

@@ -82,43 +82,44 @@ export const LocationDetailsCard = () => {
   const {updatePreviewMode} = React.useContext(PreviewModeContext);
   const {isDataReady, placeData} = React.useContext(PlaceDetailContext);
 
-  if (!isDataReady) {
-    return <></>;
-  }
+  if (isDataReady && placeData) {
+    const {
+      previewImageReference,
+      placeTitle: {placeName, placeType},
+      locationDetails: {address},
+    } = placeData.current!;
 
-  const {
-    previewImageReference,
-    placeTitle: {placeName, placeType},
-    locationDetails: {address},
-  } = placeData?.current!;
-
-  return (
-    <>
-      <View style={styles.locationDetailContainer}>
-        <PreviewImage reference={previewImageReference} />
-        <View style={styles.locationDetail}>
-          <View style={styles.locationTitle}>
-            <Text style={styles.locationName}>{placeName}</Text>
-            <Text style={styles.locationType}>{placeType}</Text>
-          </View>
-          <TouchableWithoutFeedback onPress={() => updatePreviewMode('route')}>
-            <View style={styles.routeButton}>
-              <View style={styles.routeIcon}>
-                <FontAwesomeIcon size={20} icon={faRoute} />
+    return (
+      <>
+        <View style={styles.locationDetailContainer}>
+          <PreviewImage reference={previewImageReference} />
+          <View style={styles.locationDetail}>
+            <View style={styles.locationTitle}>
+              <Text style={styles.locationName}>{placeName}</Text>
+              <Text style={styles.locationType}>{placeType}</Text>
+            </View>
+            <TouchableWithoutFeedback
+              onPress={() => updatePreviewMode('route')}>
+              <View style={styles.routeButton}>
+                <View style={styles.routeIcon}>
+                  <FontAwesomeIcon size={20} icon={faRoute} />
+                </View>
+                <Text style={styles.routeText}>Routing Now</Text>
               </View>
-              <Text style={styles.routeText}>Routing Now</Text>
-            </View>
-          </TouchableWithoutFeedback>
-          <View style={styles.locationAddress}>
-            <View style={styles.addressIcon}>
-              <FontAwesomeIcon size={30} icon={faLocationDot} />
-            </View>
-            <View style={styles.locationAddressDetail}>
-              <Text style={styles.locationAddressComplete}>{address}</Text>
+            </TouchableWithoutFeedback>
+            <View style={styles.locationAddress}>
+              <View style={styles.addressIcon}>
+                <FontAwesomeIcon size={30} icon={faLocationDot} />
+              </View>
+              <View style={styles.locationAddressDetail}>
+                <Text style={styles.locationAddressComplete}>{address}</Text>
+              </View>
             </View>
           </View>
         </View>
-      </View>
-    </>
-  );
+      </>
+    );
+  }
+
+  return <></>;
 };

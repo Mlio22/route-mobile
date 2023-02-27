@@ -5,6 +5,8 @@ import MapboxGL, {MapViewProps} from '@rnmapbox/maps';
 import {CameraProps} from '@rnmapbox/maps/javascript/components/Camera';
 
 import {UserMarker} from '../molecules/UserMarker';
+import {ChildrenProp, CoordinatesObjectType} from '../../types/Home';
+import {UserLocationContext} from '../context/UserLocationContext';
 
 const styles = StyleSheet.create({
   map: {
@@ -41,33 +43,31 @@ const styles = StyleSheet.create({
   mapSettings: {},
 });
 
-type BasicMapProps = {
-  centerCoordinates?: number[];
-  children?: React.ReactNode;
-};
-
-export class BasicMap extends React.Component<BasicMapProps> {
+export class BasicMap extends React.Component<ChildrenProp> {
   camera: React.RefObject<MapboxGL.Camera>;
-  userMarker: React.RefObject<UserMarker>;
+  // @ts-ignore
+  context: React.ContextType<typeof UserLocationContext>;
 
   currentTargetCoordinates: number[];
 
-  constructor(props: BasicMapProps) {
+  constructor(props: ChildrenProp) {
     super(props);
 
     this.camera = React.createRef<MapboxGL.Camera>();
-    this.userMarker = React.createRef<UserMarker>();
 
-    this.currentTargetCoordinates = props.centerCoordinates || [
-      107.604954, -6.934469,
-    ];
+    this.currentTargetCoordinates = [107.604954, -6.934469];
   }
 
   async centerMapToUser(): Promise<void> {
-    const userCoordinates = await this.userMarker.current?.getUserCoordinates();
+    const {isEnabled, userCoordinates, activateUserLocation} = this.context;
 
-    if (userCoordinates) {
-      this.camera.current?.flyTo(userCoordinates);
+    if (isEnabled.current) {
+      const {longitude, latitude} =
+        userCoordinates.current! as CoordinatesObjectType;
+
+      this.camera.current?.flyTo([longitude!, latitude!]);
+    } else {
+      activateUserLocation();
     }
   }
 
@@ -88,7 +88,7 @@ export class BasicMap extends React.Component<BasicMapProps> {
       <>
         <MapboxGL.MapView {...mapviewProps}>
           <MapboxGL.Camera ref={this.camera} {...cameraProps} />
-          <UserMarker ref={this.userMarker} />
+          <UserMarker />
           {this.props.children}
           {anotherChildren}
         </MapboxGL.MapView>
@@ -100,3 +100,5 @@ export class BasicMap extends React.Component<BasicMapProps> {
     return this.renderMap();
   }
 }
+
+BasicMap.contextType = UserLocationContext;

@@ -1,29 +1,20 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  NativeStackScreenProps,
-  createNativeStackNavigator,
-} from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {mapboxSetup} from './src/utils/mapbox';
 
 import Home from './src/screens/Home';
 import SearchLocation from './src/screens/SearchLocation';
+import LocationDetails from './src/screens/LocationDetail';
 
 import {UserLocationContextProvider} from './src/Components/context/UserLocationContext';
-import LocationDetails from './src/screens/LocationDetail';
 import {SearchContextProvider} from './src/Components/context/SearchContext';
+
+import {RootStackParamList} from './src/types/App';
 
 // setup for mapbox
 mapboxSetup();
-
-type RootStackParamList = {
-  Home: undefined;
-  SearchLocation: undefined;
-  LocationDetails: {
-    selectedPlaceId: string;
-  };
-};
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -50,13 +41,3 @@ export default function App(): React.ReactNode {
     </UserLocationContextProvider>
   );
 }
-
-export type SearchLocationProps = NativeStackScreenProps<
-  RootStackParamList,
-  'SearchLocation'
->;
-export type HomeStackProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
-export type LocationDetailsProps = NativeStackScreenProps<
-  RootStackParamList,
-  'LocationDetails'
->;

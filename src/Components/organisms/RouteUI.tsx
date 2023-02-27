@@ -1,6 +1,6 @@
 import React from 'react';
-import {RouteSummary} from '../atoms/route/RouteSummary';
-import {RouteSteps} from '../atoms/route/RouteSteps';
+import {RouteSummary} from '../atoms/routeUI/RouteSummary';
+import {RouteSteps} from '../atoms/routeUI/RouteSteps';
 
 export const RouteUI = () => {
   return (

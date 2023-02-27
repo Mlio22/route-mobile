@@ -1,18 +1,9 @@
 import React from 'react';
-
-type SearchInfoType = {
-  searchQuery?: string;
-  selectedPlaceId?: string;
-};
-
-type SearchContextType = {
-  searchInfo: SearchInfoType;
-  updateInfo: (newInfo: SearchInfoType) => void;
-};
-
-type props = {
-  children: React.ReactNode;
-};
+import {
+  ChildrenProp,
+  SearchContextType,
+  SearchInfoType,
+} from '../../types/Home';
 
 const searchInfoDefaultValue: SearchInfoType = {
   searchQuery: '',
@@ -24,10 +15,10 @@ const contextDefaultValue: SearchContextType = {
   updateInfo: (_: any) => {},
 };
 
-const SearchContext: React.Context<SearchContextType> =
+export const SearchContext: React.Context<SearchContextType> =
   React.createContext(contextDefaultValue);
 
-const SearchContextProvider = (props: props) => {
+export const SearchContextProvider = (props: ChildrenProp) => {
   const [searchInfo, updateSearchInfo] = React.useState<SearchInfoType>(
     searchInfoDefaultValue,
   );
@@ -54,6 +45,3 @@ const SearchContextProvider = (props: props) => {
     </SearchContext.Provider>
   );
 };
-
-export type {SearchInfoType, SearchContextType};
-export {SearchContext, SearchContextProvider, searchInfoDefaultValue};
