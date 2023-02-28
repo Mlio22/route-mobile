@@ -12,6 +12,7 @@ import {UserLocationContextProvider} from './src/Components/context/UserLocation
 import {SearchContextProvider} from './src/Components/context/SearchContext';
 
 import {RootStackParamList} from './src/types/App';
+import {UserSettingsContextProvider} from './src/Components/context/UserSettingsContext';
 
 // setup for mapbox
 mapboxSetup();
@@ -34,10 +35,12 @@ const MyStack = React.memo(() => {
 
 export default function App(): React.ReactNode {
   return (
-    <UserLocationContextProvider>
-      <SearchContextProvider>
-        <MyStack />
-      </SearchContextProvider>
-    </UserLocationContextProvider>
+    <UserSettingsContextProvider>
+      <UserLocationContextProvider>
+        <SearchContextProvider>
+          <MyStack />
+        </SearchContextProvider>
+      </UserLocationContextProvider>
+    </UserSettingsContextProvider>
   );
 }

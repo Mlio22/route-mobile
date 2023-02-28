@@ -1,12 +1,11 @@
 import MapboxGL, {Logger} from '@rnmapbox/maps';
+import {MAPBOX_API_TOKEN} from '@env';
 
 export const mapboxSetup = () => {
   MapboxGL.locationManager.start(1);
   MapboxGL.setConnected(true);
   MapboxGL.setWellKnownTileServer('Mapbox');
-  MapboxGL.setAccessToken(
-    'pk.eyJ1IjoiYW5ha2JhaWstZXhlIiwiYSI6ImNsYnl4YnZkaTAzaDYzd3A3MWhrb2lqeWIifQ.JLrFLc_GxkTdET36LKjJvw',
-  );
+  MapboxGL.setAccessToken(MAPBOX_API_TOKEN);
 
   // edit logging messages
   Logger.setLogCallback(log => {

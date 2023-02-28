@@ -1,33 +1,16 @@
 import React, {useState, useRef} from 'react';
+import {GOOGLE_API_TOKEN} from '@env';
+import {
+  placeDataType,
+  placeDetailContextDefault,
+  placeGeolocationType,
+} from '../../../types/Location';
 
-const GOOGLE_PLACES_API_KEY = 'AIzaSyCjpcDm8TzqStHV2YMsPzIlnHUy8W5zDFo';
-
-type placeDataType = {
-  previewImageReference: string;
-  placeTitle: {
-    placeName: string;
-    placeType: string;
-  };
-  locationDetails: {
-    address: string;
-  };
-};
-
-type placeGeolocationType = {
-  coordinates: number[];
-  bounds: {
-    ne: number[];
-    sw: number[];
-  };
-};
-
-type placeDetailContextDefault = {
-  isDataReady: boolean;
-  placeData?: React.RefObject<placeDataType>;
-  placeGeolocation?: React.MutableRefObject<placeGeolocationType>;
-};
+// todo: refractor file ini dan keluarkan types dan fungsinya
 
 const contextDefaultValue: placeDetailContextDefault = {
+  placeData: null as unknown as React.RefObject<placeDataType>,
+  placeGeolocation: null as unknown as React.RefObject<placeGeolocationType>,
   isDataReady: false,
 };
 
@@ -49,7 +32,7 @@ function extractPlaceData(jsonResponse: any): placeDataType {
 }
 
 async function getPlaceData(placeId: string): Promise<placeDataType> {
-  const API_URL = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${GOOGLE_PLACES_API_KEY}`;
+  const API_URL = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${GOOGLE_API_TOKEN}`;
 
   const response = await fetch(API_URL),
     responseJSON = await response.json(),
@@ -85,7 +68,7 @@ function extractPlaceGeolocationData(jsonResponse: any) {
 }
 
 async function getPlaceGeolocationData(placeId: string) {
-  const API_URL = `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${GOOGLE_PLACES_API_KEY}`;
+  const API_URL = `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${GOOGLE_API_TOKEN}`;
 
   const response = await fetch(API_URL),
     responseJson = await response.json(),
@@ -100,8 +83,8 @@ export const PlaceDetailContextProvider = (props: any) => {
   const [isDataReady, updateIsDataReady] = useState(false);
 
   const placeId = useRef<string>('');
-  const placeData = useRef<placeDataType>();
-  const placeGeolocation = useRef<placeGeolocationType>();
+  const placeData = useRef<placeDataType>({});
+  const placeGeolocation = useRef<placeGeolocationType>({});
 
   const updateReadyStatus = (newStatus: boolean) => {
     if (isDataReady === newStatus) return;
@@ -133,5 +116,3 @@ export const PlaceDetailContextProvider = (props: any) => {
     </PlaceDetailContext.Provider>
   );
 };
-
-// todo: buat placedetailsContext yang membawahi mode preview detail dan route detail

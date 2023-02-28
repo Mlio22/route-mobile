@@ -4,8 +4,7 @@ import {UserLocationContext} from '../UserLocationContext';
 // @ts-ignore
 import mapboxPolyline from '@mapbox/polyline';
 import {CoordinatesObjectType} from '../../../types/Home';
-
-const GOOGLE_PLACES_API_KEY = 'AIzaSyCjpcDm8TzqStHV2YMsPzIlnHUy8W5zDFo';
+import {GOOGLE_API_TOKEN} from '@env';
 
 type routeInfoType = {
   distance: {
@@ -55,7 +54,7 @@ async function getData(
   const {latitude, longitude} = userCoordinates,
     coordinates = `${latitude},${longitude}`;
 
-  const URL = `https://maps.googleapis.com/maps/api/directions/json?origin=${coordinates}&destination=place_id:${selectedPlaceId}&key=${GOOGLE_PLACES_API_KEY}`;
+  const URL = `https://maps.googleapis.com/maps/api/directions/json?origin=${coordinates}&destination=place_id:${selectedPlaceId}&key=${GOOGLE_API_TOKEN}`;
 
   const response = await fetch(URL),
     responseJSON = await response.json();

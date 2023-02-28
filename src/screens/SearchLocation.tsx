@@ -16,6 +16,8 @@ import {UserLocationContext} from '../Components/context/UserLocationContext';
 import {SearchContext} from '../Components/context/SearchContext';
 import {SearchLocationProps} from '../types/App';
 
+import {GOOGLE_API_TOKEN} from '@env';
+
 const styles = StyleSheet.create({
   container: {
     width: '100%',
@@ -57,9 +59,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const GOOGLE_PLACES_API_KEY = 'AIzaSyCjpcDm8TzqStHV2YMsPzIlnHUy8W5zDFo';
 let query: Query<AutocompleteRequestType> = {
-  key: GOOGLE_PLACES_API_KEY,
+  key: GOOGLE_API_TOKEN,
   language: 'id', // language of the results
 };
 

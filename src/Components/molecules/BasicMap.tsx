@@ -27,10 +27,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  trackUserImage: {
-    width: 20,
-    height: 20,
-  },
   mapSettingsContainer: {
     position: 'absolute',
     right: 10,

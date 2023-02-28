@@ -1,3 +1,6 @@
+import {GOOGLE_API_TOKEN} from '@env';
+import {placeDataType} from '../types/Location';
+
 export class PlaceUtils {
   static extractPlaceData(jsonResponse: any): placeDataType {
     const {photos, formatted_address, name, types} = jsonResponse;
@@ -17,7 +20,7 @@ export class PlaceUtils {
   }
 
   async getPlaceData(placeId: string): Promise<placeDataType> {
-    const API_URL = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${GOOGLE_PLACES_API_KEY}`;
+    const API_URL = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${GOOGLE_API_TOKEN}`;
 
     const response = await fetch(API_URL),
       responseJSON = await response.json(),

@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Image} from 'react-native';
+import {GOOGLE_API_TOKEN} from '@env';
 
 const styles = StyleSheet.create({
   locationPreviewImage: {
@@ -15,12 +16,10 @@ type previewImageProps = {
   reference: string;
 };
 
-const GOOGLE_PLACES_API_KEY = 'AIzaSyCjpcDm8TzqStHV2YMsPzIlnHUy8W5zDFo';
-
 export const PreviewImage = (props: previewImageProps) => {
   const {reference} = props;
 
-  const URL = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photo_reference=${reference}&key=${GOOGLE_PLACES_API_KEY}`;
+  const URL = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photo_reference=${reference}&key=${GOOGLE_API_TOKEN}`;
 
   return (
     <View style={styles.locationPreviewImage}>
