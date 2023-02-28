@@ -7,7 +7,7 @@ import ActionSheet, {
   useScrollHandlers,
 } from 'react-native-actions-sheet';
 
-import {RouteDirectionIcon} from '../RouteDirectionIcon';
+import {RouteDirectionIcon} from './RouteDirectionIcon';
 import {parse} from 'node-html-parser';
 import {PlaceRouteContext} from '../../context/locationDetails/PlaceRouteContext';
 

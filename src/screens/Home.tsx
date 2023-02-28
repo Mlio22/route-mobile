@@ -4,7 +4,6 @@ import {
   View,
   TextInput,
   Image,
-  TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native';
 
@@ -13,6 +12,7 @@ import {HomeMap} from '../Components/organisms/HomeMap';
 
 import {SearchContext} from '../Components/context/SearchContext';
 import {HomeStackProps} from '../types/App';
+import {HomeMenu} from '../Components/molecules/HomeMenu';
 
 const styles = StyleSheet.create({
   container: {
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     overflow: 'hidden',
+    elevation: 20,
   },
 
   searchBarContainer: {
@@ -108,32 +109,7 @@ const Home = (props: HomeStackProps) => {
         </TouchableWithoutFeedback>
         <HomeMap />
       </View>
-      <View style={styles.menuButtonContainer}>
-        <TouchableOpacity style={styles.menuButton}>
-          <Image
-            style={styles.menuIcon}
-            source={require('../images/user.png')}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuButton}>
-          <Image
-            style={styles.menuIcon}
-            source={require('../images/vehicleType.png')}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuButton}>
-          <Image
-            style={styles.menuIcon}
-            source={require('../images/timeline.png')}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuButton}>
-          <Image
-            style={styles.menuIcon}
-            source={require('../images/generalSettings.png')}
-          />
-        </TouchableOpacity>
-      </View>
+      <HomeMenu />
     </LinearGradient>
   );
 };
