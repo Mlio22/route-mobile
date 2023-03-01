@@ -1,9 +1,9 @@
 import React from 'react';
+import {ChildrenProp} from '../../types/Home';
 import {
-  ChildrenProp,
   SearchContextType,
   SearchInfoType,
-} from '../../types/Home';
+} from '../../types/components/context/SearchContext';
 
 const searchInfoDefaultValue: SearchInfoType = {
   searchQuery: '',

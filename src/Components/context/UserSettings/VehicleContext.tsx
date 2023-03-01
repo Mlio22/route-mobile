@@ -1,13 +1,9 @@
 import React from 'react';
 import {ChildrenProp} from '../../../types/Home';
-import {VehicleType} from '../../atoms/HomeMenu/VehicleButton';
+import {VehicleType} from '../../../types/components/atoms/HomeMenuChildren/VehicleButton';
+import {VehicleContextDefaultType} from '../../../types/components/context/UserSettings/VehicleContext';
 
-type VehicleContextType = {
-  vehicleType: React.RefObject<VehicleType>;
-  toggleVehicleType: () => void;
-};
-
-const contextDefaultValue: VehicleContextType = {
+const contextDefaultValue: VehicleContextDefaultType = {
   vehicleType: null as unknown as React.RefObject<VehicleType>,
   toggleVehicleType: () => {},
 };
@@ -25,7 +21,7 @@ export const VehicleContextProvider = (props: ChildrenProp) => {
     }
   };
 
-  const vehicleContextObj: VehicleContextType = {
+  const vehicleContextObj: VehicleContextDefaultType = {
     vehicleType,
     toggleVehicleType,
   };

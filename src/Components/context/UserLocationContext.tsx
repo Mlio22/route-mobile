@@ -1,14 +1,12 @@
 import React from 'react';
 import {
-  ChildrenProp,
-  CoordinatesObjectType,
-  UserLocationContextType,
-} from '../../types/Home';
-import {
   checkUserLocationFirst,
   enableUserLocation,
   getUserCoordinates,
 } from '../../utils/UserLocation';
+
+import {ChildrenProp, CoordinatesObjectType} from '../../types/Home';
+import {UserLocationContextType} from '../../types/components/context/UserLocationContext';
 
 const contextDefaultValue: UserLocationContextType = {
   isEnabled: null as unknown as React.RefObject<boolean>,
@@ -21,10 +19,6 @@ export const UserLocationContext = React.createContext(contextDefaultValue);
 export const UserLocationContextProvider = (props: ChildrenProp) => {
   let interval: ReturnType<typeof setInterval>;
 
-  // todo:
-  // on startup, get user location if GPS is enabled.
-  // if user enabled location, listen every 10 secs until it detects that location has disabled
-  // add manual settings for user location
   const isEnabled = React.useRef(false);
   const userCoordinates = React.useRef<CoordinatesObjectType>({
     longitude: 0,
@@ -33,11 +27,9 @@ export const UserLocationContextProvider = (props: ChildrenProp) => {
 
   const onLocationActivated = () => {
     interval = setInterval(async () => {
-      // console.log('interval location');
-
       if (!isEnabled.current) clearInterval(interval);
 
-      // check user location still enabled every 1s
+      // check user location still enabled every 10s
       isEnabled.current = await checkUserLocationFirst();
     }, 10000);
   };

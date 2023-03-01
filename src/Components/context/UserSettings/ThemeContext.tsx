@@ -1,11 +1,7 @@
 import React from 'react';
-import {ThemeType} from '../../atoms/HomeMenu/ThemeButton';
 import {ChildrenProp} from '../../../types/Home';
-
-type ThemeContextType = {
-  theme: ThemeType;
-  toggleTheme: () => void;
-};
+import {ThemeType} from '../../../types/components/atoms/HomeMenuChildren/ThemeButton';
+import {ThemeContextType} from '../../../types/components/context/UserSettings/ThemeContext';
 
 const contextDefaultValue: ThemeContextType = {
   theme: 'light',
@@ -18,8 +14,6 @@ export const ThemeContextProvider = (props: ChildrenProp) => {
   const [theme, setTheme] = React.useState<ThemeType>('light');
 
   const toggleTheme = () => {
-    console.log('toggle');
-
     if (theme === 'light') setTheme('dark');
     if (theme === 'dark') setTheme('light');
   };

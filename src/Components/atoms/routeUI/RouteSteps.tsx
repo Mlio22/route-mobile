@@ -105,7 +105,7 @@ export const RouteSteps = () => {
   const actionSheetRef = React.useRef<ActionSheetRef>(null);
   const scrollhandlers = useScrollHandlers<ScrollView>('sv-1', actionSheetRef);
 
-  const {isDataReady, routeSteps} = React.useContext(PlaceRouteContext);
+  const {isDataReady, routeStepsRef} = React.useContext(PlaceRouteContext);
 
   if (!isDataReady) {
     return <></>;
@@ -115,7 +115,7 @@ export const RouteSteps = () => {
     actionSheetRef.current?.show();
   }, 100);
 
-  const steps = routeSteps?.current!;
+  const steps = routeStepsRef?.current!;
 
   return (
     <ActionSheet {...actionSheetProps} ref={actionSheetRef}>

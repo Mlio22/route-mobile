@@ -56,6 +56,7 @@ export class HomeMap extends React.Component {
       <>
         <BasicMap ref={this.basicMap} />
 
+        {/* todo: pisahkan komponen ini */}
         <TouchableOpacity
           style={styles.userPositionContainer}
           onPress={() => this.centerToUser()}>

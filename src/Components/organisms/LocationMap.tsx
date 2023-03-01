@@ -1,20 +1,9 @@
 import React from 'react';
 import {BasicMap} from '../molecules/BasicMap';
 
-// @ts-ignore
-import {PreviewModeContext} from '../context/locationDetails/PreviewModeContext';
-import {PlaceChildren} from '../atoms/locationMap/PlaceChildren';
-import {RouteChildren} from '../atoms/locationMap/RouteChildren';
 import {coordinatesObjToArr} from '../../utils/Coordinates';
-
-type centerTargetProps = {
-  coordinates: number[];
-  bounds?: {
-    ne: number[];
-    sw: number[];
-  };
-  addPadding?: boolean;
-};
+import {RouteMapChildren} from '../molecules/locationMap/LocationMapChildren';
+import {centerTargetProps} from '../../types/components/organisms/LocationMap';
 
 function searchBounds(coord1: number[], coord2: number[]) {
   const [X1, Y1] = coord1;
@@ -51,6 +40,7 @@ export class LocationMap extends BasicMap {
   }
 
   async boundUserAndTarget() {
+    // todo: perbaiki bound user dan target
     const {isEnabled, userCoordinates, activateUserLocation} = this.context;
 
     if (isEnabled.current) {
@@ -71,17 +61,3 @@ export class LocationMap extends BasicMap {
     return this.renderMap(children);
   }
 }
-
-export type RouteMapChildrenProps = {
-  routeMapRef: LocationMap;
-};
-
-const RouteMapChildren = (props: RouteMapChildrenProps) => {
-  const {previewMode} = React.useContext(PreviewModeContext);
-
-  if (previewMode === 'place') {
-    return <PlaceChildren {...props} />;
-  } else {
-    return <RouteChildren {...props} />;
-  }
-};

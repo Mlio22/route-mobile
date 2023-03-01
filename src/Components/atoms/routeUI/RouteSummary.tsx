@@ -60,13 +60,13 @@ const styles = StyleSheet.create({
 
 export const RouteSummary = () => {
   const {searchInfo} = React.useContext(SearchContext);
-  const {isDataReady, routeSummary} = React.useContext(PlaceRouteContext);
+  const {isDataReady, routeSummaryRef} = React.useContext(PlaceRouteContext);
 
   if (!isDataReady) {
     return <></>;
   }
 
-  const {distance, duration} = routeSummary?.current!;
+  const {distance, duration} = routeSummaryRef?.current!;
 
   return (
     <View style={styles.routeSummaryContainer}>

@@ -46,6 +46,7 @@ export const SettingsButton = () => {
       <View style={styles.menuButton}>
         <SettingsIcon />
       </View>
+
       <Text style={styles.menuText}>Settings</Text>
     </TouchableOpacity>
   );

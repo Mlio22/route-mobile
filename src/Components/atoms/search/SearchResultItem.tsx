@@ -2,6 +2,7 @@ import {faLocationDot} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import {searchResultItemProps} from '../../../types/components/atoms/Search/SearchResultItem';
 
 const styles = StyleSheet.create({
   searchResultItem: {
@@ -40,15 +41,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-type searchResultItemProps = {
-  data: {
-    structured_formatting: {
-      main_text: string;
-      secondary_text: string;
-    };
-  };
-};
 
 export const SearchResultItem = (props: searchResultItemProps): JSX.Element => {
   const {

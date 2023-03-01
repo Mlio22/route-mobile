@@ -2,6 +2,8 @@ import React from 'react';
 import {StyleSheet, View, Image} from 'react-native';
 import {GOOGLE_API_TOKEN} from '@env';
 
+import {previewImageProps} from '../../../types/components/atoms/details/PreviewImage';
+
 const styles = StyleSheet.create({
   locationPreviewImage: {
     height: '40%',
@@ -11,10 +13,6 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 });
-
-type previewImageProps = {
-  reference: string;
-};
 
 export const PreviewImage = (props: previewImageProps) => {
   const {reference} = props;

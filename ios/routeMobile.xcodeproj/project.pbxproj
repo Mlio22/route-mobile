@@ -14,19 +14,9 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-routeMobile-routeMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-routeMobile-routeMobileTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		2DAC74938C6B4F3FA995720D /* generalSettings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D6E442ABE1048CFB2C9DDE0 /* generalSettings.png */; };
 		711823A91E174C4DBD5A13D8 /* options1.png in Resources */ = {isa = PBXBuildFile; fileRef = C560C7FFA67E43038139C166 /* options1.png */; };
 		3470C58F841C4C1B8DD8DAEB /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 22ADB9015E0D47D08FE8D828 /* search.png */; };
-		A86CCF4E26554A538BE5A561 /* timeline.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C4421133B448E0B49E19A7 /* timeline.png */; };
-		8E3DE8E063AE4E5C93BF93E5 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 59CC8DCCD0684ABB821A5983 /* user.png */; };
 		4A8D98B17E5C4D00A477ED7D /* userTrack.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C5303A2AC1485BBD513E7C /* userTrack.png */; };
-		3C57CC142833423A853D9660 /* vehicleType.png in Resources */ = {isa = PBXBuildFile; fileRef = 64C0CDD22AA94751B7D99E68 /* vehicleType.png */; };
-		FD7FB6425E0C4B018446BCC7 /* galleryfavorite-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 16E400F2845240209E7D7EAB /* galleryfavorite-1.png */; };
-		370FCD9BDE88427E8F17E93C /* galleryfavorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 65D2720E0D7F4D6AB722A597 /* galleryfavorite.png */; };
-		80A68497E32D46D3AC8B98FC /* home3.png in Resources */ = {isa = PBXBuildFile; fileRef = 950CA857C6A744438A04D8A8 /* home3.png */; };
-		A52A4289453F4B74BAA704FA /* homehashtag.png in Resources */ = {isa = PBXBuildFile; fileRef = 8686102B618741E9B730D38B /* homehashtag.png */; };
-		B5790465EA324F1C89D0684E /* preview.png in Resources */ = {isa = PBXBuildFile; fileRef = E79511627AE74805AFE5F0A3 /* preview.png */; };
-		34750EC101A3482D9B929102 /* straight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F05016CA4864290853E125D /* straight.png */; };
 		CD9FD3D313DB40EF857C1D7D /* rounded=belok kiri bawah.svg in Resources */ = {isa = PBXBuildFile; fileRef = 0E89FC337DD046CC93ADF836 /* rounded=belok kiri bawah.svg */; };
 		60F31CB784CF41B3923E895A /* rounded=muter belok kanan bawah.svg in Resources */ = {isa = PBXBuildFile; fileRef = 23A4E04530E2422E9B708DD3 /* rounded=muter belok kanan bawah.svg */; };
 		EF9975E2DF25410ABE44E9D4 /* rounded=muter belok kanan.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7ACD1A5196594B7ABE0BE33A /* rounded=muter belok kanan.svg */; };
@@ -73,19 +63,9 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = routeMobile/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-routeMobile-routeMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-routeMobile-routeMobileTests.release.xcconfig"; path = "Target Support Files/Pods-routeMobile-routeMobileTests/Pods-routeMobile-routeMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		3D6E442ABE1048CFB2C9DDE0 /* generalSettings.png */ = {isa = PBXFileReference; name = "generalSettings.png"; path = "../src/images/generalSettings.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C560C7FFA67E43038139C166 /* options1.png */ = {isa = PBXFileReference; name = "options1.png"; path = "../src/images/options1.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		22ADB9015E0D47D08FE8D828 /* search.png */ = {isa = PBXFileReference; name = "search.png"; path = "../src/images/search.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		95C4421133B448E0B49E19A7 /* timeline.png */ = {isa = PBXFileReference; name = "timeline.png"; path = "../src/images/timeline.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		59CC8DCCD0684ABB821A5983 /* user.png */ = {isa = PBXFileReference; name = "user.png"; path = "../src/images/user.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		D5C5303A2AC1485BBD513E7C /* userTrack.png */ = {isa = PBXFileReference; name = "userTrack.png"; path = "../src/images/userTrack.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		64C0CDD22AA94751B7D99E68 /* vehicleType.png */ = {isa = PBXFileReference; name = "vehicleType.png"; path = "../src/images/vehicleType.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		16E400F2845240209E7D7EAB /* galleryfavorite-1.png */ = {isa = PBXFileReference; name = "galleryfavorite-1.png"; path = "../src/images/galleryfavorite-1.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		65D2720E0D7F4D6AB722A597 /* galleryfavorite.png */ = {isa = PBXFileReference; name = "galleryfavorite.png"; path = "../src/images/galleryfavorite.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		950CA857C6A744438A04D8A8 /* home3.png */ = {isa = PBXFileReference; name = "home3.png"; path = "../src/images/home3.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8686102B618741E9B730D38B /* homehashtag.png */ = {isa = PBXFileReference; name = "homehashtag.png"; path = "../src/images/homehashtag.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E79511627AE74805AFE5F0A3 /* preview.png */ = {isa = PBXFileReference; name = "preview.png"; path = "../src/images/preview.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9F05016CA4864290853E125D /* straight.png */ = {isa = PBXFileReference; name = "straight.png"; path = "../src/images/straight.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		0E89FC337DD046CC93ADF836 /* rounded=belok kiri bawah.svg */ = {isa = PBXFileReference; name = "rounded=belok kiri bawah.svg"; path = "../src/images/directions/rounded=belok kiri bawah.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		23A4E04530E2422E9B708DD3 /* rounded=muter belok kanan bawah.svg */ = {isa = PBXFileReference; name = "rounded=muter belok kanan bawah.svg"; path = "../src/images/directions/rounded=muter belok kanan bawah.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		7ACD1A5196594B7ABE0BE33A /* rounded=muter belok kanan.svg */ = {isa = PBXFileReference; name = "rounded=muter belok kanan.svg"; path = "../src/images/directions/rounded=muter belok kanan.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
@@ -210,19 +190,9 @@
 		AE440B2CD3FA42DBB3B4D0E9 /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
-				3D6E442ABE1048CFB2C9DDE0 /* generalSettings.png */,
 				C560C7FFA67E43038139C166 /* options1.png */,
 				22ADB9015E0D47D08FE8D828 /* search.png */,
-				95C4421133B448E0B49E19A7 /* timeline.png */,
-				59CC8DCCD0684ABB821A5983 /* user.png */,
 				D5C5303A2AC1485BBD513E7C /* userTrack.png */,
-				64C0CDD22AA94751B7D99E68 /* vehicleType.png */,
-				16E400F2845240209E7D7EAB /* galleryfavorite-1.png */,
-				65D2720E0D7F4D6AB722A597 /* galleryfavorite.png */,
-				950CA857C6A744438A04D8A8 /* home3.png */,
-				8686102B618741E9B730D38B /* homehashtag.png */,
-				E79511627AE74805AFE5F0A3 /* preview.png */,
-				9F05016CA4864290853E125D /* straight.png */,
 				0E89FC337DD046CC93ADF836 /* rounded=belok kiri bawah.svg */,
 				23A4E04530E2422E9B708DD3 /* rounded=muter belok kanan bawah.svg */,
 				7ACD1A5196594B7ABE0BE33A /* rounded=muter belok kanan.svg */,
@@ -340,19 +310,9 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				2DAC74938C6B4F3FA995720D /* generalSettings.png in Resources */,
 				711823A91E174C4DBD5A13D8 /* options1.png in Resources */,
 				3470C58F841C4C1B8DD8DAEB /* search.png in Resources */,
-				A86CCF4E26554A538BE5A561 /* timeline.png in Resources */,
-				8E3DE8E063AE4E5C93BF93E5 /* user.png in Resources */,
 				4A8D98B17E5C4D00A477ED7D /* userTrack.png in Resources */,
-				3C57CC142833423A853D9660 /* vehicleType.png in Resources */,
-				FD7FB6425E0C4B018446BCC7 /* galleryfavorite-1.png in Resources */,
-				370FCD9BDE88427E8F17E93C /* galleryfavorite.png in Resources */,
-				80A68497E32D46D3AC8B98FC /* home3.png in Resources */,
-				A52A4289453F4B74BAA704FA /* homehashtag.png in Resources */,
-				B5790465EA324F1C89D0684E /* preview.png in Resources */,
-				34750EC101A3482D9B929102 /* straight.png in Resources */,
 				CD9FD3D313DB40EF857C1D7D /* rounded=belok kiri bawah.svg in Resources */,
 				60F31CB784CF41B3923E895A /* rounded=muter belok kanan bawah.svg in Resources */,
 				EF9975E2DF25410ABE44E9D4 /* rounded=muter belok kanan.svg in Resources */,

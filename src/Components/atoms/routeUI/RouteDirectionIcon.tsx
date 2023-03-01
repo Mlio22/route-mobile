@@ -1,9 +1,7 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
-
-type DirectionIconProps = {
-  color: string;
-};
+import {DirectionIconProps} from '../../../types/components/atoms/RouteUI/RouteDirectionIcon';
+import {TrafficColor} from '../../data/constants';
 
 const StraightIcon = (props: DirectionIconProps) => {
   const {color} = props;
@@ -132,7 +130,6 @@ type RouteDirectionIconProps = {
   congestionIndex: number;
 };
 
-const directionColor = ['#cc3300', '#ffcc00', '#14530d'];
 const straightDirections = ['straight', 'keep-right', 'keep-left'],
   turnRightDirections = ['turn-sharp-right', 'turn-right'],
   turnLeftDirections = ['turn-sharp-left', 'turn-left'],
@@ -148,9 +145,7 @@ export const RouteDirectionIcon = (
 ): JSX.Element => {
   const {maneuver, congestionIndex} = props;
 
-  const color = directionColor[congestionIndex];
-
-  console.log(props, color);
+  const color = TrafficColor[congestionIndex];
 
   if (straightDirections.includes(maneuver)) {
     return <StraightIcon color={color} />;

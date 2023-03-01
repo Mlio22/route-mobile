@@ -1,11 +1,9 @@
 import React from 'react';
+import {
+  PreviewModeType,
+  contextDefaultType,
+} from '../../../types/components/context/LocationDetails/PreviewModeContext';
 
-export type PreviewModeType = 'place' | 'route';
-
-type contextDefaultType = {
-  previewMode: PreviewModeType;
-  updatePreviewMode: (newMode: PreviewModeType) => void;
-};
 const contextDefault: contextDefaultType = {
   previewMode: 'place',
   updatePreviewMode: (_: any) => {},

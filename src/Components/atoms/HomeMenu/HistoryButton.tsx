@@ -46,6 +46,7 @@ export const HistoryButton = () => {
       <View style={styles.menuButton}>
         <HistoryIcon />
       </View>
+
       <Text style={styles.menuText}>History</Text>
     </TouchableOpacity>
   );

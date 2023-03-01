@@ -3,8 +3,6 @@ import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import Svg, {Defs, Image, Path, Pattern, Use} from 'react-native-svg';
 import {ThemeContext} from '../../context/UserSettings/ThemeContext';
 
-export type ThemeType = 'light' | 'dark';
-
 const LightThemeIcon = () => {
   return (
     <Svg width={30} height={30} fill="none">

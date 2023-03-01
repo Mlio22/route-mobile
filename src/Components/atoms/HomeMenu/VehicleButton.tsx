@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import Svg, {Path} from 'react-native-svg';
-import {ThemeType} from './ThemeButton';
 import {VehicleContext} from '../../context/UserSettings/VehicleContext';
 import {ThemeContext} from '../../context/UserSettings/ThemeContext';
+import {ThemeType} from '../../../types/components/atoms/HomeMenuChildren/ThemeButton';
 
 type VehicleIconProps = {
   theme: ThemeType;
@@ -49,8 +49,6 @@ const styles = StyleSheet.create({
 
   menuText: {textAlign: 'center', marginTop: 5, fontWeight: '400'},
 });
-
-export type VehicleType = 'car' | 'motorcycle';
 
 const VehicleIcon = () => {
   const {vehicleType, toggleVehicleType} = React.useContext(VehicleContext);
