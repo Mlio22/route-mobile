@@ -9,7 +9,7 @@ export type routeInfoType = {
   };
 };
 
-export type congestionIndexType = 1 | 2 | 3;
+export type congestionIndexType = 0 | 1 | 2;
 
 export type rawStepType = {
   distance: {

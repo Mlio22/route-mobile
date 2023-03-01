@@ -27,32 +27,53 @@ const lineLayerStyle = (index: number) => {
 
 // todo group lines
 
-export const RouteLineLayers = (polylineRoute: PolylineRouteType[]) => {
-  const layers = polylineRoute.map((polyline, index) => {
-    let {congestionIndex, coordinates} = polyline;
+const createMultilineShape = (lines: Array<number[][]>) => {
+  return {
+    type: 'MultiLineString',
+    coordinates: lines,
+  } as Geometry;
+};
 
-    // ide: ambil satu titik koordinat setelah akhir dari garis
-    if (index !== polylineRoute.length - 1) {
-      const {coordinates: otherCoordinates} = polylineRoute[index + 1];
+const groupLines = (polylineRoute: PolylineRouteType[]) => {
+  const greenLines: Array<number[][]> = [],
+    yellowLines: Array<number[][]> = [],
+    redLines: Array<number[][]> = [];
 
-      coordinates.push(otherCoordinates[1]);
+  polylineRoute.forEach((polyline, index) => {
+    const {congestionIndex, coordinates} = polyline;
+
+    if (congestionIndex === 0) {
+      greenLines[index] = coordinates;
     }
 
-    // @ts-ignore
-    const shape: Geometry = {
-      type: 'LineString',
-      coordinates: coordinates,
-    };
+    if (congestionIndex === 1) {
+      yellowLines[index] = coordinates;
+    }
+
+    if (congestionIndex === 2) {
+      redLines[index] = coordinates;
+    }
+  });
+
+  return [greenLines, yellowLines, redLines];
+};
+
+export const RouteLineLayers = (polylineRoute: PolylineRouteType[]) => {
+  const lines = groupLines(polylineRoute);
+  const layers = lines.map((line, congestionIndex) => {
+    const shape = createMultilineShape(line);
 
     return (
-      <MapboxGL.ShapeSource id={`line${index}`} shape={shape}>
+      <MapboxGL.ShapeSource id={`line${congestionIndex}`} shape={shape}>
         <MapboxGL.LineLayer
-          id={`linelayer${index}`}
+          id={`linelayer${congestionIndex}`}
           style={lineLayerStyle(congestionIndex)}
         />
       </MapboxGL.ShapeSource>
     );
   });
 
-  return layers;
+  console.log(layers);
+
+  return <>{layers}</>;
 };
