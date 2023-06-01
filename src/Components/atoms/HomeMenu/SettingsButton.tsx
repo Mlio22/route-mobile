@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Svg, {Defs, Image, Path, Pattern, Use} from 'react-native-svg';
+import { HomeStackProps } from '../../../types/App';
 
 const styles = StyleSheet.create({
   menuButton: {
@@ -38,11 +39,12 @@ const SettingsIcon = () => {
   );
 };
 
-export const SettingsButton = () => {
+export const SettingsButton = (props: any) => {
   // todo: hubungkan dengan theme context
+  const navigation = props.navigation
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPressIn={() => {navigation.navigate('SettingsGeneral');}}>
       <View style={styles.menuButton}>
         <SettingsIcon />
       </View>

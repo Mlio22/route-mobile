@@ -109,7 +109,7 @@ const Home = (props: HomeStackProps) => {
         </TouchableWithoutFeedback>
         <HomeMap />
       </View>
-      <HomeMenu />
+      <HomeMenu navigation={navigation} />
     </LinearGradient>
   );
 };

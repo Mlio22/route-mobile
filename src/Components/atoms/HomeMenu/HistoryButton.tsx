@@ -38,11 +38,11 @@ const HistoryIcon = () => {
   );
 };
 
-export const HistoryButton = () => {
+export const HistoryButton = (props: any) => {
   // todo: hubungkan dengan theme context
-
+  const navigation = props.navigation;
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPressIn={() => {navigation.navigate('History');}}>
       <View style={styles.menuButton}>
         <HistoryIcon />
       </View>

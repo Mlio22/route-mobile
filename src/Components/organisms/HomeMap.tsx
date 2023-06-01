@@ -1,7 +1,9 @@
 import React from 'react';
-import {View, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Image, TouchableOpacity, StyleSheet, Modal, Text, TouchableWithoutFeedback } from 'react-native';
 
 import {BasicMap} from '../molecules/BasicMap';
+import OverlayResolusiPeta from '../molecules/Mapsettings';
+import ToggleSwitch from '../molecules/Mapsettingsinside/Toggleswitch';
 
 const styles = StyleSheet.create({
   map: {
@@ -36,19 +38,101 @@ const styles = StyleSheet.create({
   },
 
   mapSettings: {},
+
+  // style overlay
+  overlayContainer: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+    position: 'absolute',
+    top: "67%",
+    left: 0,
+    right: "-20%",
+    bottom: "23%",
+    // backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+
+  overlayContent: {
+    backgroundColor: '#FFFFFF',
+    padding: 20,
+    borderRadius: 10,
+  },
+
+  overlayText: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
 });
 
-export class HomeMap extends React.Component {
+interface HomeMapState {
+  isOverlayVisible: boolean;
+} 
+
+export class HomeMap extends React.Component<{}, HomeMapState> {
   basicMap: React.RefObject<BasicMap>;
 
   constructor(props: any) {
     super(props);
 
     this.basicMap = React.createRef<BasicMap>();
+    this.state = {
+      isOverlayVisible: false,
+    };
   }
 
   centerToUser() {
     this.basicMap.current?.centerMapToUser();
+  }
+
+// bagian modal
+  toggleOverlay() {
+      this.setState((prevState) => ({
+        isOverlayVisible: !prevState.isOverlayVisible,
+      }));
+  }
+
+  closeOverlay() {
+    this.setState({
+      isOverlayVisible: false,
+    });
+  }
+
+  handleOverlayPress() {
+    // Tidak melakukan apa-apa ketika overlay ditekan
+  }
+
+  handleOutsidePress() {
+    this.closeOverlay();
+  }
+
+  renderOverlay() {
+
+    if (!this.state.isOverlayVisible) {
+      return null;
+    }
+    
+    return (
+      // <Modal visible={this.state.isOverlayVisible} transparent>
+      //   <TouchableOpacity
+      //     style={styles.overlayContainer}
+      //     onPress={() => this.toggleOverlay()}>
+      //     <OverlayResolusiPeta/>
+      //   </TouchableOpacity>
+      // </Modal>
+      <Modal visible={this.state.isOverlayVisible} transparent>
+        <TouchableWithoutFeedback onPress={() => this.handleOutsidePress()}>
+          <View style={styles.overlayContainer}>
+            <TouchableWithoutFeedback onPress={() => this.handleOverlayPress()}>
+              <View style={styles.overlayContent}>
+                <ToggleSwitch></ToggleSwitch>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+    );
   }
 
   render(): React.ReactNode {
@@ -56,22 +140,28 @@ export class HomeMap extends React.Component {
       <>
         <BasicMap ref={this.basicMap} />
 
-        {/* todo: pisahkan komponen ini */}
+        {/* Pisahkan komponen ini */}
         <TouchableOpacity
           style={styles.userPositionContainer}
-          onPress={() => this.centerToUser()}>
+          onPress={() => this.centerToUser()}
+        >
           <Image
             style={styles.trackUserImage}
             source={require('../../images/userTrack.png')}
           />
         </TouchableOpacity>
 
-        <View style={styles.mapSettingsContainer}>
+        <TouchableOpacity
+          style={styles.mapSettingsContainer}
+          onPress={() => this.toggleOverlay()}
+        >
           <Image
             style={styles.mapSettings}
             source={require('../../images/options1.png')}
           />
-        </View>
+        </TouchableOpacity>
+
+        {this.renderOverlay()}
       </>
     );
   }
