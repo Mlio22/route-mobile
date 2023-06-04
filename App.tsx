@@ -13,9 +13,6 @@ import History from './src/screens/History';
 import SearchLocation from './src/screens/SearchLocation';
 import LocationDetails from './src/screens/LocationDetail';
 
-// Coretan
-import DragAndDropScreen from './src/screens/coretan';
-
 import {UserLocationContextProvider} from './src/Components/context/UserLocationContext';
 import {SearchContextProvider} from './src/Components/context/SearchContext';
 
@@ -31,7 +28,7 @@ const MyStack = React.memo(() => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="DragAndDropScreen"
+        initialRouteName="PreferencesSettingsfirst"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="WelcomePage" component={WelcomePage} />
         <Stack.Screen name="PreferencesVehicleFirst" component={PreferencesVehicleFirst}/>

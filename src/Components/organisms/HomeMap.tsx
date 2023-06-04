@@ -1,8 +1,14 @@
 import React from 'react';
-import {View, Image, TouchableOpacity, StyleSheet, Modal, Text, TouchableWithoutFeedback } from 'react-native';
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+  TouchableWithoutFeedback,
+} from 'react-native';
 
 import {BasicMap} from '../molecules/BasicMap';
-import OverlayResolusiPeta from '../molecules/Mapsettings';
 import ToggleSwitch from '../molecules/Mapsettingsinside/Toggleswitch';
 
 const styles = StyleSheet.create({
@@ -47,10 +53,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     position: 'absolute',
-    top: "67%",
+    top: '67%',
     left: 0,
-    right: "-20%",
-    bottom: "23%",
+    right: '-20%',
+    bottom: '23%',
     // backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 
@@ -68,7 +74,7 @@ const styles = StyleSheet.create({
 
 interface HomeMapState {
   isOverlayVisible: boolean;
-} 
+}
 
 export class HomeMap extends React.Component<{}, HomeMapState> {
   basicMap: React.RefObject<BasicMap>;
@@ -86,11 +92,11 @@ export class HomeMap extends React.Component<{}, HomeMapState> {
     this.basicMap.current?.centerMapToUser();
   }
 
-// bagian modal
+  // bagian modal
   toggleOverlay() {
-      this.setState((prevState) => ({
-        isOverlayVisible: !prevState.isOverlayVisible,
-      }));
+    this.setState(prevState => ({
+      isOverlayVisible: !prevState.isOverlayVisible,
+    }));
   }
 
   closeOverlay() {
@@ -108,11 +114,10 @@ export class HomeMap extends React.Component<{}, HomeMapState> {
   }
 
   renderOverlay() {
-
     if (!this.state.isOverlayVisible) {
       return null;
     }
-    
+
     return (
       // <Modal visible={this.state.isOverlayVisible} transparent>
       //   <TouchableOpacity
@@ -143,8 +148,7 @@ export class HomeMap extends React.Component<{}, HomeMapState> {
         {/* Pisahkan komponen ini */}
         <TouchableOpacity
           style={styles.userPositionContainer}
-          onPress={() => this.centerToUser()}
-        >
+          onPress={() => this.centerToUser()}>
           <Image
             style={styles.trackUserImage}
             source={require('../../images/userTrack.png')}
@@ -153,8 +157,7 @@ export class HomeMap extends React.Component<{}, HomeMapState> {
 
         <TouchableOpacity
           style={styles.mapSettingsContainer}
-          onPress={() => this.toggleOverlay()}
-        >
+          onPress={() => this.toggleOverlay()}>
           <Image
             style={styles.mapSettings}
             source={require('../../images/options1.png')}
