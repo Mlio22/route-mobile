@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
     // backgroundColor: "red",
     width: '100%',
-    height: 375,
+    height: '100%',
   },
   Framedc: {
     display: 'flex',

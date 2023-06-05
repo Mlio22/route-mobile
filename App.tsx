@@ -31,8 +31,14 @@ const MyStack = React.memo(() => {
         initialRouteName="PreferencesSettingsfirst"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="WelcomePage" component={WelcomePage} />
-        <Stack.Screen name="PreferencesVehicleFirst" component={PreferencesVehicleFirst}/>
-        <Stack.Screen name="PreferencesSettingsfirst" component={PreferencesSettingsfirst} />
+        <Stack.Screen
+          name="PreferencesVehicleFirst"
+          component={PreferencesVehicleFirst}
+        />
+        <Stack.Screen
+          name="PreferencesSettingsfirst"
+          component={PreferencesSettingsfirst}
+        />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="SettingsGeneral" component={SettingsGeneral} />
         <Stack.Screen name="History" component={History} />
