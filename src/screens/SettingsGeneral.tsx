@@ -93,34 +93,36 @@ const styles = StyleSheet.create({
 
 const SettingsGeneral = (props:SettingsGeneralprops) => {
 
-    return(
-    <View style={styles.HalamanSetting}>
-      <View style={styles.Containergreen}>
-        <View style={styles.Settingsmenus}>
-          <Image
-            style={styles.Logosettings}
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/7f6tmwcwqya-414%3A446?alt=media&token=afb8c830-05e2-4f55-91e7-324b19609681",
-            }}
-          />
-          <Text style={styles.Settings}>SETTINGS</Text>
-        </View>
-        <View style={styles.Containerwhite}>
-          <View style={styles.Containsettings}>
-            <View style={styles.Containsettingspil}>
-              <TouchableOpacity>
-                <Text style={styles.PreferencesSettings}>
-                  preferences settings
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Text style={styles.ManualLocation}>Manual Location</Text>
-              </TouchableOpacity>
-            </View>
+  const navigation = props.navigation;
+
+  return(
+  <View style={styles.HalamanSetting}>
+    <View style={styles.Containergreen}>
+      <View style={styles.Settingsmenus}>
+        <Image
+          style={styles.Logosettings}
+          source={{
+            uri: "https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/7f6tmwcwqya-414%3A446?alt=media&token=afb8c830-05e2-4f55-91e7-324b19609681",
+          }}
+        />
+        <Text style={styles.Settings}>SETTINGS</Text>
+      </View>
+      <View style={styles.Containerwhite}>
+        <View style={styles.Containsettings}>
+          <View style={styles.Containsettingspil}>
+            <TouchableOpacity>
+              <Text style={styles.PreferencesSettings}>
+                preferences settings
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPressIn={() => {navigation.navigate('Manuallocation');}}>
+              <Text style={styles.ManualLocation}>Manual Location</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
     </View>
+  </View>
 )};
 
 export default SettingsGeneral;

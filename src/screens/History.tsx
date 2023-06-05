@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         paddingRight: 22,
         paddingTop: 20,
         paddingBottom: 557,
-        backgroundColor: "red",
+        // backgroundColor: "red",
         marginTop:50,
       },
       Historysatuan: {
@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         height: "100%",
-        boxSizing: "border-box",
       },
       Image: {
         width: 70,
@@ -109,7 +108,6 @@ const styles = StyleSheet.create({
         paddingRight: 2,
         paddingBottom: 2,
         marginLeft:10,
-        boxSizing: "border-box",
       },
       YogyaBojongsoang: {
         color: "rgba(31,31,31,1)",

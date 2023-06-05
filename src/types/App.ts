@@ -10,10 +10,8 @@ export type RootStackParamList = {
   };
   History: undefined;
   SettingsGeneral: undefined;
+  Manuallocation: undefined;
   PreferencesSettingsfirst: undefined;
-
-  // coretan 
-  DragAndDropScreen: undefined;
 };
 
 
@@ -30,5 +28,6 @@ export type LocationDetailsProps = NativeStackScreenProps<
 >;
 export type Historyprops = NativeStackScreenProps<RootStackParamList, 'History'>;
 export type SettingsGeneralprops = NativeStackScreenProps<RootStackParamList, 'SettingsGeneral'>;
+export type Manuallocationprops = NativeStackScreenProps<RootStackParamList, 'Manuallocation'>;
 export type PreferencesSettingsfirstprops = NativeStackScreenProps<RootStackParamList, 'PreferencesSettingsfirst'>;
 
