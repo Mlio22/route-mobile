@@ -42,27 +42,23 @@ const styles = StyleSheet.create({
   // style overlay
   overlayContainer: {
     flex: 1,
-    display: 'flex',
+    // display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
     alignItems: 'center',
     position: 'absolute',
-    top: "67%",
-    left: 0,
-    right: "-20%",
-    bottom: "23%",
+    right: "6%",
+    bottom: "27%",
     // backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 
   overlayContent: {
-    backgroundColor: '#FFFFFF',
-    padding: 20,
-    borderRadius: 10,
-  },
-
-  overlayText: {
-    fontSize: 16,
-    textAlign: 'center',
+    backgroundColor: 'white',
+    width: "75%",
+    height: "100%",
+  
+    // padding: 50,
+    // borderRadius: 100,
   },
 });
 
@@ -126,7 +122,7 @@ export class HomeMap extends React.Component<{}, HomeMapState> {
           <View style={styles.overlayContainer}>
             <TouchableWithoutFeedback onPress={() => this.handleOverlayPress()}>
               <View style={styles.overlayContent}>
-                <ToggleSwitch></ToggleSwitch>
+                <OverlayResolusiPeta/>
               </View>
             </TouchableWithoutFeedback>
           </View>

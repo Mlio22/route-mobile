@@ -31,7 +31,7 @@ const MyStack = React.memo(() => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="DragAndDropScreen"
+        initialRouteName="Home"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="WelcomePage" component={WelcomePage} />
         <Stack.Screen name="PreferencesVehicleFirst" component={PreferencesVehicleFirst}/>
@@ -41,7 +41,7 @@ const MyStack = React.memo(() => {
         <Stack.Screen name="History" component={History} />
         <Stack.Screen name="SearchLocation" component={SearchLocation} />
         <Stack.Screen name="LocationDetails" component={LocationDetails} />
-        <Stack.Screen name="DragAndDropScreen" component={DragAndDropScreen} />
+        {/* <Stack.Screen name="DragAndDropScreen" component={DragAndDropScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
