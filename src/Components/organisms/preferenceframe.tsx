@@ -22,14 +22,14 @@ export default function Framepreferensi() {
     quality: qualityPan,
     traffic: trafficPan,
   };
-  let panAdditional: any = {
-    distance: 0,
-    duration: 75,
-    congestion: 150,
-    quality: 225,
-    traffic: 300,
-  };
 
+  let intervalAdditional = 0;
+
+  function setIntervalAdditional(height: number) {
+    intervalAdditional = height / 5;
+  }
+
+  let oriOrder = ['distance', 'duration', 'congestion', 'quality', 'traffic'];
   let panOrder = ['distance', 'duration', 'congestion', 'quality', 'traffic'];
 
   // https://stackoverflow.com/a/6470794/12125511
@@ -52,7 +52,7 @@ export default function Framepreferensi() {
     Animated.spring(pan, {
       toValue: {
         x: 0,
-        y: (to_index - from_index) * 75,
+        y: (to_index - from_index) * intervalAdditional,
       },
       useNativeDriver: false,
     }).start(_ => {
@@ -63,14 +63,18 @@ export default function Framepreferensi() {
   function onRelease(panName: string) {
     // 1. get pan index
     const current_index = panOrder.indexOf(panName),
-      current_pan = panList[panName];
+      current_pan = panList[panName],
+      originalOrder = oriOrder.indexOf(panName);
 
     // 2. get pan height
     const {_offset, _value} = current_pan.y;
-    const current_pan_height = _offset + _value + panAdditional[panName];
+
+    const current_pan_height =
+      _offset + _value + intervalAdditional * originalOrder;
 
     // 3. check if it is off limit
-    let target_index = Math.round(current_pan_height / 75);
+    let target_index = Math.round(current_pan_height / intervalAdditional);
+
     if (target_index > 4) target_index = 4;
     if (target_index < 0) target_index = 0;
 
@@ -97,13 +101,13 @@ export default function Framepreferensi() {
 
     // 5. spring current pan into nearest point
     current_pan.extractOffset();
-    const offset = current_pan.y._offset + panAdditional[panName];
+    const offset = current_pan.y._offset + intervalAdditional * originalOrder;
 
     let differ;
-    if (offset < target_index * 75) {
-      differ = target_index * 75 - offset;
+    if (offset < target_index * intervalAdditional) {
+      differ = target_index * intervalAdditional - offset;
     } else {
-      differ = -(offset - target_index * 75);
+      differ = -(offset - target_index * intervalAdditional);
     }
 
     Animated.spring(current_pan, {
@@ -168,7 +172,11 @@ export default function Framepreferensi() {
   });
 
   return (
-    <View style={styles.Framepreferensi}>
+    <View
+      style={styles.Framepreferensi}
+      onLayout={e => {
+        setIntervalAdditional(e.nativeEvent.layout.height);
+      }}>
       <Animated.View
         style={[
           styles.Framedc,
