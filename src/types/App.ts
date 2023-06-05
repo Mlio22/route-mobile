@@ -11,6 +11,9 @@ export type RootStackParamList = {
   History: undefined;
   SettingsGeneral: undefined;
   PreferencesSettingsfirst: undefined;
+
+  // coretan 
+  DragAndDropScreen: undefined;
 };
 
 

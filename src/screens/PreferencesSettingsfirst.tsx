@@ -92,8 +92,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     // justifyContent: "flex-start",
     width: "100%",
-    height: "4%",
-    // backgroundColor: "red",
+    height: "10%",
+    //  backgroundColor: "red",
   },
   Containerbot2:{
     display: "flex",
@@ -115,8 +115,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
-    height: "70%",
-    // backgroundColor: "green",
+    height: "60%",
+    //  backgroundColor: "white",
   },
   containerpref2:{
     display: "flex",

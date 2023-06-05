@@ -25,10 +25,10 @@ const manuallocation = (props:any) => {
     return (
         <LocationDetailsContextProvider placeId={selectedPlaceId}>
           <LocationMap>
-            <TargetMarker />
+
+          
           </LocationMap>
-    
-          <LocationDetailsUI />
+          
         </LocationDetailsContextProvider>
       );
 };

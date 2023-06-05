@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import {BasicMap} from '../molecules/BasicMap';
-import ToggleSwitch from '../molecules/Mapsettingsinside/Toggleswitch';
+import OverlayResolusiPeta from '../molecules/Mapsettings';
 
 const styles = StyleSheet.create({
   map: {
@@ -127,7 +127,7 @@ export class HomeMap extends React.Component<{}, HomeMapState> {
           <View style={styles.overlayContainer}>
             <TouchableWithoutFeedback onPress={() => this.handleOverlayPress()}>
               <View style={styles.overlayContent}>
-                <ToggleSwitch/>
+                <OverlayResolusiPeta/>
               </View>
             </TouchableWithoutFeedback>
           </View>
