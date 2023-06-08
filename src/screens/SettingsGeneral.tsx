@@ -6,94 +6,101 @@ import {
     View,
     TouchableOpacity, 
 } from "react-native";
+
 import { SettingsGeneralprops } from "../types/App";
 
+// Tombol reset
+import { resetFirstTime } from '../utils/FirstTimeUtils';
+import { resetUserPosition } from '../storages/Coordinatesstorage(manual)';
+import { resetValueInAsyncStorage } from '../storages/vehiclevalue';
+
 const styles = StyleSheet.create({
-    HalamanSetting: {
-        flex: 1,
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        alignItems: "flex-start",
-        width: "100%",
-        height: "100%",
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingTop: 66,
-        paddingBottom: 77,
-        backgroundColor:
-          " linear-gradient(152.13deg, rgba(94,183,84,1) 20%, rgba(83,222,217,1) 94%) ",
-      },
-      Containergreen: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        width: "100%",
-        height: "100%",
-      },
-      Settingsmenus: {
-        display: "flex",
-        flexDirection: "row",
-        width: "100%",
-        paddingRight: 2,
-        paddingBottom: 2,
-        marginBottom: 10,
-      },
-      Logosettings: {
-        width: 30,
-        height: "100%", 
-        marginRight: 20,
-        marginBottom: 20,
-      },
-      Settings: {
-        color: "rgba(0,0,0,1)",
-        fontSize: 24,
-        lineHeight: 24,
-        fontFamily: "Inter, sans-serif",
-        fontWeight: "400",
-        marginTop: 5,
-      },
-      Containerwhite: {
-        width: "100%",
-        height: 596,
-        paddingLeft: 14,
-        paddingRight: 77,
-        paddingTop: 41,
-        paddingBottom: 470,
-        borderRadius: 20,
-        backgroundColor: "rgba(255,255,255,0.92)",
-      },
-      Containsettings: {
-        width: 229,
-        height: "100%",
-      },
-      Containsettingspil: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        width: "100%",
-        height: "100%",
-        paddingRight: 35,
-        paddingBottom: 4,
-      },
-      PreferencesSettings: {
-        color: "rgba(0,0,0,1)",
-        fontSize: 20,
-        lineHeight: 20,
-        fontFamily: "Inter, sans-serif",
-        fontWeight: "500",
-      },
-      ManualLocation: {
-        color: "rgba(0,0,0,1)",
-        fontSize: 20,
-        lineHeight: 20,
-        fontFamily: "Inter, sans-serif",
-        fontWeight: "400",
-      },
+  HalamanSetting: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    width: "100%",
+    height: "100%",
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 66,
+    paddingBottom: 77,
+    backgroundColor:
+      " linear-gradient(152.13deg, rgba(94,183,84,1) 20%, rgba(83,222,217,1) 94%) ",
+  },
+  Containergreen: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    width: "100%",
+    height: "100%",
+  },
+  Settingsmenus: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    paddingRight: 2,
+    paddingBottom: 2,
+    marginBottom: 10,
+  },
+  Logosettings: {
+    width: 30,
+    height: "100%", 
+    marginRight: 20,
+    marginBottom: 20,
+  },
+  Settings: {
+    color: "rgba(0,0,0,1)",
+    fontSize: 24,
+    lineHeight: 24,
+    fontFamily: "Inter, sans-serif",
+    fontWeight: "400",
+    marginTop: 5,
+  },
+  Containerwhite: {
+    width: "100%",
+    height: "100%",
+    paddingLeft: 14,
+    paddingRight: 77,
+    paddingTop: 41,
+    paddingBottom: 470,
+    borderRadius: 20,
+    backgroundColor: "rgba(255,255,255,0.92)",
+    // backgroundColor: "yellow",
+  },
+  Containsettings: {
+    width: "100%",
+    height: "100%",
+  },
+  Containsettingspil: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    paddingRight: 35,
+    paddingBottom: 4,
+    // backgroundColor: "red",
+  },
+  TextSettings: {
+    color: "rgba(0,0,0,1)",
+    fontSize: 22,
+    lineHeight: 22,
+    fontFamily: "Inter, sans-serif",
+    fontWeight: "600",
+  },
+  framebuttonsettings: {
+    marginTop: 40,
+  },
 });
 
 const SettingsGeneral = (props:SettingsGeneralprops) => {
 
   const navigation = props.navigation;
+
+  const handleReset = async () => {
+    resetFirstTime(); // reset penggunan pertama kali
+    resetUserPosition(); // reset user position
+    resetValueInAsyncStorage('VehicleValue'); // reset vehicle value
+  };
 
   return(
   <View style={styles.HalamanSetting}>
@@ -110,14 +117,21 @@ const SettingsGeneral = (props:SettingsGeneralprops) => {
       <View style={styles.Containerwhite}>
         <View style={styles.Containsettings}>
           <View style={styles.Containsettingspil}>
+
             <TouchableOpacity>
-              <Text style={styles.PreferencesSettings}>
-                preferences settings
+              <Text style={styles.TextSettings}>
+                Preferences settings
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPressIn={() => {navigation.navigate('Manuallocation');}}>
-              <Text style={styles.ManualLocation}>Manual Location</Text>
+
+            <TouchableOpacity style={styles.framebuttonsettings} onPressIn={() => {navigation.navigate('Manuallocation');}}>
+              <Text style={styles.TextSettings}>Manual Location</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity style={styles.framebuttonsettings} onPress={handleReset}>
+              <Text style={styles.TextSettings}>Tombol Reset</Text>
+            </TouchableOpacity>
+
           </View>
         </View>
       </View>

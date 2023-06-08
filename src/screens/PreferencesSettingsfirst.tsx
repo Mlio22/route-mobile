@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   Image,

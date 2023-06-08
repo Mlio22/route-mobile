@@ -130,6 +130,7 @@ const History = (props:Historyprops) => {
     <View style={styles.Historycontain}>
       <Text style={styles.History}>HISTORY</Text>
       <View style={styles.Containisi}>
+
         <TouchableOpacity style={styles.Historysatuan}>
           <View style={styles.Framecontain}>
             <View style={styles.Framedetailkondisi}>
@@ -155,6 +156,7 @@ const History = (props:Historyprops) => {
             </View>
           </View>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.Historysatuan}>
           <View style={styles.Framecontain}>
             <View style={styles.Framedetailkondisi}>
@@ -180,6 +182,7 @@ const History = (props:Historyprops) => {
             </View>
           </View>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.Historysatuan}>
           <View style={styles.Framecontain}>
             <View style={styles.Framedetailkondisi}>
@@ -205,6 +208,7 @@ const History = (props:Historyprops) => {
             </View>
           </View>
         </TouchableOpacity>
+        
       </View>
     </View> 
   )

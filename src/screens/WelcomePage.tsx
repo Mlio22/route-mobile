@@ -9,6 +9,8 @@ import { WelcomePageProps } from "../types/App";
 
 import LinearGradient from 'react-native-linear-gradient';
 
+import { checkIfFirstTime } from '../utils/FirstTimeUtils';
+
 const styles = StyleSheet.create({
     container: {
       width: '100%',
@@ -33,13 +35,20 @@ const WelcomePage = (props: WelcomePageProps) => {
   const navigation = props.navigation;
 
   useEffect(() => {
-    // Delay untuk menampilkan halaman selamat datang selama beberapa detik
-    const delay = 4000; // 3000 milidetik = 3 detik
+    const handleFirstTimeCheck = async () => {
+      const isFirstTime = await checkIfFirstTime();
+      if (isFirstTime) {
+        // Pengguna pertama kali melihat halaman ini
+        navigation.navigate('PreferencesVehicleFirst');
+      } else {
+        // Pengguna telah melihat halaman ini sebelumnya
+        navigation.navigate('Home');
+      }
+    };
 
-    const timer = setTimeout(() => {
-      // Navigasi ke halaman berikutnya setelah delay selesai
-      navigation.navigate('PreferencesVehicleFirst');
-    }, delay);
+    // Panggil fungsi pengecekan isFirstTime setelah beberapa detik delay
+    const delay = 4000; // 3000 milidetik = 3 detik
+    const timer = setTimeout(handleFirstTimeCheck, delay);
 
     return () => clearTimeout(timer); // Membersihkan timer saat komponen unmount
   }, [navigation]);

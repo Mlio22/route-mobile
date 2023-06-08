@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import { 
     StyleSheet,
     Image, 
@@ -9,6 +9,8 @@ import {
 
 import { PreferencesVehicleFirstprops } from "../types/App";
 import LinearGradient from 'react-native-linear-gradient';
+
+import { saveValueToAsyncStorage }from '../storages/vehiclevalue';
 
 const styles = StyleSheet.create({
     container: {
@@ -153,6 +155,16 @@ const PreferencesVehicleFirst = (props: PreferencesVehicleFirstprops) => {
 
   const navigation = props.navigation;
 
+  const handleMotorcyclePress = () => {
+    saveValueToAsyncStorage('VehicleValue',0);
+    navigation.navigate('PreferencesSettingsfirst');
+  };
+
+  const handleCarPress = () => {
+    saveValueToAsyncStorage('VehicleValue',1);
+    navigation.navigate('PreferencesSettingsfirst');
+  };
+
   return(
         <LinearGradient style={styles.container} colors={['#1B920E', '#53DED9']}>
             <View style={styles.basecontainer}>
@@ -167,7 +179,7 @@ const PreferencesVehicleFirst = (props: PreferencesVehicleFirstprops) => {
                         <Text style={styles.ChooseYourVehicle}>Choose your Vehicle</Text>
                     </View>
                 </View>
-                <TouchableOpacity style={styles.TombolPilihMotor} onPressIn={() => {navigation.navigate('PreferencesSettingsfirst');}}>
+                <TouchableOpacity style={styles.TombolPilihMotor} onPress={handleMotorcyclePress}>
                     {/* klo mencet ntar masuk ke input buat preferensi motor ato mobil ama landsung ke menu setting preferensi awalan */}
                     <View>
                         <View style={styles.FrameTombolMotor}>
@@ -181,7 +193,7 @@ const PreferencesVehicleFirst = (props: PreferencesVehicleFirstprops) => {
                         </View>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.TombolPilihMobil} onPressIn={() => {navigation.navigate('PreferencesSettingsfirst');}}>
+                <TouchableOpacity style={styles.TombolPilihMobil} onPress={handleCarPress}>
                     {/* klo mencet ntar masuk ke input buat preferensi motor ato mobil ama landsung ke menu setting preferensi awalan */}
                     <View>
                         <View style={styles.FrameTombolMobil}>

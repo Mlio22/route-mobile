@@ -10,8 +10,6 @@ import AnimatedIconloading from '../atoms/details/Animationmanuallocation';
 
 export default function StatusLokasiDanTujuan(props: any) {
 
-    const navigation = props.navigation;
-
     return (
         <View style={styles.container}>
             <View style={styles.StatusLokasiDanTujuan}>

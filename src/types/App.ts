@@ -12,6 +12,9 @@ export type RootStackParamList = {
   SettingsGeneral: undefined;
   Manuallocation: undefined;
   PreferencesSettingsfirst: undefined;
+
+  // coretan
+  MapScreen: undefined;
 };
 
 
@@ -30,4 +33,7 @@ export type Historyprops = NativeStackScreenProps<RootStackParamList, 'History'>
 export type SettingsGeneralprops = NativeStackScreenProps<RootStackParamList, 'SettingsGeneral'>;
 export type Manuallocationprops = NativeStackScreenProps<RootStackParamList, 'Manuallocation'>;
 export type PreferencesSettingsfirstprops = NativeStackScreenProps<RootStackParamList, 'PreferencesSettingsfirst'>;
+
+// coretan 
+export type MapScreenprops = NativeStackScreenProps<RootStackParamList, 'MapScreen'>;
 

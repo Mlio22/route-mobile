@@ -14,6 +14,9 @@ import SearchLocation from './src/screens/SearchLocation';
 import LocationDetails from './src/screens/LocationDetail';
 import Manuallocation from './src/screens/Manuallocation';
 
+// coretan
+import MapScreen from './src/screens/coretan';
+
 import {UserLocationContextProvider} from './src/Components/context/UserLocationContext';
 import {SearchContextProvider} from './src/Components/context/SearchContext';
 
@@ -67,6 +70,10 @@ const MyStack = React.memo(() => {
           name="Manuallocation" 
           component={Manuallocation} 
         />
+        {/* <Stack.Screen
+          name='MapScreen'
+          component={MapScreen}
+          /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
