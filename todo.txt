@@ -45,6 +45,10 @@ auxiliary:
 [] (readability) Ubah struktur folder components menjadi per screen
 [] (readability) Buat satu file untuk export semua gambar dan bisa diimport dimanapun
 
+Manual Location: 
+[] (bug) console warning cannot read property 'photo' dan 'legs'
+[] (tambahan) ilangin tulisan mapbox bagian bawah kiri
+
 ------- todo sejak mar 2023 ---------
 
 fitur:
