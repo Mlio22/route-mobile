@@ -1,0 +1,79 @@
+Welcome page:
+
+
+Vehicle: 
+
+Preferences list:
+
+Home:
+[] (utama) Hubungkan vehicle theme dengan setting awal kendaraan
+[] (utama) hubungkan tampilan traffic pada home map dengan server (/traffic)
+[] (bug) terjadi bug saat menghidupkan GPS dengan menekan tombol focus user
+
+SearchBar:
+[] (tampilan) perbagus tampilan saat hasil pencarian di tekan
+[] (performa) batalkan request hasil pencarian jika tulisan pada search bar berubah
+[] (bug) tulisan pada search masih tetap ada walaupun sudah dihapus
+[] (bug) hapus tulisan pada searchbar home jika sudah dihapus dari dalam
+
+Preview location:
+[] (bug) Lokasi tujuan tidak tercenter pada peta setelah dicari menggunakan searchbar, bahkan bisa lebih aneh, malah menggunakan zoom 3
+[] (performa / readability) Pisahkan kode Preview Location mode dengan Route mode
+
+Routing:
+[] (utama) Hubungkan routing dengan server (/route)
+[] (utama) Tampilkan UI untuk rute alternatif
+[] (bug) bounding peta antar user-tujuan salah, terutama untuk tujuan yang jauh dari pengguna
+[] (tambahan) preview masing-masing rute saat ditekan
+[] (utama) perbaiki icon rute pada step rute
+[] (utama) siapkan icon rute yang ditambah icon lampu merah
+[] (tambahan) tambahkan rute pada histori perutean
+
+Travel Mode:
+[] (utama) design Halaman Travel
+
+History:
+[] (tambahan) buat file untuk mengatur penyimpanan data history
+
+Settings:
+[] (utama) hubungkan tombol settings preferensi ke halaman preferensi, sekalian dengan preferensi yang tersimpan
+[] (bug / performa) warning pada saat setting lokasi manual yang banyak
+
+auxiliary:
+[] (bug / utama) Error mapbox pada awal aplikasi
+[] (tambahan) Dark mode aplikasi
+[] (readability) Ubah struktur folder components menjadi per screen
+[] (readability) Buat satu file untuk export semua gambar dan bisa diimport dimanapun
+
+------- todo sejak mar 2023 ---------
+
+fitur:
+[v] setting preferensi awal
+[v] update UI Home
+[v] get user location on start (when location on)
+[ ] rute alternatif
+[v] settings peta
+
+plus:
+[ ] documentation
+[-] user select origin location -> buat dihalaman dev settings untuk set lokasi pengguna
+[v] .env file untuk credential (mapbox dan google)
+[ ] cek dan perbaiki style di semua screen
+[ ]   ubah width dan height menjadi mendekati native
+[v] ubah rute Linestring menjadi 3 multilinestring (berdasarkan kemacetan)
+[ ] fitur preview masing - masing step pada rute
+[v] hubungkan garis" rute
+[v] typescript types
+[x] update lokasi user per interval -> tidak perlu
+[ ] perbaiki proses bound (baik itu lokasi, atau user-lokasi)
+
+
+bug:
+[ ] error mapbox diawal
+[ ] hide keyboard on search screen
+[ ] ganti warna rute yang tidak membuat kebingungan
+
+
+late:
+[ ] design dark mode paada seluruh app
+[ ] language settings

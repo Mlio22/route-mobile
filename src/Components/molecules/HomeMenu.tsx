@@ -5,7 +5,6 @@ import {VehicleButton} from '../atoms/HomeMenu/VehicleButton';
 import {HistoryButton} from '../atoms/HomeMenu/HistoryButton';
 import {SettingsButton} from '../atoms/HomeMenu/SettingsButton';
 
-
 const styles = StyleSheet.create({
   menuButtonContainer: {
     alignItems: 'center',
@@ -24,7 +23,7 @@ export const HomeMenu = (props: any) => {
     <View style={styles.menuButtonContainer}>
       <ThemeButton />
       <VehicleButton />
-      <HistoryButton navigation={navigation}/>
+      <HistoryButton navigation={navigation} />
       <SettingsButton navigation={navigation} />
     </View>
   );

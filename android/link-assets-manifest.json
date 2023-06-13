@@ -66,8 +66,16 @@
       "sha1": "7bab13869aa79fd3c752788838faa1b8c28fa1fc"
     },
     {
+      "path": "src/images/index.ts",
+      "sha1": "6b610efa1848f38cbe31adb2afc3139748f51df3"
+    },
+    {
       "path": "src/images/options1.png",
       "sha1": "f689124878455ef2309ee90550e0fa75c1a8cb86"
+    },
+    {
+      "path": "src/images/pinpoint.png",
+      "sha1": "b8d6929152aead6b8654ceca5dab4de7c3076d22"
     },
     {
       "path": "src/images/search.png",

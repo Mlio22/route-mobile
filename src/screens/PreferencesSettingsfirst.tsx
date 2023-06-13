@@ -1,13 +1,5 @@
-import React, { useEffect } from 'react';
-import {
-  StyleSheet,
-  Image,
-  Text,
-  View,
-  Animated,
-  PanResponder,
-  TouchableOpacity,
-} from 'react-native';
+import React from 'react';
+import {StyleSheet, Image, Text, View, TouchableOpacity} from 'react-native';
 
 import {PreferencesSettingsfirstprops} from '../types/App';
 
@@ -114,6 +106,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
+    minHeight: 375,
     height: '60%',
     //  backgroundColor: "white",
   },

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
 
 const ToggleSwitch = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -11,8 +11,7 @@ const ToggleSwitch = () => {
   return (
     <TouchableOpacity
       style={[styles.switch, isChecked && styles.switchChecked]}
-      onPress={handleToggle}
-    >
+      onPress={handleToggle}>
       <View style={[styles.slider, isChecked && styles.sliderChecked]}>
         <View style={styles.sliderInner} />
       </View>
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
     top: 2.3,
     left: 2,
     shadowColor: 'rgba(0, 0, 0, 0.3)',
-    shadowOffset: { width: 0, height: 6 },
+    shadowOffset: {width: 0, height: 6},
     shadowRadius: 6,
     shadowOpacity: 1,
     transitionProperty: 'left, background-color',

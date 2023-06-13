@@ -1,37 +1,29 @@
-import React, {useEffect} from "react";
-import { 
-    StyleSheet,  
-    Text, 
-    View,  
-} from "react-native";
-
-import { WelcomePageProps } from "../types/App";
-
+import React, {useEffect} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {WelcomePageProps} from '../types/App';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { checkIfFirstTime } from '../utils/FirstTimeUtils';
+import {checkIfFirstTime} from '../utils/FirstTimeUtils';
 
 const styles = StyleSheet.create({
-    container: {
-      width: '100%',
-      height: '100%',
-      backgroundColor: 'red',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: 1,
-    },
-    Welcome: {
-      color: "black",
-      fontSize: 48,
-      lineHeight: 48,
-      fontFamily: "Krub, sans-serif",//font nya blom ada
-      fontWeight: "700",
-    },
+  container: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  Welcome: {
+    color: 'black',
+    fontSize: 48,
+    lineHeight: 48,
+    fontFamily: 'Krub, sans-serif', //font nya blom ada
+    fontWeight: '700',
+  },
 });
 
-
 const WelcomePage = (props: WelcomePageProps) => {
-
   const navigation = props.navigation;
 
   useEffect(() => {
@@ -59,7 +51,7 @@ const WelcomePage = (props: WelcomePageProps) => {
         <Text style={styles.Welcome}>WELCOME</Text>
       </View>
     </LinearGradient>
-  )
+  );
 };
 
 export default WelcomePage;

@@ -12,10 +12,7 @@ import SettingsGeneral from './src/screens/SettingsGeneral';
 import History from './src/screens/History';
 import SearchLocation from './src/screens/SearchLocation';
 import LocationDetails from './src/screens/LocationDetail';
-import Manuallocation from './src/screens/Manuallocation';
-
-// coretan
-import MapScreen from './src/screens/coretan';
+import Manuallocation from './src/screens/ManualLocation';
 
 import {UserLocationContextProvider} from './src/Components/context/UserLocationContext';
 import {SearchContextProvider} from './src/Components/context/SearchContext';
@@ -34,11 +31,8 @@ const MyStack = React.memo(() => {
       <Stack.Navigator
         initialRouteName="WelcomePage"
         screenOptions={{headerShown: false}}>
-        <Stack.Screen 
-          name="WelcomePage" 
-          component={WelcomePage} 
-        />
-        <Stack.Screen 
+        <Stack.Screen name="WelcomePage" component={WelcomePage} />
+        <Stack.Screen
           name="PreferencesVehicleFirst"
           component={PreferencesVehicleFirst}
         />
@@ -46,30 +40,12 @@ const MyStack = React.memo(() => {
           name="PreferencesSettingsfirst"
           component={PreferencesSettingsfirst}
         />
-        <Stack.Screen 
-          name="Home" 
-          component={Home} 
-          />
-        <Stack.Screen 
-          name="SettingsGeneral" 
-          component={SettingsGeneral} 
-        />
-        <Stack.Screen 
-          name="History" 
-          component={History} 
-        />
-        <Stack.Screen 
-          name="SearchLocation" 
-          component={SearchLocation} 
-        />
-        <Stack.Screen 
-          name="LocationDetails" 
-          component={LocationDetails} 
-        />
-        <Stack.Screen 
-          name="Manuallocation" 
-          component={Manuallocation} 
-        />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="SettingsGeneral" component={SettingsGeneral} />
+        <Stack.Screen name="History" component={History} />
+        <Stack.Screen name="SearchLocation" component={SearchLocation} />
+        <Stack.Screen name="LocationDetails" component={LocationDetails} />
+        <Stack.Screen name="Manuallocation" component={Manuallocation} />
         {/* <Stack.Screen
           name='MapScreen'
           component={MapScreen}
