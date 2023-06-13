@@ -6,13 +6,13 @@ import {mapboxSetup} from './src/utils/mapbox';
 
 import WelcomePage from './src/screens/WelcomePage';
 import PreferencesVehicleFirst from './src/screens/PreferencesVehicleFirst';
-import PreferencesSettingsfirst from './src/screens/PreferencesSettingsfirst';
+import PreferencesSettingsFirst from './src/screens/PreferencesSettingsFirst';
 import Home from './src/screens/Home';
 import SettingsGeneral from './src/screens/SettingsGeneral';
 import History from './src/screens/History';
 import SearchLocation from './src/screens/SearchLocation';
 import LocationDetails from './src/screens/LocationDetail';
-import Manuallocation from './src/screens/ManualLocation';
+import ManualLocation from './src/screens/ManualLocation';
 
 import {UserLocationContextProvider} from './src/Components/context/UserLocationContext';
 import {SearchContextProvider} from './src/Components/context/SearchContext';
@@ -37,15 +37,15 @@ const MyStack = React.memo(() => {
           component={PreferencesVehicleFirst}
         />
         <Stack.Screen
-          name="PreferencesSettingsfirst"
-          component={PreferencesSettingsfirst}
+          name="PreferencesSettingsFirst"
+          component={PreferencesSettingsFirst}
         />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="SettingsGeneral" component={SettingsGeneral} />
         <Stack.Screen name="History" component={History} />
         <Stack.Screen name="SearchLocation" component={SearchLocation} />
         <Stack.Screen name="LocationDetails" component={LocationDetails} />
-        <Stack.Screen name="Manuallocation" component={Manuallocation} />
+        <Stack.Screen name="ManualLocation" component={ManualLocation} />
         {/* <Stack.Screen
           name='MapScreen'
           component={MapScreen}

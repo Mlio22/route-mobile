@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Image, Text, View, TouchableOpacity} from 'react-native';
 
-import {PreferencesSettingsfirstprops} from '../types/App';
+import {PreferencesSettingsFirstprops} from '../types/App';
 
 import Framepreferensi from '../Components/organisms/preferenceframe';
 
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const PreferencesSettings = (props: PreferencesSettingsfirstprops) => {
+const PreferencesSettingsFirst = (props: PreferencesSettingsFirstprops) => {
   const navigation = props.navigation;
 
   return (
@@ -184,4 +184,4 @@ const PreferencesSettings = (props: PreferencesSettingsfirstprops) => {
   );
 };
 
-export default PreferencesSettings;
+export default PreferencesSettingsFirst;

@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Manuallocation = () => {
+const ManualLocation = () => {
   const [coordinates, setCoordinates] = useState<number[]>([
     107.6351264, -6.972025,
   ]);
@@ -135,4 +135,4 @@ const Manuallocation = () => {
   );
 };
 
-export default Manuallocation;
+export default ManualLocation;
