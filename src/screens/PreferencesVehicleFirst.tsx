@@ -150,12 +150,12 @@ const PreferencesVehicleFirst = (props: PreferencesVehicleFirstprops) => {
 
   const handleMotorcyclePress = () => {
     saveValueToAsyncStorage('VehicleValue', 0);
-    navigation.navigate('PreferencesSettingsfirst');
+    navigation.navigate('PreferencesSettingsFirst');
   };
 
   const handleCarPress = () => {
     saveValueToAsyncStorage('VehicleValue', 1);
-    navigation.navigate('PreferencesSettingsfirst');
+    navigation.navigate('PreferencesSettingsFirst');
   };
 
   return (
