@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    backgroundColor: 'red',
+    backgroundColor: '#43D8C9',
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
@@ -159,7 +159,7 @@ const PreferencesVehicleFirst = (props: PreferencesVehicleFirstprops) => {
   };
 
   return (
-    <LinearGradient style={styles.container} colors={['#1B920E', '#53DED9']}>
+    <View style={styles.container}>
       <View style={styles.basecontainer}>
         <View style={styles.Title}>
           <Image
@@ -205,7 +205,7 @@ const PreferencesVehicleFirst = (props: PreferencesVehicleFirstprops) => {
           </View>
         </TouchableOpacity>
       </View>
-    </LinearGradient>
+    </View>
   );
 };
 

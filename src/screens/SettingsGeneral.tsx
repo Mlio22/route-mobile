@@ -7,6 +7,7 @@ import {SettingsGeneralprops} from '../types/App';
 import {resetFirstTime} from '../utils/FirstTimeUtils';
 import {resetUserPosition} from '../storages/Coordinatesstorage(manual)';
 import {resetValueInAsyncStorage} from '../storages/vehiclevalue';
+import {resetPreferenceInAsyncStorage} from '../storages/Preferecevalue';
 
 const styles = StyleSheet.create({
   HalamanSetting: {
@@ -20,8 +21,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingTop: 66,
     paddingBottom: 77,
-    backgroundColor:
-      ' linear-gradient(152.13deg, rgba(94,183,84,1) 20%, rgba(83,222,217,1) 94%) ',
+    backgroundColor: '#43D8C9',
   },
   Containergreen: {
     display: 'flex',
@@ -93,6 +93,7 @@ const SettingsGeneral = (props: SettingsGeneralprops) => {
     resetFirstTime(); // reset penggunan pertama kali
     resetUserPosition(); // reset user position
     resetValueInAsyncStorage('VehicleValue'); // reset vehicle value
+    resetPreferenceInAsyncStorage('preference'); // // reset preferensi
   };
 
   return (
@@ -110,7 +111,10 @@ const SettingsGeneral = (props: SettingsGeneralprops) => {
         <View style={styles.Containerwhite}>
           <View style={styles.Containsettings}>
             <View style={styles.Containsettingspil}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPressIn={() => {
+                  navigation.navigate('PreferencesSettingsFirst');
+                }}>
                 <Text style={styles.TextSettings}>Preferences settings</Text>
               </TouchableOpacity>
 
@@ -125,7 +129,7 @@ const SettingsGeneral = (props: SettingsGeneralprops) => {
               <TouchableOpacity
                 style={styles.framebuttonsettings}
                 onPress={handleReset}>
-                <Text style={styles.TextSettings}>Tombol Reset</Text>
+                <Text style={styles.TextSettings}>Reset</Text>
               </TouchableOpacity>
             </View>
           </View>

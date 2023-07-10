@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    backgroundColor: 'red',
+    backgroundColor: '#43D8C9',
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
@@ -46,11 +46,11 @@ const WelcomePage = (props: WelcomePageProps) => {
   }, [navigation]);
 
   return (
-    <LinearGradient style={styles.container} colors={['#1B920E', '#53DED9']}>
+    <View style={styles.container}>
       <View>
         <Text style={styles.Welcome}>WELCOME</Text>
       </View>
-    </LinearGradient>
+    </View>
   );
 };
 

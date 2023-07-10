@@ -8,7 +8,7 @@ import {
   Image,
 } from 'react-native';
 
-export default function Framepreferensi() {
+export default function Framepreferensi2(props: any) {
   const distancePan = useRef(new Animated.ValueXY()).current;
   const durationPan = useRef(new Animated.ValueXY()).current;
   const congestionPan = useRef(new Animated.ValueXY()).current;
@@ -97,6 +97,7 @@ export default function Framepreferensi() {
       }
 
       slideArray(current_index, target_index);
+      props.setOrder(panOrder);
     }
 
     // 5. spring current pan into nearest point

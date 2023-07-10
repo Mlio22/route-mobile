@@ -147,6 +147,12 @@ export const RouteDirectionIcon = (
 
   const color = TrafficColor[congestionIndex];
 
+  let logo;
+
+  // 1. bikin logo manuver dengan lihat parameter manuver
+  // 2. check parameter redLight
+  // 2a. redlight true, maka tambahkan logo lampu merah pada manuver
+
   if (straightDirections.includes(maneuver)) {
     return <StraightIcon color={color} />;
   }

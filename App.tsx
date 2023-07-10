@@ -14,6 +14,8 @@ import SearchLocation from './src/screens/SearchLocation';
 import LocationDetails from './src/screens/LocationDetail';
 import ManualLocation from './src/screens/ManualLocation';
 
+import MapScreen from './src/screens/MapScreen';
+
 import {UserLocationContextProvider} from './src/Components/context/UserLocationContext';
 import {SearchContextProvider} from './src/Components/context/SearchContext';
 
@@ -46,10 +48,7 @@ const MyStack = React.memo(() => {
         <Stack.Screen name="SearchLocation" component={SearchLocation} />
         <Stack.Screen name="LocationDetails" component={LocationDetails} />
         <Stack.Screen name="ManualLocation" component={ManualLocation} />
-        {/* <Stack.Screen
-          name='MapScreen'
-          component={MapScreen}
-          /> */}
+        {/* <Stack.Screen name="MapScreen" component={MapScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

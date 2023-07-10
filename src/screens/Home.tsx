@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    backgroundColor: 'red',
+    backgroundColor: '#43D8C9',
     alignItems: 'center',
     flex: 1,
   },
@@ -52,13 +52,13 @@ const Home = (props: HomeStackProps) => {
   const navigation = props.navigation;
 
   return (
-    <LinearGradient style={styles.container} colors={['#1B920E', '#53DED9']}>
+    <View style={styles.container}>
       <View style={styles.mapContainer}>
         <FakeSearchBar navigation={navigation} />
         <HomeMap />
       </View>
       <HomeMenu navigation={navigation} />
-    </LinearGradient>
+    </View>
   );
 };
 
