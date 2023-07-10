@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Image, Text, View, TouchableOpacity} from 'react-native';
 
 import {PreferencesSettingsFirstprops} from '../types/App';
@@ -136,111 +136,16 @@ const styles = StyleSheet.create({
   },
 });
 
-class PreferencesSettingsFirst2 extends React.Component {
-  state: {
-    is_data_retrieved: boolean;
-    currentOrder: string[];
-    text: string;
-  };
-  // @ts-ignore
-  props: any;
-
-  constructor(props: any) {
-    super(props);
-
-    this.state = {
-      is_data_retrieved: false,
-      currentOrder: [],
-      text: 'belum',
-    };
-
-    this.retrieve_data();
-  }
-
-  async retrieve_data() {
-    let currentOrder: string[] = [];
-    let newText = '';
-
-    try {
-      currentOrder = await getPreferenceToAsyncStorage('preference');
-
-      if (currentOrder.length > 0) {
-        newText = 'udah';
-      } else {
-        newText = 'belum';
-      }
-    } catch (e) {
-      newText = 'belum';
-    }
-
-    this.setState({is_data_retrieved: true, text: newText, currentOrder});
-  }
-
-  setOrder(newOrder: string[]) {
-    this.setState({currentOrder: newOrder});
-  }
-
-  handleSubmitPress() {
-    savePreferenceToAsyncStorage('preference', this.state.currentOrder);
-    this.props.navigation.navigate('Home');
-  }
-
-  render() {
-    if (!this.state.is_data_retrieved) return <></>;
-
-    return (
-      <View style={styles.HalamanPemilihanPreferensiAwalVer2}>
-        <View style={styles.Containercontent}>
-          <View style={styles.Containertop}>
-            <Image
-              style={styles.Choose1}
-              source={{
-                uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/j8m5rtm1zr-414%3A378?alt=media&token=d6320b25-2574-4472-a5a5-1cf15ce74c07',
-              }}
-            />
-            <Text style={styles.SetYourPreferencesFi}>{this.state.text}</Text>
-          </View>
-          <View style={styles.Containertop2}>
-            <Text style={styles.WeNeedToKnowYourPref}>
-              we need to know your preferences first
-            </Text>
-          </View>
-          <View style={styles.Containertop3}>
-            <Text style={styles.Importanttext}>Most Important</Text>
-          </View>
-          <View style={styles.containerpref}>
-            <View style={styles.Vectorline}>{/* buat garis importance */}</View>
-            <View style={styles.containerpref2}>
-              <Framepreferensi
-                setOrder={(newOrder: string[]) => {
-                  this.setOrder(newOrder);
-                }}></Framepreferensi>
-            </View>
-          </View>
-          <View style={styles.Containerbot}>
-            <Text style={styles.Importanttext}>Less Important</Text>
-          </View>
-          <View style={styles.Containerbot2}>
-            <TouchableOpacity
-              onPress={() => {
-                this.handleSubmitPress();
-              }}>
-              <Image
-                style={styles.Vectorsubmit}
-                source={{
-                  uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/1grlufro641i-414%3A421?alt=media&token=84a011c0-6cd1-4322-9876-4d5a477c48ac',
-                }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    );
-  }
-}
-
 const PreferencesSettingsFirst = (props: PreferencesSettingsFirstprops) => {
   const navigation = props.navigation;
+
+  const [preference, setPreference] = useState(null);
+
+  useEffect(() => {
+    getPreferenceToAsyncStorage('preference').then(value => {
+      setPreference(value);
+    });
+  }, []);
 
   // import asyncStorage yang preference
   // ambil preference menggunakan getValuePreference
@@ -269,11 +174,15 @@ const PreferencesSettingsFirst = (props: PreferencesSettingsFirstprops) => {
               uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/j8m5rtm1zr-414%3A378?alt=media&token=d6320b25-2574-4472-a5a5-1cf15ce74c07',
             }}
           />
-          <Text style={styles.SetYourPreferencesFi}></Text>
+          <Text style={styles.SetYourPreferencesFi}>
+            {preference
+              ? 'Re-Set your preferences'
+              : 'Set your preferences first!'}
+          </Text>
         </View>
         <View style={styles.Containertop2}>
           <Text style={styles.WeNeedToKnowYourPref}>
-            we need to know your preferences first
+            we need to know your preferences
           </Text>
         </View>
         <View style={styles.Containertop3}>

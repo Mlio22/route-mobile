@@ -240,7 +240,7 @@ export default function Framepreferensi2(props: any) {
           <Image
             style={styles.Logorc}
             source={{
-              uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/wmcpl2jxuv8-414%3A414?alt=media&token=daa1a7ce-48e2-4b56-b118-ba196529965d',
+              uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/5t4peczrxmi-618%3A302?alt=media&token=682f5e77-c262-40b3-a568-fdcebd84519b',
             }}
           />
         </View>
@@ -253,11 +253,11 @@ export default function Framepreferensi2(props: any) {
         ]}
         {...panResponder5.panHandlers}>
         <View style={styles.Frametlc}>
-          <Text style={styles.TrafficLights}>Traffic Lights</Text>
+          <Text style={styles.TrafficLights}>Continues Straight</Text>
           <Image
             style={styles.Logotl}
             source={{
-              uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/wmcpl2jxuv8-414%3A418?alt=media&token=163f37c8-ee59-4394-8277-4903974213a4',
+              uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/wmcpl2jxuv8-414%3A414?alt=media&token=daa1a7ce-48e2-4b56-b118-ba196529965d',
             }}
           />
         </View>
