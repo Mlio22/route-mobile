@@ -20,8 +20,9 @@ const lineLayerStyle = (index: number) => {
   // todo: perbaiki styling, dengan titik sambung
   return {
     lineColor: TrafficColor[index],
-    lineWidth: 5,
-    lineJoin: 'round',
+    lineWidth: 3.2,
+    lineCap: MapboxGL.LineJoin.Round,
+    lineOpacity: 1.84,
   };
 };
 
@@ -72,8 +73,6 @@ export const RouteLineLayers = (polylineRoute: PolylineRouteType[]) => {
       </MapboxGL.ShapeSource>
     );
   });
-
-  console.log(layers);
 
   return <>{layers}</>;
 };

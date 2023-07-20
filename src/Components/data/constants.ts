@@ -1,1 +1,1 @@
-export const TrafficColor = ['#cc3300', '#ffcc00', '#14530d'];
+export const TrafficColor = ['#cc3300', '#FF974D', '#FF974D'];

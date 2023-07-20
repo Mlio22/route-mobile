@@ -1,5 +1,5 @@
 import React from 'react';
-import {BasicMap} from '../molecules/BasicMap';
+import {BasicMap} from '../Map/BasicMap';
 
 import {coordinatesObjToArr} from '../../utils/Coordinates';
 import {RouteMapChildren} from '../molecules/locationMap/LocationMapChildren';

@@ -24,7 +24,7 @@ interface HomeMapSettingsState {
   isOverlayVisible: boolean;
 }
 
-class HomeMapSettings extends React.Component<{}, HomeMapSettingsState> {
+class HomeMapSettings extends React.Component<any, HomeMapSettingsState> {
   constructor(props: any) {
     super(props);
     this.state = {isOverlayVisible: false};
@@ -38,6 +38,8 @@ class HomeMapSettings extends React.Component<{}, HomeMapSettingsState> {
   }
 
   render(): React.ReactNode {
+    const toggleTraffic = this.props.toggleTraffic;
+
     return (
       <>
         <TouchableOpacity
@@ -45,7 +47,9 @@ class HomeMapSettings extends React.Component<{}, HomeMapSettingsState> {
           onPress={() => this.toggleOverlay()}>
           <Image source={ICONS.MAP_OPTIONs} />
         </TouchableOpacity>
-        {this.state.isOverlayVisible && <HomeMapSettingsOverlay />}
+        {this.state.isOverlayVisible && (
+          <HomeMapSettingsOverlay toggleTraffic={toggleTraffic} />
+        )}
       </>
     );
   }

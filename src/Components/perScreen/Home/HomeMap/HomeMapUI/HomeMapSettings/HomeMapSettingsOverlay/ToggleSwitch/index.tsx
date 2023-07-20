@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {View, TouchableOpacity, StyleSheet} from 'react-native';
 
-const ToggleSwitch = () => {
+const ToggleSwitch = (props: any) => {
   const [isChecked, setIsChecked] = useState(false);
+  const toggleTraffic = props.toggleTraffic;
 
   const handleToggle = () => {
     setIsChecked(!isChecked);
+    toggleTraffic();
   };
 
   return (

@@ -39,7 +39,7 @@ const WelcomePage = (props: WelcomePageProps) => {
     };
 
     // Panggil fungsi pengecekan isFirstTime setelah beberapa detik delay
-    const delay = 4000; // 3000 milidetik = 3 detik
+    const delay = 400; // 3000 milidetik = 3 detik
     const timer = setTimeout(handleFirstTimeCheck, delay);
 
     return () => clearTimeout(timer); // Membersihkan timer saat komponen unmount

@@ -1,6 +1,7 @@
 export type ChildrenProp = {
   children?: React.ReactNode;
-  theme: any
+  trafficIndicatorRef?: React.RefObject<boolean>;
+  theme: any;
 };
 
 export type CoordinatesObjectType = {
@@ -13,7 +14,7 @@ export type CoordinatesObjectNullableType = {
   longitude: number | null;
 };
 
-export type CoordinatesArrayType = [number, number];
+export type CoordinatesArrayType = number[];
 export type CoordinatesArrayNullableType = [number | null, number | null];
 
 export type CoordinatesType = CoordinatesArrayType | CoordinatesObjectType;
