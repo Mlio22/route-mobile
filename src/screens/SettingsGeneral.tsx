@@ -12,7 +12,7 @@ import {SettingsGeneralprops} from '../types/App';
 
 // Tombol reset
 import {resetFirstTime} from '../utils/FirstTimeUtils';
-import {resetUserPosition} from '../storages/Coordinatesstorage(manual)';
+// import {resetUserPosition} from '../storages/Coordinatesstorage(manual)';
 import {resetValueInAsyncStorage} from '../storages/vehiclevalue';
 import {resetPreferenceInAsyncStorage} from '../storages/Preferecevalue';
 
@@ -98,7 +98,7 @@ const SettingsGeneral = (props: SettingsGeneralprops) => {
 
   const handleReset = async () => {
     resetFirstTime(); // reset penggunan pertama kali
-    resetUserPosition(); // reset user position
+    // resetUserPosition(); // reset user position
     resetValueInAsyncStorage(); // reset vehicle value
     resetPreferenceInAsyncStorage('preference'); // // reset preferensi
     ToastAndroid.show('Resetting', 1000);
@@ -126,13 +126,13 @@ const SettingsGeneral = (props: SettingsGeneralprops) => {
                 <Text style={styles.TextSettings}>Preferences settings</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={styles.framebuttonsettings}
                 onPressIn={() => {
                   navigation.navigate('ManualLocation');
                 }}>
                 <Text style={styles.TextSettings}>Manual Location</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
               <TouchableOpacity
                 style={styles.framebuttonsettings}
