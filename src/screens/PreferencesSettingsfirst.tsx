@@ -1,5 +1,12 @@
-import React from 'react';
-import {StyleSheet, Image, Text, View, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  Image,
+  Text,
+  View,
+  TouchableOpacity,
+  ToastAndroid,
+} from 'react-native';
 
 import {PreferencesSettingsFirstprops} from '../types/App';
 
@@ -139,6 +146,14 @@ const styles = StyleSheet.create({
 const PreferencesSettingsFirst = (props: PreferencesSettingsFirstprops) => {
   const navigation = props.navigation;
 
+  const [preference, setPreference] = useState(null);
+
+  useEffect(() => {
+    getPreferenceToAsyncStorage('preference').then(value => {
+      setPreference(value);
+    });
+  }, []);
+
   // import asyncStorage yang preference
   // ambil preference menggunakan getValuePreference
   // cek prefence nilainya ada atau ngga
@@ -154,6 +169,7 @@ const PreferencesSettingsFirst = (props: PreferencesSettingsFirstprops) => {
     console.log(currentOrder);
     savePreferenceToAsyncStorage('preference', currentOrder);
     navigation.navigate('Home');
+    ToastAndroid.show('Preferences Set', 1000);
   };
 
   return (
@@ -166,11 +182,15 @@ const PreferencesSettingsFirst = (props: PreferencesSettingsFirstprops) => {
               uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/j8m5rtm1zr-414%3A378?alt=media&token=d6320b25-2574-4472-a5a5-1cf15ce74c07',
             }}
           />
-          <Text style={styles.SetYourPreferencesFi}></Text>
+          <Text style={styles.SetYourPreferencesFi}>
+            {preference
+              ? 'Re-Set your preferences'
+              : 'Set your preferences first!'}
+          </Text>
         </View>
         <View style={styles.Containertop2}>
           <Text style={styles.WeNeedToKnowYourPref}>
-            we need to know your preferences first
+            we need to know your preferences
           </Text>
         </View>
         <View style={styles.Containertop3}>

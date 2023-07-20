@@ -1,5 +1,12 @@
 import React from 'react';
-import {StyleSheet, Image, Text, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  Text,
+  View,
+  TouchableOpacity,
+  ToastAndroid,
+} from 'react-native';
 
 import {SettingsGeneralprops} from '../types/App';
 
@@ -36,7 +43,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingRight: 2,
     paddingBottom: 2,
-    marginBottom: 10,
+    marginBottom: 15,
   },
   Logosettings: {
     width: 30,
@@ -92,8 +99,9 @@ const SettingsGeneral = (props: SettingsGeneralprops) => {
   const handleReset = async () => {
     resetFirstTime(); // reset penggunan pertama kali
     resetUserPosition(); // reset user position
-    resetValueInAsyncStorage('VehicleValue'); // reset vehicle value
+    resetValueInAsyncStorage(); // reset vehicle value
     resetPreferenceInAsyncStorage('preference'); // // reset preferensi
+    ToastAndroid.show('Resetting', 1000);
   };
 
   return (

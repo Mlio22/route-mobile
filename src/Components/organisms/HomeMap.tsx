@@ -2,9 +2,13 @@ import React from 'react';
 
 import {BasicMap} from '../Map/BasicMap';
 import HomeMapUI from '../perScreen/Home/HomeMap/HomeMapUI';
+import {ThemeContext} from '../context/UserSettings/ThemeContext';
 
 export class HomeMap extends React.Component {
   basicMap: React.RefObject<BasicMap>;
+
+  // @ts-ignore
+  context: React.Context<typeof ThemeContext>;
 
   constructor(props: any) {
     super(props);
@@ -23,7 +27,7 @@ export class HomeMap extends React.Component {
   render(): React.ReactNode {
     return (
       <>
-        <BasicMap ref={this.basicMap} />
+        <BasicMap ref={this.basicMap} theme={this.context.theme} />
         <HomeMapUI
           toggleTraffic={() => this.toggleTrafficView()}
           centerToUser={() => this.centerToUser()}
@@ -32,3 +36,5 @@ export class HomeMap extends React.Component {
     );
   }
 }
+
+HomeMap.contextType = ThemeContext;

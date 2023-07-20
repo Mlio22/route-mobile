@@ -1,6 +1,7 @@
 export type ChildrenProp = {
   children?: React.ReactNode;
   trafficIndicatorRef?: React.RefObject<boolean>;
+  theme: any;
 };
 
 export type CoordinatesObjectType = {

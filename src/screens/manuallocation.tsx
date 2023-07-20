@@ -1,9 +1,17 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ToastAndroid,
+} from 'react-native';
 
 import MapboxGL from '@rnmapbox/maps';
 import {LocationDetailsContextProvider} from '../Components/context/LocationDetailContext';
 import {saveUserPosition} from '../storages/Coordinatesstorage(manual)';
+import {UserLocationContext} from '../Components/context/UserLocationContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -66,72 +74,81 @@ const styles = StyleSheet.create({
   },
 });
 
-const ManualLocation = () => {
-  const [coordinates, setCoordinates] = useState<number[]>([
-    107.6351264, -6.972025,
-  ]);
+type coordinate = {
+  latitude: number;
+  longitude: number;
+};
+
+const ManualLocation = (props: any) => {
+  const navigation = props.navigation;
+
+  const [coordinates, setCoordinates] = useState<coordinate>({
+    longitude: 107.6351264,
+    latitude: -6.972025,
+  });
   const mapview = React.createRef<MapboxGL.MapView>();
 
   const forsaveUserPosition = () => {
-    saveUserPosition(coordinates);
+    navigation.navigate('SettingsGeneral');
+    ToastAndroid.show('Manually Set', 1000);
   };
 
   return (
-    <LocationDetailsContextProvider>
-      <View style={{flex: 1}}>
-        <View style={styles.pinpoint}>
-          <Image source={require('../images/pinpoint.png')} />
-        </View>
+    <View style={{flex: 1}}>
+      <View style={styles.pinpoint}>
+        <Image source={require('../images/pinpoint.png')} />
+      </View>
 
-        <MapboxGL.MapView
-          style={{flex: 1}}
-          ref={mapview}
-          onTouchMove={async _ => {
-            try {
-              const center = await mapview.current!.getCenter();
-              setCoordinates(center);
-            } catch (e) {}
-          }}>
-          <MapboxGL.Camera
-            defaultSettings={{
-              centerCoordinate: coordinates,
-              zoomLevel: 15,
-            }}
-          />
-        </MapboxGL.MapView>
+      <MapboxGL.MapView
+        style={{flex: 1}}
+        ref={mapview}
+        onTouchMove={async e => {
+          try {
+            const center = await mapview.current!.getCenter();
+            const [longitude, latitude] = center;
 
-        {coordinates.length > 0 && (
-          <View style={styles.containerstatus}>
-            <View style={styles.StatusLokasiDanTujuan}>
-              <View style={styles.Framedetailmanualalocation}>
+            setCoordinates({latitude, longitude});
+          } catch (e) {}
+        }}>
+        <MapboxGL.Camera
+          defaultSettings={{
+            centerCoordinate: [coordinates.longitude, coordinates.latitude],
+            zoomLevel: 15,
+          }}
+        />
+      </MapboxGL.MapView>
+
+      {coordinates && (
+        <View style={styles.containerstatus}>
+          <View style={styles.StatusLokasiDanTujuan}>
+            <View style={styles.Framedetailmanualalocation}>
+              <Image
+                style={styles.Vector}
+                source={{
+                  uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/sarxv8i0j8-292%3A346?alt=media&token=a83a79db-83c7-4d00-a7e8-1ee766d12def',
+                }}
+              />
+              <View>
+                <Text style={styles.pinpointtext}>
+                  Latitude: {coordinates.latitude.toFixed(5)}
+                </Text>
+                <Text style={styles.pinpointtext}>
+                  Longitude: {coordinates.longitude.toFixed(5)}
+                </Text>
+              </View>
+              <TouchableOpacity onPress={forsaveUserPosition}>
                 <Image
-                  style={styles.Vector}
+                  style={styles.Vector1}
                   source={{
-                    uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/sarxv8i0j8-292%3A346?alt=media&token=a83a79db-83c7-4d00-a7e8-1ee766d12def',
+                    uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/sarxv8i0j8-292%3A342?alt=media&token=53678b45-4651-4d97-8a6a-a7459e322ab4',
                   }}
                 />
-                <View>
-                  <Text style={styles.pinpointtext}>
-                    Latitude: {coordinates[1].toFixed(5)}
-                  </Text>
-                  <Text style={styles.pinpointtext}>
-                    Longitude: {coordinates[0].toFixed(5)}
-                  </Text>
-                </View>
-                <TouchableOpacity onPress={forsaveUserPosition}>
-                  <Image
-                    style={styles.Vector1}
-                    source={{
-                      uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/sarxv8i0j8-292%3A342?alt=media&token=53678b45-4651-4d97-8a6a-a7459e322ab4',
-                    }}
-                  />
-                </TouchableOpacity>
-              </View>
+              </TouchableOpacity>
             </View>
           </View>
-        )}
-      </View>
-    </LocationDetailsContextProvider>
+        </View>
+      )}
+    </View>
   );
 };
 
