@@ -6,6 +6,7 @@ import {CameraProps} from '@rnmapbox/maps/javascript/components/Camera';
 
 import {UserMarker} from '../molecules/UserMarker';
 import {ChildrenProp, CoordinatesObjectType} from '../../types/Home';
+import {ThemeContext} from '../context/UserSettings/ThemeContext';
 import {UserLocationContext} from '../context/UserLocationContext';
 import {centerTargetProps} from '../../types/components/organisms/LocationMap';
 import TrafficView from './Traffic';
@@ -99,6 +100,9 @@ export class BasicMap extends React.Component<ChildrenProp> {
   }
 
   renderMap(anotherChildren?: any) {
+    MapboxGL.setAccessToken(
+      'pk.eyJ1IjoiYW5ha2JhaWstZXhlIiwiYSI6ImNsYnl4YnZkaTAzaDYzd3A3MWhrb2lqeWIifQ.JLrFLc_GxkTdET36LKjJvw',
+    );
     const mapviewProps: MapViewProps = {
         projection: 'globe',
         style: styles.map,
@@ -111,6 +115,12 @@ export class BasicMap extends React.Component<ChildrenProp> {
         animationMode: 'none',
         centerCoordinate: this.currentTargetCoordinates,
       };
+
+    // console.log(this.props.theme);
+
+    if (this.props.theme === 'dark') {
+      mapviewProps.styleURL = `mapbox://styles/mapbox/dark-v10`;
+    }
 
     return (
       <>

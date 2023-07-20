@@ -6,7 +6,7 @@ import {mapboxSetup} from './src/utils/mapbox';
 
 import WelcomePage from './src/screens/WelcomePage';
 import PreferencesVehicleFirst from './src/screens/PreferencesVehicleFirst';
-import PreferencesSettingsFirst from './src/screens/PreferencesSettingsfirst';
+import PreferencesSettingsFirst from './src/screens/PreferencesSettingsFirst';
 import Home from './src/screens/Home';
 import SettingsGeneral from './src/screens/SettingsGeneral';
 import History from './src/screens/History';

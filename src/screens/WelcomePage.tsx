@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {WelcomePageProps} from '../types/App';
-import LinearGradient from 'react-native-linear-gradient';
+import {mapboxSetup} from '../utils/mapbox';
 
 import {checkIfFirstTime} from '../utils/FirstTimeUtils';
 
@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
+
+// Debug
+mapboxSetup();
 
 const WelcomePage = (props: WelcomePageProps) => {
   const navigation = props.navigation;
