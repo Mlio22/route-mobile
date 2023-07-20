@@ -86,7 +86,7 @@ const ManualLocation = () => {
         <MapboxGL.MapView
           style={{flex: 1}}
           ref={mapview}
-          onTouchMove={async e => {
+          onTouchMove={async _ => {
             try {
               const center = await mapview.current!.getCenter();
               setCoordinates(center);

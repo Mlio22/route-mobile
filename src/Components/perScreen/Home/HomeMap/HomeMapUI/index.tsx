@@ -5,10 +5,11 @@ import HomeMapSettings from './HomeMapSettings';
 
 const HomeMapUI = (props: any) => {
   const centerToUser = props.centerToUser;
+  const toggleTraffic = props.toggleTraffic;
   return (
     <>
       <HomeMapTrackUser centerToUser={centerToUser} />
-      <HomeMapSettings />
+      <HomeMapSettings toggleTraffic={toggleTraffic} />
     </>
   );
 };

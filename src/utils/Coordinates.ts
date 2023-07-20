@@ -1,4 +1,4 @@
-import {CoordinatesArrayType, CoordinatesObjectType} from '../types/Home';
+import {CoordinatesObjectType} from '../types/Home';
 
 export const coordinatesObjToArr = (coords: CoordinatesObjectType) => {
   const {latitude, longitude} = coords;
@@ -6,7 +6,7 @@ export const coordinatesObjToArr = (coords: CoordinatesObjectType) => {
   return [longitude, latitude];
 };
 
-export const coordinatesArrToObj = (coords: CoordinatesArrayType) => {
+export const coordinatesArrToObj = (coords: number[]) => {
   const [longitude, latitude] = coords;
 
   return {

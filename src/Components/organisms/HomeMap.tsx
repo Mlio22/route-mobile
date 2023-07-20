@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {BasicMap} from '../molecules/BasicMap';
+import {BasicMap} from '../Map/BasicMap';
 import HomeMapUI from '../perScreen/Home/HomeMap/HomeMapUI';
 
 export class HomeMap extends React.Component {
@@ -16,11 +16,18 @@ export class HomeMap extends React.Component {
     this.basicMap.current?.centerMapToUser();
   }
 
+  toggleTrafficView() {
+    this.basicMap.current?.toggleTrafficView();
+  }
+
   render(): React.ReactNode {
     return (
       <>
         <BasicMap ref={this.basicMap} />
-        <HomeMapUI centerToUser={() => this.centerToUser()} />
+        <HomeMapUI
+          toggleTraffic={() => this.toggleTrafficView()}
+          centerToUser={() => this.centerToUser()}
+        />
       </>
     );
   }

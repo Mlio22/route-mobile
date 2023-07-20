@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, Image, Text, View, TouchableOpacity} from 'react-native';
 
 import {PreferencesVehicleFirstprops} from '../types/App';
-import LinearGradient from 'react-native-linear-gradient';
 
 import {saveValueToAsyncStorage} from '../storages/vehiclevalue';
 

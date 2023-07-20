@@ -6,15 +6,13 @@ import {mapboxSetup} from './src/utils/mapbox';
 
 import WelcomePage from './src/screens/WelcomePage';
 import PreferencesVehicleFirst from './src/screens/PreferencesVehicleFirst';
-import PreferencesSettingsFirst from './src/screens/PreferencesSettingsFirst';
+import PreferencesSettingsFirst from './src/screens/PreferencesSettingsfirst';
 import Home from './src/screens/Home';
 import SettingsGeneral from './src/screens/SettingsGeneral';
 import History from './src/screens/History';
 import SearchLocation from './src/screens/SearchLocation';
 import LocationDetails from './src/screens/LocationDetail';
 import ManualLocation from './src/screens/ManualLocation';
-
-import MapScreen from './src/screens/MapScreen';
 
 import {UserLocationContextProvider} from './src/Components/context/UserLocationContext';
 import {SearchContextProvider} from './src/Components/context/SearchContext';

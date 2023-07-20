@@ -40,13 +40,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeMapSettingsOverlay = () => {
+const HomeMapSettingsOverlay = (props: any) => {
+  const toggleTraffic = props.toggleTraffic;
+
   return (
     <View style={styles.overlayContainer}>
       <View style={styles.overlayContent}>
         <View style={styles.FrameToggle}>
           <Text style={styles.TrafficDisplay}>Traffic Display</Text>
-          <ToggleSwitch />
+          <ToggleSwitch toggleTraffic={toggleTraffic} />
         </View>
       </View>
     </View>
