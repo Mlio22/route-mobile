@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Image, Text, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  Text,
+  View,
+  TouchableOpacity,
+  ToastAndroid,
+} from 'react-native';
 
 import {PreferencesSettingsFirstprops} from '../types/App';
 
@@ -162,6 +169,7 @@ const PreferencesSettingsFirst = (props: PreferencesSettingsFirstprops) => {
     console.log(currentOrder);
     savePreferenceToAsyncStorage('preference', currentOrder);
     navigation.navigate('Home');
+    ToastAndroid.show('Preferences Set', 1000);
   };
 
   return (

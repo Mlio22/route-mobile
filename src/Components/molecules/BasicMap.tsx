@@ -8,6 +8,7 @@ import {UserMarker} from '../molecules/UserMarker';
 import {ChildrenProp, CoordinatesObjectType} from '../../types/Home';
 import {ThemeContext} from '../context/UserSettings/ThemeContext';
 import {UserLocationContext} from '../context/UserLocationContext';
+import {saveUserPosition} from '../../storages/Coordinatesstorage(manual)';
 
 const styles = StyleSheet.create({
   map: {
@@ -77,13 +78,16 @@ export class BasicMap extends React.Component<ChildrenProp> {
         style: styles.map,
         attributionEnabled: false,
         logoEnabled: false,
-        // styleURL: `mapbox://styles/mapbox/dark-v10`,
       },
       cameraProps: CameraProps = {
         zoomLevel: 15,
         animationMode: 'none',
         centerCoordinate: this.currentTargetCoordinates,
       };
+
+    if (this.props.theme === 'dark') {
+      mapviewProps.styleURL = `mapbox://styles/mapbox/dark-v10`;
+    }
 
     return (
       <>

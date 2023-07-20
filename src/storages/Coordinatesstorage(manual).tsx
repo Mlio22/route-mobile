@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const saveUserPosition = async (coordinates: number[]) => {
+export const saveUserPosition = async (coordinates: any) => {
   try {
     await AsyncStorage.setItem('userPosition', JSON.stringify(coordinates));
     console.log('Posisi pengguna disimpan:', coordinates);
@@ -27,10 +27,10 @@ export const getUserPosition = async () => {
 };
 
 export const resetUserPosition = async () => {
-    try {
-      await AsyncStorage.removeItem('userPosition');
-      console.log('Koordinat pengguna berhasil direset.');
-    } catch (error) {
-      console.log('Gagal mereset koordinat pengguna:', error);
-    }
-  };
+  try {
+    await AsyncStorage.removeItem('userPosition');
+    console.log('Koordinat pengguna berhasil direset.');
+  } catch (error) {
+    console.log('Gagal mereset koordinat pengguna:', error);
+  }
+};

@@ -9,6 +9,8 @@ import {
   rawStepType,
   routeInfoType,
 } from '../types/components/context/LocationDetails/PlaceRouteContext';
+import {getValueFromAsyncStorage} from '../storages/vehiclevalue';
+import {getPreferenceToAsyncStorage} from '../storages/Preferecevalue';
 
 function fixCoordinates(polylineString: string): number[][] {
   const coordinatesList = mapboxPolyline.decode(polylineString);
@@ -24,13 +26,43 @@ type routeParam = {
   userCoordinates: CoordinatesObjectType;
 };
 
+function extractPlaceGeolocationData(jsonResponse: any) {
+  const {
+    geometry: {
+      location: {lat, lng},
+    },
+  } = jsonResponse.results[0];
+  return {lat, lng};
+}
+
+async function getPlaceGeolocationData(placeId: string) {
+  const API_URL = `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${GOOGLE_API_TOKEN}`;
+
+  const response = await fetch(API_URL),
+    responseJson = await response.json(),
+    geolocationData = extractPlaceGeolocationData(responseJson);
+
+  return geolocationData;
+}
+
 async function getData(param: routeParam) {
   const {selectedPlaceId, userCoordinates} = param;
 
-  const {latitude, longitude} = userCoordinates;
-  const coordinatesString = `${latitude},${longitude}`;
+  const {latitude: source_lat, longitude: source_lon} = userCoordinates;
+  const {lat: target_lat, lng: target_lon} = await getPlaceGeolocationData(
+    selectedPlaceId,
+  );
+  const userVehicle = await getValueFromAsyncStorage();
+  // console.log(userVehicle);
+  const listPriority = await getPreferenceToAsyncStorage('preference');
+  // console.log(listPriority);
 
-  const URL = `https://maps.googleapis.com/maps/api/directions/json?origin=${coordinatesString}&destination=place_id:${selectedPlaceId}&key=${GOOGLE_API_TOKEN}`;
+  const sourceCoordinatesString = `${source_lat},${source_lon}`;
+  const targetCoordinatesString = `${target_lat},${target_lon}`;
+
+  const URL = `https://maps.googleapis.com/maps/api/directions/json?origin=${sourceCoordinatesString}&destination=place_id:${selectedPlaceId}&key=${GOOGLE_API_TOKEN}`;
+  const URL2 = `http://localhost:3000/route?coordinates=${sourceCoordinatesString};${targetCoordinatesString}&vehicle=${userVehicle}&priorities=${listPriority}`;
+  console.log(URL2);
 
   const response = await fetch(URL),
     responseJSON = await response.json();

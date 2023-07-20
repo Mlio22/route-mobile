@@ -82,6 +82,8 @@ export const LocationDetailsCard = () => {
   const {updatePreviewMode} = React.useContext(PreviewModeContext);
   const {isDataReady, placeData} = React.useContext(PlaceDetailContext);
 
+  // fungsi buat masukin data ke asnycstorage
+
   if (isDataReady && placeData) {
     const {
       previewImageReference,

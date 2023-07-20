@@ -7,6 +7,7 @@ import {
 
 import {ChildrenProp, CoordinatesObjectType} from '../../types/Home';
 import {UserLocationContextType} from '../../types/components/context/UserLocationContext';
+import {saveUserPosition} from '../../storages/Coordinatesstorage(manual)';
 
 const contextDefaultValue: UserLocationContextType = {
   isEnabled: null as unknown as React.RefObject<boolean>,

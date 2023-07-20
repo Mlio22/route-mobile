@@ -1,5 +1,6 @@
 export type ChildrenProp = {
   children?: React.ReactNode;
+  theme: any
 };
 
 export type CoordinatesObjectType = {

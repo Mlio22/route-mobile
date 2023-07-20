@@ -13,24 +13,22 @@ export default function Framepreferensi2(props: any) {
   const durationPan = useRef(new Animated.ValueXY()).current;
   const congestionPan = useRef(new Animated.ValueXY()).current;
   const qualityPan = useRef(new Animated.ValueXY()).current;
-  const trafficPan = useRef(new Animated.ValueXY()).current;
 
   let panList: any = {
     distance: distancePan,
     duration: durationPan,
     congestion: congestionPan,
     quality: qualityPan,
-    traffic: trafficPan,
   };
 
   let intervalAdditional = 0;
 
   function setIntervalAdditional(height: number) {
-    intervalAdditional = height / 5;
+    intervalAdditional = height / 4;
   }
 
-  let oriOrder = ['distance', 'duration', 'congestion', 'quality', 'traffic'];
-  let panOrder = ['distance', 'duration', 'congestion', 'quality', 'traffic'];
+  let oriOrder = ['distance', 'duration', 'congestion', 'quality'];
+  let panOrder = ['distance', 'duration', 'congestion', 'quality'];
 
   // https://stackoverflow.com/a/6470794/12125511
   function slideArray(fromIndex: number, toIndex: number) {
@@ -75,7 +73,7 @@ export default function Framepreferensi2(props: any) {
     // 3. check if it is off limit
     let target_index = Math.round(current_pan_height / intervalAdditional);
 
-    if (target_index > 4) target_index = 4;
+    if (target_index > 3) target_index = 3;
     if (target_index < 0) target_index = 0;
 
     let slide_direction = 0;
@@ -162,16 +160,6 @@ export default function Framepreferensi2(props: any) {
     },
   });
 
-  const panResponder5 = PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onPanResponderMove: (e, gestureState) => {
-      trafficPan.y.setValue(gestureState.dy);
-    },
-    onPanResponderRelease: () => {
-      onRelease('traffic');
-    },
-  });
-
   return (
     <View
       style={styles.Framepreferensi}
@@ -245,23 +233,6 @@ export default function Framepreferensi2(props: any) {
           />
         </View>
       </Animated.View>
-
-      <Animated.View
-        style={[
-          styles.Frametl,
-          {transform: trafficPan.getTranslateTransform()},
-        ]}
-        {...panResponder5.panHandlers}>
-        <View style={styles.Frametlc}>
-          <Text style={styles.TrafficLights}>Continues Straight</Text>
-          <Image
-            style={styles.Logotl}
-            source={{
-              uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/wmcpl2jxuv8-414%3A414?alt=media&token=daa1a7ce-48e2-4b56-b118-ba196529965d',
-            }}
-          />
-        </View>
-      </Animated.View>
     </View>
   );
 }
@@ -282,13 +253,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: '10%',
+    height: '13%',
     marginRight: 40,
     paddingLeft: 70,
     paddingRight: 70,
     paddingTop: 10,
     paddingBottom: 10,
-    borderRadius: 20,
+    borderRadius: 30,
     backgroundColor: 'rgba(241,241,241,0.8)',
     // marginLeft:10,
   },
@@ -320,13 +291,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: '10%',
+    height: '13%',
     marginRight: 40,
     paddingLeft: 50,
     paddingRight: 50,
     paddingTop: 10,
     paddingBottom: 10,
-    borderRadius: 20,
+    borderRadius: 30,
     backgroundColor: 'rgba(241,241,241,0.8)',
   },
   Framestc: {
@@ -357,13 +328,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: '10%',
+    height: '13%',
     marginRight: 40,
     paddingLeft: 45,
     paddingRight: 45,
     paddingTop: 10,
     paddingBottom: 10,
-    borderRadius: 20,
+    borderRadius: 30,
     backgroundColor: 'rgba(241,241,241,0.8)',
   },
   Frameclc: {
@@ -392,13 +363,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: '10%',
+    height: '13%',
     marginRight: 40,
     paddingLeft: 50,
     paddingRight: 50,
     paddingTop: 10,
     paddingBottom: 10,
-    borderRadius: 20,
+    borderRadius: 30,
     backgroundColor: 'rgba(241,241,241,0.8)',
   },
   Framercc: {
@@ -421,38 +392,38 @@ const styles = StyleSheet.create({
     width: 30,
     height: '100%',
   },
-  Frametl: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '10%',
-    paddingLeft: 67,
-    paddingRight: 67,
-    paddingTop: 10,
-    paddingBottom: 10,
-    borderRadius: 20,
-    backgroundColor: 'rgba(241,241,241,0.8)',
-  },
-  Frametlc: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-  },
-  TrafficLights: {
-    marginRight: 10,
-    color: 'rgba(0,0,0,1)',
-    fontSize: 20,
-    lineHeight: 20,
-    fontFamily: 'Lato, sans-serif',
-    fontWeight: '400',
-  },
-  Logotl: {
-    width: 30,
-    height: '100%',
-  },
+  // Frametl: {
+  //   display: 'flex',
+  //   flexDirection: 'column',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   width: '100%',
+  //   height: '10%',
+  //   paddingLeft: 67,
+  //   paddingRight: 67,
+  //   paddingTop: 10,
+  //   paddingBottom: 10,
+  //   borderRadius: 20,
+  //   backgroundColor: 'rgba(241,241,241,0.8)',
+  // },
+  // Frametlc: {
+  //   display: 'flex',
+  //   flexDirection: 'row',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   width: '100%',
+  //   height: '100%',
+  // },
+  // TrafficLights: {
+  //   marginRight: 10,
+  //   color: 'rgba(0,0,0,1)',
+  //   fontSize: 20,
+  //   lineHeight: 20,
+  //   fontFamily: 'Lato, sans-serif',
+  //   fontWeight: '400',
+  // },
+  // Logotl: {
+  //   width: 30,
+  //   height: '100%',
+  // },
 });
