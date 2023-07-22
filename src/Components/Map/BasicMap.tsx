@@ -116,8 +116,6 @@ export class BasicMap extends React.Component<ChildrenProp> {
         centerCoordinate: this.currentTargetCoordinates,
       };
 
-    // console.log(this.props.theme);
-
     if (this.props.theme === 'dark') {
       mapviewProps.styleURL = `mapbox://styles/mapbox/dark-v10`;
     }

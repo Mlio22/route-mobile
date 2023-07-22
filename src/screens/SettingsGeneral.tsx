@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   framebuttonsettings: {
-    marginTop: 40,
+    height: 50,
   },
 });
 
@@ -120,10 +120,16 @@ const SettingsGeneral = (props: SettingsGeneralprops) => {
           <View style={styles.Containsettings}>
             <View style={styles.Containsettingspil}>
               <TouchableOpacity
+                style={styles.framebuttonsettings}
                 onPressIn={() => {
                   navigation.navigate('PreferencesSettingsFirst');
                 }}>
                 <Text style={styles.TextSettings}>Preferences settings</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.framebuttonsettings}
+                onPress={handleReset}>
+                <Text style={styles.TextSettings}>Reset</Text>
               </TouchableOpacity>
 
               {/* <TouchableOpacity
@@ -133,12 +139,6 @@ const SettingsGeneral = (props: SettingsGeneralprops) => {
                 }}>
                 <Text style={styles.TextSettings}>Manual Location</Text>
               </TouchableOpacity> */}
-
-              <TouchableOpacity
-                style={styles.framebuttonsettings}
-                onPress={handleReset}>
-                <Text style={styles.TextSettings}>Reset</Text>
-              </TouchableOpacity>
             </View>
           </View>
         </View>

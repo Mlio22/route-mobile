@@ -1,5 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+function convertVehicleIntoNumber(vehicleType: string) {
+  if (vehicleType === 'motorcycle') {
+    return '0';
+  }
+
+  if (vehicleType === 'car') {
+    return '1';
+  }
+}
+
 // Menyimpan nilai vehicle ke AsyncStorage
 export const saveValueToAsyncStorage = async (value: string) => {
   try {
@@ -15,7 +25,9 @@ export const getValueFromAsyncStorage = async () => {
   try {
     const value = await AsyncStorage.getItem('VehicleValue');
     if (value !== null) {
-      return JSON.parse(value);
+      const vehicleValue = JSON.parse(value);
+      const vehicleValueString = convertVehicleIntoNumber(vehicleValue);
+      return vehicleValueString;
     } else {
       console.log('Value not found');
       return null;

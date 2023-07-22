@@ -148,11 +148,11 @@ const PreferencesSettingsFirst = (props: PreferencesSettingsFirstprops) => {
 
   const [preference, setPreference] = useState(null);
 
-  useEffect(() => {
-    getPreferenceToAsyncStorage('preference').then(value => {
-      setPreference(value);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getPreferenceToAsyncStorage('preference').then(value => {
+  //     setPreference(value);
+  //   });
+  // }, []);
 
   // import asyncStorage yang preference
   // ambil preference menggunakan getValuePreference
