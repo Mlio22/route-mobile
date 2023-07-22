@@ -42,13 +42,13 @@ export const PlaceRouteContextProvider = (props: PlaceRouteProps) => {
       userCoordinates: currentUserCoordinates,
     };
 
-    const {routeSummary, processedSteps, processedRouteLine} =
+    const {routeSummary, processedRouteLine, routeSteps} =
       await retrieveRouteData(routeParam);
 
     placeIdRef.current = props.placeId;
     routeSummaryRef.current = routeSummary;
-    routeStepsRef.current = processedSteps;
     routeLineListRef.current = processedRouteLine;
+    routeStepsRef.current = routeSteps;
 
     updateReadyStatus(true);
   })();

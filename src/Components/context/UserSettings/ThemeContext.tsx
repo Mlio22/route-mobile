@@ -10,7 +10,7 @@ const contextDefaultValue: ThemeContextType = {
 
 export const ThemeContext = React.createContext(contextDefaultValue);
 
-export const ThemeContextProvider = (props: ChildrenProp) => {
+export const ThemeContextProvider = (props: any) => {
   const [theme, setTheme] = React.useState<ThemeType>('light');
 
   const toggleTheme = () => {

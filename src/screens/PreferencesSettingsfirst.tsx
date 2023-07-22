@@ -146,19 +146,7 @@ const styles = StyleSheet.create({
 const PreferencesSettingsFirst = (props: PreferencesSettingsFirstprops) => {
   const navigation = props.navigation;
 
-  const [preference, setPreference] = useState(null);
-
-  // useEffect(() => {
-  //   getPreferenceToAsyncStorage('preference').then(value => {
-  //     setPreference(value);
-  //   });
-  // }, []);
-
-  // import asyncStorage yang preference
-  // ambil preference menggunakan getValuePreference
-  // cek prefence nilainya ada atau ngga
-  // klo nilainya ngga ada tulisan "Set your preferences first"
-  // klo nilainya ada tulisan "re-setSet your preferences"
+  const [preference, _] = useState<any>(null);
 
   let currentOrder: string[] = [];
   function setOrder(newOrder: any) {

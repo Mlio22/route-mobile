@@ -32,7 +32,7 @@ const createMultilineShape = (lines: Array<number[][]>) => {
   return {
     type: 'MultiLineString',
     coordinates: lines,
-  } as Geometry;
+  } as any;
 };
 
 const groupLines = (polylineRoute: PolylineRouteType[]) => {
@@ -40,19 +40,19 @@ const groupLines = (polylineRoute: PolylineRouteType[]) => {
     yellowLines: Array<number[][]> = [],
     redLines: Array<number[][]> = [];
 
-  polylineRoute.forEach((polyline, index) => {
+  polylineRoute.forEach(polyline => {
     const {congestionIndex, coordinates} = polyline;
 
-    if (congestionIndex === 0) {
-      greenLines[index] = coordinates;
-    }
-
     if (congestionIndex === 1) {
-      yellowLines[index] = coordinates;
+      greenLines.push(coordinates);
     }
 
     if (congestionIndex === 2) {
-      redLines[index] = coordinates;
+      yellowLines.push(coordinates);
+    }
+
+    if (congestionIndex === 3) {
+      redLines.push(coordinates);
     }
   });
 
@@ -61,11 +61,15 @@ const groupLines = (polylineRoute: PolylineRouteType[]) => {
 
 export const RouteLineLayers = (polylineRoute: PolylineRouteType[]) => {
   const lines = groupLines(polylineRoute);
+
   const layers = lines.map((line, congestionIndex) => {
     const shape = createMultilineShape(line);
 
     return (
-      <MapboxGL.ShapeSource id={`line${congestionIndex}`} shape={shape}>
+      <MapboxGL.ShapeSource
+        key={`${congestionIndex}`}
+        id={`line${congestionIndex}`}
+        shape={shape}>
         <MapboxGL.LineLayer
           id={`linelayer${congestionIndex}`}
           style={lineLayerStyle(congestionIndex)}

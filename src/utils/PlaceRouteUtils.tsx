@@ -4,7 +4,6 @@ import {GOOGLE_API_TOKEN} from '@env';
 import {CoordinatesObjectType} from '../types/Home';
 import {
   PolylineRouteType,
-  ProcessedStepType,
   polylineDataRaw,
   rawStepType,
   routeInfoType,
@@ -13,7 +12,7 @@ import {getValueFromAsyncStorage} from '../storages/vehiclevalue';
 import {getPreferenceToAsyncStorage} from '../storages/Preferecevalue';
 
 function fixCoordinates(polylineString: string): number[][] {
-  const coordinatesList = mapboxPolyline.decode(polylineString);
+  const coordinatesList = mapboxPolyline.decode(polylineString, 6);
 
   return coordinatesList.map((coordinate: number[]) => {
     const [lat, lng] = coordinate;
@@ -53,69 +52,42 @@ async function getData(param: routeParam) {
     selectedPlaceId,
   );
   const userVehicle = await getValueFromAsyncStorage();
-  // console.log(userVehicle);
-  const listPriority = await getPreferenceToAsyncStorage('preference');
-  // console.log(listPriority);
+  const listPriority = await getPreferenceToAsyncStorage();
 
   const sourceCoordinatesString = `${source_lat},${source_lon}`;
   const targetCoordinatesString = `${target_lat},${target_lon}`;
 
-  const URL = `https://maps.googleapis.com/maps/api/directions/json?origin=${sourceCoordinatesString}&destination=place_id:${selectedPlaceId}&key=${GOOGLE_API_TOKEN}`;
-  const URL2 = `http://localhost:3000/route?coordinates=${sourceCoordinatesString};${targetCoordinatesString}&vehicle=${userVehicle}&priorities=${listPriority}`;
-  console.log(URL2);
+  const URL = `http://10.0.2.2:3000/route?coordinates=${sourceCoordinatesString};${targetCoordinatesString}&vehicle=${userVehicle}&priorities=${listPriority}`;
+  console.log(URL);
 
   const response = await fetch(URL),
     responseJSON = await response.json();
 
-  const {distance, duration, steps} = responseJSON.routes[0].legs[0];
+  const {
+    overview: {
+      overview_info: {total_distance, total_duration},
+      overview_geometries_traffic,
+    },
+    steps,
+  } = responseJSON;
 
   const routeSummary = {
-    distance,
-    duration,
+    distance: total_distance,
+    duration: total_duration,
   } as routeInfoType;
 
-  const rawSteps = steps as rawStepType[];
+  const routeGeometries = overview_geometries_traffic;
 
-  return {routeSummary, rawSteps};
-}
+  const routeSteps = steps as rawStepType[];
 
-function processRouteSteps(stepsRawData: rawStepType[]) {
-  let stepsList: ProcessedStepType[] = [],
-    polylineList: polylineDataRaw[] = [];
-
-  stepsRawData.forEach(step => {
-    const {
-      distance,
-      duration,
-      polyline: {points: polylineString},
-      maneuver,
-      html_instructions,
-    } = step;
-
-    const congestionIndex = Math.floor(Math.random() * 3);
-
-    stepsList.push({
-      distance,
-      duration,
-      maneuver,
-      congestionIndex,
-      html_instructions,
-    });
-
-    polylineList.push({
-      polylineString,
-      congestionIndex,
-    });
-  });
-
-  return {steps: stepsList, polylines: polylineList};
+  return {routeSummary, routeGeometries, routeSteps};
 }
 
 function processPolylineStrings(polylineDataList: polylineDataRaw[]) {
   let polylineRoute: PolylineRouteType[] = [];
 
   polylineDataList.forEach(polylineData => {
-    const {polylineString, congestionIndex} = polylineData;
+    const [polylineString, congestionIndex] = polylineData;
     const coordinates = fixCoordinates(polylineString);
 
     polylineRoute.push({
@@ -128,10 +100,9 @@ function processPolylineStrings(polylineDataList: polylineDataRaw[]) {
 }
 
 export async function retrieveRouteData(param: routeParam) {
-  const {routeSummary, rawSteps} = await getData(param);
+  const {routeSummary, routeGeometries, routeSteps} = await getData(param);
 
-  const {steps: processedSteps, polylines} = processRouteSteps(rawSteps);
-  const processedRouteLine = processPolylineStrings(polylines);
+  const processedRouteLine = processPolylineStrings(routeGeometries);
 
-  return {routeSummary, processedSteps, processedRouteLine};
+  return {routeSummary, routeSteps, processedRouteLine};
 }

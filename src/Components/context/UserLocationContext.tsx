@@ -16,7 +16,7 @@ const contextDefaultValue: UserLocationContextType = {
 
 export const UserLocationContext = React.createContext(contextDefaultValue);
 
-export const UserLocationContextProvider = (props: ChildrenProp) => {
+export const UserLocationContextProvider = (props: any) => {
   let interval: ReturnType<typeof setInterval>;
 
   const isEnabled = React.useRef(false);

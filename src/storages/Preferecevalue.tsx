@@ -1,5 +1,26 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+function convertPreferenceIntoNumber(preferences: string[]) {
+  // congestion,duration,quality,distance
+  let numberString = '';
+  for (const preference of preferences) {
+    if (preference === 'distance') {
+      numberString += 1;
+    }
+    if (preference === 'duration') {
+      numberString += 2;
+    }
+    if (preference === 'congestion') {
+      numberString += 3;
+    }
+    if (preference === 'quality') {
+      numberString += 4;
+    }
+  }
+
+  return numberString;
+}
+
 export const savePreferenceToAsyncStorage = async (
   key: string,
   value: any,
@@ -12,13 +33,14 @@ export const savePreferenceToAsyncStorage = async (
   }
 };
 
-export const getPreferenceToAsyncStorage = async (
-  key: string,
-): Promise<any> => {
+export const getPreferenceToAsyncStorage = async () => {
   try {
-    const value = await AsyncStorage.getItem(key);
+    const value = await AsyncStorage.getItem('preference');
+
     if (value !== null) {
-      return JSON.parse(value);
+      const priorities = JSON.parse(value);
+      const convertedPriorities = convertPreferenceIntoNumber(priorities);
+      return convertedPriorities;
     } else {
       return null;
     }

@@ -1,50 +1,25 @@
 export type routeInfoType = {
-  distance: {
-    text: string;
-    value: number;
-  };
-  duration: {
-    text: string;
-    value: number;
-  };
+  distance: number;
+  duration: number;
 };
 
-export type congestionIndexType = 0 | 1 | 2;
+export type congestionIndexType = number;
 
 export type rawStepType = {
-  distance: {
-    text: string;
-    value: number;
-  };
-  duration: {
-    text: string;
-    value: number;
-  };
-  polyline: {
-    points: string;
-  };
+  text: string;
+  distance: number;
+  duration: number;
   maneuver: string;
-  html_instructions: string;
 };
 
 export type ProcessedStepType = {
-  distance: {
-    text: string;
-    value: number;
-  };
-  duration: {
-    text: string;
-    value: number;
-  };
+  distance: number;
+  duration: number;
   maneuver: string;
-  congestionIndex: congestionIndexType;
-  html_instructions: string;
+  text: string;
 };
 
-export type polylineDataRaw = {
-  polylineString: string;
-  congestionIndex: congestionIndexType;
-};
+export type polylineDataRaw = [string, number];
 
 export type placeRouteContextDefault = {
   isDataReady: boolean;

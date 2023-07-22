@@ -14,12 +14,7 @@ const contextDefaultValue: VehicleContextDefaultType = {
 
 export const VehicleContext = React.createContext(contextDefaultValue);
 
-async function load_saved_vehicle_setting() {
-  const vehicle = (await getValueFromAsyncStorage()) || 'motorcycle';
-  return vehicle;
-}
-
-export const VehicleContextProvider = (props: ChildrenProp) => {
+export const VehicleContextProvider = (props: any) => {
   const vehicleType = React.useRef<VehicleType>('car');
 
   const toggleVehicleType = () => {
@@ -31,10 +26,6 @@ export const VehicleContextProvider = (props: ChildrenProp) => {
 
     saveValueToAsyncStorage(vehicleType.current);
   };
-
-  load_saved_vehicle_setting().then(vehicle => {
-    vehicleType.current = vehicle;
-  });
 
   const vehicleContextObj: VehicleContextDefaultType = {
     vehicleType,

@@ -66,7 +66,29 @@ export const RouteSummary = () => {
     return <></>;
   }
 
-  const {distance, duration} = routeSummaryRef?.current!;
+  let {distance, duration} = routeSummaryRef?.current!;
+
+  let distanceUnit = 'meters';
+  let durationUnit = 'seconds';
+
+  if (distance > 1000) {
+    distance = parseFloat((distance / 1000).toFixed(1));
+    distanceUnit = 'Kilometers';
+  } else {
+    distance = parseFloat(distance.toFixed(0));
+  }
+
+  if (duration >= 60) {
+    duration = parseInt((duration / 60).toFixed(0), 10);
+    durationUnit = 'minutes';
+
+    if (duration > 60) {
+      duration = parseInt((duration / 60).toFixed(0), 10);
+      durationUnit = 'hours';
+    }
+  } else {
+    duration = parseInt(duration.toFixed(0), 10);
+  }
 
   return (
     <View style={styles.routeSummaryContainer}>
@@ -89,9 +111,11 @@ export const RouteSummary = () => {
         </View>
       </View>
       <View style={styles.summaryDetailsContainer}>
-        <Text style={styles.distance}>Distance: {distance.text}</Text>
+        <Text style={styles.distance}>
+          Distance: {distance} {distanceUnit}
+        </Text>
         <Text style={styles.estimatedTime}>
-          Estimated Time: {duration.text}
+          Estimated Time: {duration} {durationUnit}
         </Text>
       </View>
     </View>

@@ -142,20 +142,39 @@ export const RouteSteps = () => {
 };
 
 const RouteStepsItem = (props: any) => {
-  const {maneuver, congestionIndex, html_instructions, distance} = props;
-  const instructions = parse(html_instructions).text;
+  let {code, distance, duration, text} = props;
+
+  let distanceUnit = 'Meters';
+  if (distance > 1000) {
+    distance = parseFloat((distance / 1000).toFixed(2));
+    distanceUnit = 'Kilometers';
+  } else {
+    distance = parseFloat(distance.toFixed(0));
+  }
+
+  let durationUnit = 'seconds';
+  if (duration > 60) {
+    duration = Math.trunc(duration / 60);
+    durationUnit = 'minutes';
+
+    if (duration > 60) {
+      duration = Math.trunc(duration / 60);
+      durationUnit = 'hour';
+    }
+  } else {
+    duration = Math.trunc(duration);
+  }
 
   return (
     <View style={styles.stepsItemContainer}>
       <View style={styles.maneuverContainer}>
-        <RouteDirectionIcon
-          maneuver={maneuver}
-          congestionIndex={congestionIndex}
-        />
+        <RouteDirectionIcon maneuver={code} />
       </View>
       <View style={styles.instructionContainer}>
-        <Text style={styles.instructionText}>{instructions}</Text>
-        <Text style={styles.distanceText}>{distance.value} m</Text>
+        <Text style={styles.instructionText}>{text}</Text>
+        <Text style={styles.distanceText}>
+          {distance} {distanceUnit} | {duration} {durationUnit}
+        </Text>
       </View>
     </View>
   );

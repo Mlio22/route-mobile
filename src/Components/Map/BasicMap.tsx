@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   mapSettings: {},
 });
 
-export class BasicMap extends React.Component<ChildrenProp> {
+export class BasicMap extends React.Component<any> {
   camera: React.RefObject<MapboxGL.Camera>;
   trafficView: React.RefObject<TrafficView>;
   // @ts-ignore
@@ -100,9 +100,6 @@ export class BasicMap extends React.Component<ChildrenProp> {
   }
 
   renderMap(anotherChildren?: any) {
-    MapboxGL.setAccessToken(
-      'pk.eyJ1IjoiYW5ha2JhaWstZXhlIiwiYSI6ImNsYnl4YnZkaTAzaDYzd3A3MWhrb2lqeWIifQ.JLrFLc_GxkTdET36LKjJvw',
-    );
     const mapviewProps: MapViewProps = {
         projection: 'globe',
         style: styles.map,

@@ -5,9 +5,7 @@ import {VehicleContextProvider} from './UserSettings/VehicleContext';
 export const UserSettingsContextProvider = (props: any) => {
   return (
     <ThemeContextProvider>
-      <VehicleContextProvider>
-        {props.children}
-      </VehicleContextProvider>
+      <VehicleContextProvider>{props.children}</VehicleContextProvider>
     </ThemeContextProvider>
   );
 };

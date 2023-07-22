@@ -18,7 +18,7 @@ const contextDefaultValue: SearchContextType = {
 export const SearchContext: React.Context<SearchContextType> =
   React.createContext(contextDefaultValue);
 
-export const SearchContextProvider = (props: ChildrenProp) => {
+export const SearchContextProvider = (props: any) => {
   const [searchInfo, updateSearchInfo] = React.useState<SearchInfoType>(
     searchInfoDefaultValue,
   );
