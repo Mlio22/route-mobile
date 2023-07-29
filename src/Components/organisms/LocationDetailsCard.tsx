@@ -1,13 +1,20 @@
 import React from 'react';
-import {StyleSheet, View, TouchableWithoutFeedback, Text} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TouchableWithoutFeedback,
+  Text,
+  ToastAndroid,
+} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faLocationDot, faRoute} from '@fortawesome/free-solid-svg-icons';
 import {PreviewImage} from '../atoms/details/PreviewImage';
 import {PlaceDetailContext} from '../context/locationDetails/PlaceDetailsContext';
 import {PreviewModeContext} from '../context/locationDetails/PreviewModeContext';
+import {PlaceRouteContext} from '../context/locationDetails/PlaceRouteContext';
 
 const styles = StyleSheet.create({
-  locationDetailContainer: {
+  locationDetailContainerFull: {
     width: '100%',
     position: 'absolute',
     bottom: 0,
@@ -18,12 +25,16 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     overflow: 'hidden',
   },
-  locationPreviewImage: {
-    height: '40%',
-  },
-  locationImage: {
+  locationDetailContainerHalf: {
     width: '100%',
-    height: '100%',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    backgroundColor: '#2EC08CEF',
+    height: '30%',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    overflow: 'hidden',
   },
   locationDetail: {
     display: 'flex',
@@ -81,8 +92,8 @@ const styles = StyleSheet.create({
 export const LocationDetailsCard = () => {
   const {updatePreviewMode} = React.useContext(PreviewModeContext);
   const {isDataReady, placeData} = React.useContext(PlaceDetailContext);
-
-  // fungsi buat masukin data ke asnycstorage
+  const {isDataReady: isRouteReady, isRouteFoundRef} =
+    React.useContext(PlaceRouteContext);
 
   if (isDataReady && placeData) {
     const {
@@ -91,9 +102,13 @@ export const LocationDetailsCard = () => {
       locationDetails: {address},
     } = placeData.current!;
 
+    const locationDetailContainerStyle = previewImageReference
+      ? styles.locationDetailContainerFull
+      : styles.locationDetailContainerHalf;
+
     return (
       <>
-        <View style={styles.locationDetailContainer}>
+        <View style={locationDetailContainerStyle}>
           <PreviewImage reference={previewImageReference} />
           <View style={styles.locationDetail}>
             <View style={styles.locationTitle}>
@@ -101,7 +116,15 @@ export const LocationDetailsCard = () => {
               <Text style={styles.locationType}>{placeType}</Text>
             </View>
             <TouchableWithoutFeedback
-              onPress={() => updatePreviewMode('route')}>
+              onPress={() => {
+                if (!isRouteReady) {
+                  ToastAndroid.show('requesting route, please wait', 500);
+                } else if (!isRouteFoundRef?.current) {
+                  ToastAndroid.show("Route not found, we're sorry", 500);
+                } else {
+                  updatePreviewMode('route');
+                }
+              }}>
               <View style={styles.routeButton}>
                 <View style={styles.routeIcon}>
                   <FontAwesomeIcon size={20} icon={faRoute} />

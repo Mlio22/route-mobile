@@ -10,10 +10,7 @@ import {
 
 import {PreferencesSettingsFirstprops} from '../types/App';
 
-import {
-  savePreferenceToAsyncStorage,
-  getPreferenceToAsyncStorage,
-} from '../storages/Preferecevalue';
+import {savePreferenceToAsyncStorage} from '../storages/Preferecevalue';
 
 import Framepreferensi from '../Components/organisms/preferenceframe';
 
@@ -148,7 +145,12 @@ const PreferencesSettingsFirst = (props: PreferencesSettingsFirstprops) => {
 
   const [preference, _] = useState<any>(null);
 
-  let currentOrder: string[] = [];
+  let currentOrder: string[] = [
+    'distance',
+    'duration',
+    'congestion',
+    'quality',
+  ];
   function setOrder(newOrder: any) {
     currentOrder = newOrder;
   }
@@ -156,7 +158,9 @@ const PreferencesSettingsFirst = (props: PreferencesSettingsFirstprops) => {
   const handleSubmitPress = () => {
     console.log(currentOrder);
     savePreferenceToAsyncStorage('preference', currentOrder);
-    navigation.navigate('Home');
+    navigation.pop();
+    navigation.pop();
+    navigation.replace('Home');
     ToastAndroid.show('Preferences Set', 1000);
   };
 
@@ -187,7 +191,7 @@ const PreferencesSettingsFirst = (props: PreferencesSettingsFirstprops) => {
         <View style={styles.containerpref}>
           <View style={styles.Vectorline}>{/* buat garis importance */}</View>
           <View style={styles.containerpref2}>
-            <Framepreferensi setOrder={setOrder}></Framepreferensi>
+            <Framepreferensi setOrder={setOrder} />
           </View>
         </View>
         <View style={styles.Containerbot}>

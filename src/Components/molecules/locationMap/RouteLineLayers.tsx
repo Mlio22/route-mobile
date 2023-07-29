@@ -20,7 +20,7 @@ const lineLayerStyle = (index: number) => {
   // todo: perbaiki styling, dengan titik sambung
   return {
     lineColor: TrafficColor[index],
-    lineWidth: 3.2,
+    lineWidth: 5,
     lineCap: MapboxGL.LineJoin.Round,
     lineOpacity: 1.84,
   };

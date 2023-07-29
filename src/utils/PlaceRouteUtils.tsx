@@ -57,30 +57,37 @@ async function getData(param: routeParam) {
   const sourceCoordinatesString = `${source_lat},${source_lon}`;
   const targetCoordinatesString = `${target_lat},${target_lon}`;
 
-  const URL = `http://10.0.2.2:3000/route?coordinates=${sourceCoordinatesString};${targetCoordinatesString}&vehicle=${userVehicle}&priorities=${listPriority}`;
-  console.log(URL);
+  // const ROUTE_API = 'http://10.0.2.2:3000/route';
+  const ROUTE_API = 'https://route.ii-api.net/route';
+  const URL = `${ROUTE_API}?coordinates=${sourceCoordinatesString};${targetCoordinatesString}&vehicle=${userVehicle}&priorities=${listPriority}`;
 
-  const response = await fetch(URL),
-    responseJSON = await response.json();
+  try {
+    const response = await fetch(URL),
+      responseJSON = await response.json();
 
-  const {
-    overview: {
-      overview_info: {total_distance, total_duration},
-      overview_geometries_traffic,
-    },
-    steps,
-  } = responseJSON;
+    const {
+      route: {
+        overview: {
+          overview_info: {total_distance, total_duration},
+          overview_geometries_traffic,
+        },
+        steps,
+      },
+    } = responseJSON;
 
-  const routeSummary = {
-    distance: total_distance,
-    duration: total_duration,
-  } as routeInfoType;
+    const routeSummary = {
+      distance: total_distance,
+      duration: total_duration,
+    } as routeInfoType;
 
-  const routeGeometries = overview_geometries_traffic;
+    const routeGeometries = overview_geometries_traffic;
 
-  const routeSteps = steps as rawStepType[];
+    const routeSteps = steps as rawStepType[];
 
-  return {routeSummary, routeGeometries, routeSteps};
+    return {routeSummary, routeGeometries, routeSteps, routeFound: true};
+  } catch (e) {
+    return {routeFound: false};
+  }
 }
 
 function processPolylineStrings(polylineDataList: polylineDataRaw[]) {
@@ -100,9 +107,14 @@ function processPolylineStrings(polylineDataList: polylineDataRaw[]) {
 }
 
 export async function retrieveRouteData(param: routeParam) {
-  const {routeSummary, routeGeometries, routeSteps} = await getData(param);
+  const {routeSummary, routeGeometries, routeSteps, routeFound} = await getData(
+    param,
+  );
 
-  const processedRouteLine = processPolylineStrings(routeGeometries);
+  let processedRouteLine;
+  if (routeFound) {
+    processedRouteLine = processPolylineStrings(routeGeometries);
+  }
 
-  return {routeSummary, routeSteps, processedRouteLine};
+  return {routeSummary, routeSteps, processedRouteLine, routeFound};
 }

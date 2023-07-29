@@ -130,8 +130,8 @@ export const RouteSteps = () => {
             {...scrollhandlers}
             contentContainerStyle={styles.ScrollViewContainer}>
             <Pressable>
-              {steps.map(step => (
-                <RouteStepsItem {...step} />
+              {steps.map((step, idx) => (
+                <RouteStepsItem key={`routeStep${idx}`} {...step} />
               ))}
             </Pressable>
           </ScrollView>

@@ -12,7 +12,6 @@ import SettingsGeneral from './src/screens/SettingsGeneral';
 import History from './src/screens/History';
 import SearchLocation from './src/screens/SearchLocation';
 import LocationDetails from './src/screens/LocationDetail';
-// import ManualLocation from './src/screens/ManualLocation';
 
 import {UserLocationContextProvider} from './src/Components/context/UserLocationContext';
 import {SearchContextProvider} from './src/Components/context/SearchContext';
@@ -21,6 +20,7 @@ import {RootStackParamList} from './src/types/App';
 import {UserSettingsContextProvider} from './src/Components/context/UserSettingsContext';
 
 // setup for mapbox
+console.ignoredYellowBox = true;
 mapboxSetup();
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

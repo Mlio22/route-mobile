@@ -49,8 +49,8 @@ const updateUserCoordinates = (newCoords: CoordinatesObjectType) => {
 
   // indonesia only
   if (latitude > 6 || latitude < -11 || longitude < 95 || longitude > 141) {
-    longitude = 107.632827;
-    latitude = -6.980611;
+    longitude = 107.635494;
+    latitude = -6.970853;
   }
 
   userCoordinates = {latitude, longitude};
@@ -60,7 +60,7 @@ export async function enableUserLocation(): Promise<boolean> {
   const userLocationGranted = await grantUserLocation();
 
   return new Promise(resolve => {
-    const successCallback = (coords: any): void => {
+    const successCallback = ({coords}: any): void => {
       updateUserCoordinates(coords);
       resolve(true);
     };

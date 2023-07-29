@@ -23,7 +23,7 @@ export const HomeMenu = (props: any) => {
     <View style={styles.menuButtonContainer}>
       <ThemeButton />
       <VehicleButton />
-      <HistoryButton navigation={navigation} />
+      {/* <HistoryButton navigation={navigation} /> */}
       <SettingsButton navigation={navigation} />
     </View>
   );

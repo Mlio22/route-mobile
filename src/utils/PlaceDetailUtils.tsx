@@ -9,8 +9,16 @@ export class PlaceDataUtils {
   static extractPlaceData(jsonResponse: any): placeDataType {
     const {photos, formatted_address, name, types} = jsonResponse;
 
+    let previewImageReference;
+
+    if (photos) {
+      previewImageReference = photos[0]?.photo_reference;
+    } else {
+      previewImageReference = '';
+    }
+
     const result: placeDataType = {
-      previewImageReference: photos[0].photo_reference,
+      previewImageReference: previewImageReference,
       placeTitle: {
         placeName: name,
         placeType: types[0],
@@ -25,6 +33,7 @@ export class PlaceDataUtils {
 
   static async getPlaceData(placeId: string): Promise<placeDataType> {
     const API_URL = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${GOOGLE_API_TOKEN}`;
+    console.log(API_URL);
 
     const response = await fetch(API_URL),
       responseJSON = await response.json(),
@@ -57,6 +66,7 @@ export class PlaceGeolocationUtils {
 
   static async getPlaceGeolocationData(placeId: string) {
     const API_URL = `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${GOOGLE_API_TOKEN}`;
+    console.log(API_URL);
 
     const response = await fetch(API_URL),
       responseJson = await response.json(),

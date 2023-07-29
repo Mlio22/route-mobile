@@ -6,4 +6,5 @@ export type SearchInfoType = {
 export type SearchContextType = {
   searchInfo: SearchInfoType;
   updateInfo: (newInfo: SearchInfoType) => void;
+  clearSearch: () => void;
 };

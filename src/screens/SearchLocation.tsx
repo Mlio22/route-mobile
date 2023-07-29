@@ -66,7 +66,7 @@ let query: Query<AutocompleteRequestType> = {
 
 export const SearchLocation = (props: SearchLocationProps) => {
   const {isEnabled, userCoordinates} = useContext(UserLocationContext);
-  const {searchInfo, updateInfo} = useContext(SearchContext);
+  const {searchInfo, updateInfo, clearSearch} = useContext(SearchContext);
 
   let isSearchAutoFilled = false;
 
@@ -85,7 +85,7 @@ export const SearchLocation = (props: SearchLocationProps) => {
   const autoRef = React.createRef<GooglePlacesAutocompleteRef>();
   const autoProps: GooglePlacesAutocompleteProps = {
     styles,
-    placeholder: 'Search Place',
+    placeholder: 'Telkom University',
     query: query,
     onPress: async data => {
       const {
@@ -104,7 +104,9 @@ export const SearchLocation = (props: SearchLocationProps) => {
     onFail: error => console.log(error),
     onNotFound: () => console.log('no results'),
     renderLeftButton: () => <BackButton navigation={props.navigation} />,
-    renderRightButton: () => <ClearSearchButton autoRef={autoRef} />,
+    renderRightButton: () => (
+      <ClearSearchButton autoRef={autoRef} clearSearch={clearSearch} />
+    ),
     renderRow: data => <SearchResultItem data={data} />,
     keepResultsAfterBlur: true,
 
@@ -132,6 +134,7 @@ export type BackButtonProps = {
 
 export type ClearSearchButtonProps = {
   autoRef: React.RefObject<GooglePlacesAutocompleteRef>;
+  clearSearch: () => void;
 };
 
 export default SearchLocation;

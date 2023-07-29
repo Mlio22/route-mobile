@@ -9,7 +9,7 @@ const HomeMapUI = (props: any) => {
   return (
     <>
       <HomeMapTrackUser centerToUser={centerToUser} />
-      <HomeMapSettings toggleTraffic={toggleTraffic} />
+      {/* <HomeMapSettings toggleTraffic={toggleTraffic} /> */}
     </>
   );
 };

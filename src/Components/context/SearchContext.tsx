@@ -1,5 +1,4 @@
 import React from 'react';
-import {ChildrenProp} from '../../types/Home';
 import {
   SearchContextType,
   SearchInfoType,
@@ -13,6 +12,7 @@ const searchInfoDefaultValue: SearchInfoType = {
 const contextDefaultValue: SearchContextType = {
   searchInfo: searchInfoDefaultValue,
   updateInfo: (_: any) => {},
+  clearSearch: () => {},
 };
 
 export const SearchContext: React.Context<SearchContextType> =
@@ -22,6 +22,12 @@ export const SearchContextProvider = (props: any) => {
   const [searchInfo, updateSearchInfo] = React.useState<SearchInfoType>(
     searchInfoDefaultValue,
   );
+
+  const clearSearch = () => {
+    updateInfo({
+      searchQuery: '',
+    });
+  };
 
   const updateInfo = (newInfo: SearchInfoType) => {
     newInfo = {
@@ -35,6 +41,7 @@ export const SearchContextProvider = (props: any) => {
   const searchContextObj: SearchContextType = {
     searchInfo,
     updateInfo,
+    clearSearch,
   };
 
   const {children} = props;

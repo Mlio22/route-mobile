@@ -5,7 +5,10 @@ import {GOOGLE_API_TOKEN} from '@env';
 import {previewImageProps} from '../../../types/components/atoms/details/PreviewImage';
 
 const styles = StyleSheet.create({
-  locationPreviewImage: {
+  locationPreviewImageNone: {
+    height: '0%',
+  },
+  locationPreviewImageAvailable: {
     height: '40%',
   },
   locationImage: {
@@ -19,8 +22,14 @@ export const PreviewImage = (props: previewImageProps) => {
 
   const URL = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&photo_reference=${reference}&key=${GOOGLE_API_TOKEN}`;
 
+  const style = reference
+    ? styles.locationPreviewImageAvailable
+    : styles.locationPreviewImageNone;
+
+  console.log(reference);
+
   return (
-    <View style={styles.locationPreviewImage}>
+    <View style={style}>
       <Image style={styles.locationImage} source={{uri: URL}} />
     </View>
   );

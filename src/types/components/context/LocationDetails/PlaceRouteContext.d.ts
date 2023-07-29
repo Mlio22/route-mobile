@@ -23,6 +23,7 @@ export type polylineDataRaw = [string, number];
 
 export type placeRouteContextDefault = {
   isDataReady: boolean;
+  isRouteFoundRef?: React.RefObject<boolean>;
   routeSummaryRef?: React.RefObject<routeInfoType>;
   routeStepsRef?: React.RefObject<ProcessedStepType[]>;
   routeLineListRef?: React.RefObject<PolylineRouteType[]>;

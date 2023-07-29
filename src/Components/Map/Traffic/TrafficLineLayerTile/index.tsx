@@ -1,7 +1,8 @@
 import React from 'react';
 import TrafficLineLayerMulti from './TrafficLineLayerMulti';
 
-const TRAFFIC_URL = 'http://10.0.2.2:3000/traffic';
+// const TRAFFIC_URL = 'http://10.0.2.2:3000/traffic';
+const TRAFFIC_URL = 'https://route.ii-api.net//traffic';
 
 const loaded_list: any = {};
 

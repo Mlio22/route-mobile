@@ -40,12 +40,13 @@ const styles = StyleSheet.create({
 
 const FakeSearchBar = (props: any) => {
   const navigation = props.navigation;
-  const {searchInfo} = React.useContext(SearchContext);
+  const {searchInfo, clearSearch} = React.useContext(SearchContext);
 
   return (
     <TouchableWithoutFeedback
       onPressIn={() => {
         navigation.navigate('SearchLocation');
+        clearSearch();
       }}>
       <View style={styles.searchBarContainer}>
         <TextInput

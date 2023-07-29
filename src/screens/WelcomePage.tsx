@@ -37,7 +37,7 @@ const WelcomePage = (props: WelcomePageProps) => {
         navigation.navigate('PreferencesVehicleFirst');
       } else {
         // Pengguna telah melihat halaman ini sebelumnya
-        navigation.navigate('Home');
+        navigation.replace('Home');
       }
     };
 

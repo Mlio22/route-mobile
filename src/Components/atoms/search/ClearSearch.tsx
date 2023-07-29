@@ -16,13 +16,14 @@ const styles = StyleSheet.create({
 });
 
 export const ClearSearchButton = (props: ClearSearchButtonProps) => {
-  const {autoRef} = props;
+  const {autoRef, clearSearch} = props;
 
   return (
     <TouchableWithoutFeedback
       onPress={() => {
         autoRef.current?.setAddressText('');
         autoRef.current?.focus();
+        clearSearch();
       }}>
       <View style={styles.clearIconContainer}>
         <FontAwesomeIcon size={20} icon={faXmark} />

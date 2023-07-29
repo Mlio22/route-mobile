@@ -19,6 +19,7 @@ export const PlaceRouteContext = React.createContext(contextDefaultValue);
 export const PlaceRouteContextProvider = (props: PlaceRouteProps) => {
   const [isDataReady, updateIsDataReady] = useState(false);
 
+  const isRouteFoundRef = useRef<boolean>(false);
   const placeIdRef = useRef<string>('');
   const routeSummaryRef = useRef<routeInfoType>({} as routeInfoType);
   const routeStepsRef = useRef<ProcessedStepType[]>([]);
@@ -42,19 +43,21 @@ export const PlaceRouteContextProvider = (props: PlaceRouteProps) => {
       userCoordinates: currentUserCoordinates,
     };
 
-    const {routeSummary, processedRouteLine, routeSteps} =
+    const {routeSummary, processedRouteLine, routeSteps, routeFound} =
       await retrieveRouteData(routeParam);
 
     placeIdRef.current = props.placeId;
-    routeSummaryRef.current = routeSummary;
-    routeLineListRef.current = processedRouteLine;
-    routeStepsRef.current = routeSteps;
+    isRouteFoundRef.current = routeFound;
+    routeSummaryRef.current = routeSummary!;
+    routeLineListRef.current = processedRouteLine!;
+    routeStepsRef.current = routeSteps!;
 
     updateReadyStatus(true);
   })();
 
   const placeRouteContextObj: placeRouteContextDefault = {
     isDataReady,
+    isRouteFoundRef,
     routeSummaryRef,
     routeStepsRef,
     routeLineListRef,

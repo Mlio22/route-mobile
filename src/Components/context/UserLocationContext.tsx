@@ -5,7 +5,7 @@ import {
   getUserCoordinates,
 } from '../../utils/UserLocation';
 
-import {ChildrenProp, CoordinatesObjectType} from '../../types/Home';
+import {CoordinatesObjectType} from '../../types/Home';
 import {UserLocationContextType} from '../../types/components/context/UserLocationContext';
 
 const contextDefaultValue: UserLocationContextType = {
@@ -45,7 +45,7 @@ export const UserLocationContextProvider = (props: any) => {
     isEnabled.current = await checkUserLocationFirst();
     userCoordinates.current = getUserCoordinates();
 
-    console.log(userCoordinates);
+    console.log(isEnabled, userCoordinates);
 
     if (isEnabled.current) onLocationActivated();
   };
